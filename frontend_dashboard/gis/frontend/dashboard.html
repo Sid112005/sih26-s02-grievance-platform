@@ -1,0 +1,3497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Civic Signal — Municipal Spatial Intelligence & GIS Decision Support (Mumbai)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css" />
+<style>
+  :root{
+    --ink:#090d16;
+    --panel:#111827;
+    --panel-2:#1f2937;
+    --panel-3:#374151;
+    --line:#374151;
+    --line-subtle:#1f2937;
+    --paper:#f9fafb;
+    --muted:#9ca3af;
+    --muted-dark:#6b7280;
+    
+    /* Decision Support Priority Palette */
+    --priority-crit:#ef4444;
+    --priority-high:#f97316;
+    --priority-med:#f59e0b;
+    --priority-low:#10b981;
+    --accent:#38bdf8;
+    --accent-glow:rgba(56,189,248,0.25);
+    
+    /* Spacing tokens */
+    --sp-xs:4px;
+    --sp-sm:8px;
+    --sp-md:12px;
+    --sp-lg:16px;
+    --sp-xl:24px;
+    --sp-2xl:32px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:var(--ink);color:var(--paper);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  .mono{font-family:"Consolas","SFMono-Regular",Menlo,monospace;}
+
+  #app{display:grid;grid-template-columns:320px 1fr 420px;grid-template-rows:64px 1fr 32px;
+    height:100vh;overflow:hidden;}
+
+  /* Header */
+  header{grid-column:1/4;display:flex;align-items:center;gap:18px;
+    padding:0 var(--sp-xl);background:var(--panel);border-bottom:1px solid var(--line);z-index:1000;}
+  .brand-wrap{display:flex;align-items:center;gap:10px;}
+  .brand-badge{width:12px;height:12px;border-radius:50%;background:var(--priority-crit);
+    box-shadow:0 0 0 4px rgba(239,68,68,.25);animation:pulse 2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 2px rgba(239,68,68,.4);}70%{box-shadow:0 0 0 8px rgba(239,68,68,0);}100%{box-shadow:0 0 0 2px rgba(239,68,68,0);}}
+  h1.brand-title{font-size:18px;font-weight:700;letter-spacing:.3px;margin:0;color:#fff;}
+  .brand-sub{color:var(--muted);font-size:13px;border-left:1px solid var(--line);padding-left:var(--sp-md);}
+  
+  .mode-indicator{background:rgba(56,189,248,0.12);color:var(--accent);border:1px solid rgba(56,189,248,0.3);
+    font-size:11.5px;padding:4px 10px;border-radius:14px;font-weight:600;display:flex;align-items:center;gap:6px;}
+  .mode-indicator .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+
+  header .header-stats{margin-left:auto;display:flex;gap:20px;}
+  .stat-card{text-align:right;}
+  .stat-card b{display:block;font-size:16px;font-family:"Consolas",monospace;color:#fff;}
+  .stat-card span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:600;}
+
+  /* Left Panel: Filter & Hotspot Rank */
+  #filters{background:var(--panel);border-right:1px solid var(--line);padding:var(--sp-lg);
+    overflow-y:auto;display:flex;flex-direction:column;gap:var(--sp-lg);}
+  .section-title-wrap{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-sm);}
+  .filter-group h2{font-size:11px;text-transform:uppercase;letter-spacing:.8px;
+    color:var(--muted);margin:0;font-weight:700;}
+  .btn-link-reset{background:none;border:none;color:var(--accent);font-size:11px;cursor:pointer;padding:0;font-weight:600;}
+  .btn-link-reset:hover{text-decoration:underline;}
+
+  /* Location Search Input */
+  .search-wrap{position:relative;}
+  .search-input{width:100%;height:40px;padding:0 var(--sp-md) 0 34px;background:var(--panel-2);
+    border:1px solid var(--line);border-radius:6px;color:#fff;font-size:13px;outline:none;transition:all .15s ease;}
+  .search-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-glow);}
+  .search-icon{position:absolute;left:10px;top:11px;font-size:13px;color:var(--muted);}
+  .search-results{position:absolute;top:44px;left:0;right:0;background:var(--panel-2);
+    border:1px solid var(--line);border-radius:6px;max-height:190px;overflow-y:auto;z-index:900;display:none;box-shadow:0 8px 20px rgba(0,0,0,.5);}
+  .search-res-item{padding:8px 12px;font-size:12.5px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05);}
+  .search-res-item:hover{background:rgba(56,189,248,.15);color:var(--accent);}
+
+  /* Filter Chips */
+  .chip-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .chip{height:32px;padding:0 10px;border:1px solid var(--line);border-radius:5px;font-size:12px;
+    color:var(--muted);cursor:pointer;background:var(--panel-2);display:inline-flex;align-items:center;
+    gap:4px;transition:all .15s ease;user-select:none;}
+  .chip:hover{border-color:var(--accent);color:#fff;}
+  .chip.active{border-color:var(--accent);color:#fff;background:rgba(56,189,248,.18);font-weight:600;}
+
+  /* Date Range Filter */
+  .date-range-row{display:grid;grid-template-columns:repeat(4, 1fr);gap:4px;}
+  .date-btn{height:30px;font-size:11px;border:1px solid var(--line);border-radius:4px;
+    background:var(--panel-2);color:var(--muted);cursor:pointer;font-weight:600;transition:all .15s;}
+  .date-btn:hover{color:#fff;border-color:var(--accent);}
+  .date-btn.active{background:var(--accent);color:var(--ink);border-color:var(--accent);}
+
+  /* Hotspot list items */
+  .hotspot-list-item{border:1px solid var(--line);border-radius:8px;padding:12px;
+    margin-bottom:8px;cursor:pointer;background:var(--panel-2);transition:all .2s ease;}
+  .hotspot-list-item:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.3);}
+  .hotspot-list-item.selected{border-color:var(--accent);background:rgba(56,189,248,.12);
+    box-shadow:0 0 0 1.5px var(--accent);}
+  .hli-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+  .hli-id{font-size:12px;font-weight:700;color:var(--muted);}
+  .badge{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.3px;display:inline-flex;align-items:center;gap:4px;}
+  .badge.Low{background:rgba(16,185,129,.18);color:var(--priority-low);border:1px solid rgba(16,185,129,.35);}
+  .badge.Medium{background:rgba(245,158,11,.18);color:var(--priority-med);border:1px solid rgba(245,158,11,.35);}
+  .badge.High{background:rgba(249,115,22,.18);color:var(--priority-high);border:1px solid rgba(249,115,22,.35);}
+  .badge.Critical{background:rgba(239,68,68,.22);color:var(--priority-crit);border:1px solid rgba(239,68,68,.4);}
+  .hli-title{font-size:14px;font-weight:600;color:#fff;}
+  .hli-meta{font-size:12px;color:var(--muted);margin-top:5px;display:flex;justify-content:space-between;}
+
+  /* Center Map Container */
+  #map-container{position:relative;height:100%;width:100%;}
+  #map{height:100%;width:100%;background:#090d16;}
+
+  /* Floating Map Tools */
+  .map-tools-floating{position:absolute;top:16px;right:16px;background:rgba(17,24,39,.94);
+    backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:8px;padding:10px 12px;
+    z-index:800;display:flex;flex-direction:column;gap:10px;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+  .bm-row{display:flex;gap:4px;}
+  .bm-btn{height:32px;padding:0 12px;font-size:12px;font-weight:600;background:var(--panel-2);
+    border:1px solid var(--line);color:var(--muted);border-radius:5px;cursor:pointer;transition:all .15s;}
+  .bm-btn.active{background:var(--accent);color:var(--ink);border-color:var(--accent);}
+  
+  .tool-row-divider{height:1px;background:var(--line);margin:2px 0;}
+  .proximity-tool-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;}
+  .proximity-select{height:28px;background:var(--panel-2);border:1px solid var(--line);color:#fff;
+    border-radius:4px;font-size:11.5px;padding:0 6px;outline:none;}
+  .layer-toggles{display:flex;gap:14px;font-size:12px;}
+  .layer-toggles label{display:flex;align-items:center;gap:5px;cursor:pointer;color:var(--paper);}
+
+  /* Map Legend */
+  #legend{position:absolute;bottom:20px;left:16px;background:rgba(17,24,39,.94);
+    backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+    font-size:12px;z-index:800;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+  #legend .title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:700;margin-bottom:6px;}
+  #legend .row{display:flex;align-items:center;gap:8px;margin-top:4px;}
+  #legend .sw{width:12px;height:12px;border-radius:3px;}
+
+  /* Right Detail Intelligence Panel */
+  #detail{background:var(--panel);border-left:1px solid var(--line);overflow-y:auto;padding:var(--sp-xl) var(--sp-lg);}
+  #detail .empty{color:var(--muted);font-size:14px;padding-top:80px;text-align:center;line-height:1.6;}
+  .dh-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;}
+  .dh-id{font-size:12px;color:var(--muted);letter-spacing:.5px;font-weight:700;}
+  .dh-place{font-size:20px;font-weight:700;margin:3px 0 14px;color:#fff;}
+
+  .risk-panel{display:flex;align-items:center;gap:16px;background:var(--panel-2);
+    border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:16px;}
+  .risk-score{font-size:34px;font-weight:800;font-family:"Consolas",monospace;}
+  .risk-score small{font-size:14px;font-weight:500;color:var(--muted);}
+  .btn-explain{font-size:11px;color:var(--accent);background:none;border:none;cursor:pointer;padding:0;font-weight:600;margin-top:4px;display:block;}
+  .btn-explain:hover{text-decoration:underline;}
+
+  .kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+  .kpi{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;}
+  .kpi b{display:block;font-size:18px;font-family:"Consolas",monospace;color:#fff;}
+  .kpi span{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:600;}
+  
+  h3.section-label{font-size:11.5px;text-transform:uppercase;letter-spacing:.7px;
+    color:var(--muted);margin:18px 0 9px;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
+  .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;font-size:12.5px;}
+  .bar-row .label{width:92px;flex-shrink:0;color:var(--muted);}
+  .bar-track{flex:1;height:8px;background:var(--panel-2);border-radius:4px;overflow:hidden;}
+  .bar-fill{height:100%;background:var(--accent);border-radius:4px;}
+  .bar-row .count{width:32px;text-align:right;font-family:"Consolas",monospace;color:#fff;}
+  
+  .growth-box{display:flex;align-items:center;gap:14px;background:var(--panel-2);
+    border:1px solid var(--line);border-radius:8px;padding:12px 14px;}
+  .growth-box .pct{font-size:24px;font-weight:800;font-family:"Consolas",monospace;}
+  .growth-box .pct.up{color:var(--priority-high);}
+  .growth-box .pct.down{color:var(--priority-low);}
+  .growth-box .label-txt{font-size:12px;color:var(--muted);}
+  .growth-box .label-txt.strong{color:#fff;font-weight:600;font-size:13px;}
+
+  /* Temporal Evolution Bars */
+  .timeline-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:6px;margin-top:6px;}
+  .timeline-col{background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:8px 6px;text-align:center;}
+  .timeline-col .val{font-size:16px;font-weight:700;font-family:"Consolas",monospace;color:#fff;}
+  .timeline-col .lbl{font-size:9.5px;color:var(--muted);margin-top:2px;}
+
+  /* Infrastructure Box */
+  .infra-box{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:12px 14px;}
+  .infra-item{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;margin-bottom:8px;line-height:1.4;}
+  .infra-item:last-child{margin-bottom:0;}
+  .infra-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+  
+  /* Action Box */
+  .action-box{background:rgba(249,115,22,.10);border:1px solid rgba(249,115,22,.35);
+    border-radius:8px;padding:14px 16px;}
+  .action-box .dept{font-size:11px;color:var(--priority-high);text-transform:uppercase;
+    letter-spacing:.6px;margin-bottom:5px;font-weight:700;}
+  .action-box .rec{font-size:13.5px;line-height:1.5;color:#fff;}
+
+  /* Resolution Impact Box */
+  .impact-box{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-top:6px;}
+  .impact-rate{font-size:15px;font-weight:700;color:var(--priority-low);margin-bottom:3px;}
+  .impact-txt{font-size:12px;color:var(--muted);line-height:1.45;}
+
+  /* Individual Grievances in Hotspot */
+  .complaints-list{max-height:220px;overflow-y:auto;border:1px solid var(--line);border-radius:6px;}
+  .complaint-row{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px;background:var(--panel-2);}
+  .complaint-row:last-child{border-bottom:none;}
+  .complaint-row-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
+
+  /* Bottom Trust / Status Bar */
+  footer.trust-bar{grid-column:1/4;display:flex;align-items:center;justify-content:space-between;
+    padding:0 var(--sp-xl);background:var(--panel);border-top:1px solid var(--line);font-size:11px;color:var(--muted);}
+  .trust-item{display:inline-flex;align-items:center;gap:6px;}
+  .trust-dot{width:6px;height:6px;border-radius:50%;background:var(--priority-low);}
+
+  /* Modal / Explain Dialog */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;display:none;
+    align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+  .modal-box{background:var(--panel);border:1px solid var(--line);border-radius:12px;width:520px;
+    max-width:90%;padding:var(--sp-xl);box-shadow:0 20px 40px rgba(0,0,0,.6);}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-md);}
+  .modal-head h3{margin:0;font-size:17px;color:#fff;}
+  .modal-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;}
+  .modal-body{font-size:13px;line-height:1.55;color:var(--paper);}
+  .weight-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px;}
+  .weight-table th{text-align:left;color:var(--muted);border-bottom:1px solid var(--line);padding:6px 4px;}
+  .weight-table td{padding:6px 4px;border-bottom:1px solid rgba(255,255,255,.05);}
+
+  /* Empty state in lists */
+  .empty-state{text-align:center;padding:24px 12px;color:var(--muted);font-size:13px;}
+
+  ::-webkit-scrollbar{width:6px;}
+  ::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px;}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="brand-wrap">
+      <span class="brand-badge"></span>
+      <h1 class="brand-title">Civic Signal</h1>
+    </div>
+    <span class="brand-sub">Municipal Spatial Intelligence & Decision Support Platform · Mumbai</span>
+    <span class="mode-indicator" id="dataMode"><span class="dot"></span>Live Decision Engine</span>
+    <div class="header-stats">
+      <div class="stat-card"><b id="statTotal">–</b><span>Total Grievances</span></div>
+      <div class="stat-card"><b id="statMapped">–</b><span>GPS Mapped</span></div>
+      <div class="stat-card"><b id="statUnresolved">–</b><span>Unresolved</span></div>
+      <div class="stat-card"><b id="statHotspots">–</b><span>Priority Zones</span></div>
+    </div>
+  </header>
+
+  <aside id="filters">
+    <div class="filter-group">
+      <div class="section-title-wrap">
+        <h2>Location Search</h2>
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="locSearch" class="search-input" placeholder="Search Andheri, Bandra, Powai, WEH..." />
+        <div id="searchResults" class="search-results"></div>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <div class="section-title-wrap">
+        <h2>Time Window</h2>
+        <button class="btn-link-reset" onclick="resetDateFilter()">Reset</button>
+      </div>
+      <div class="date-range-row">
+        <button class="date-btn active" data-days="all" onclick="setDateFilter('all', this)">All Time</button>
+        <button class="date-btn" data-days="7" onclick="setDateFilter(7, this)">Last 7d</button>
+        <button class="date-btn" data-days="30" onclick="setDateFilter(30, this)">Last 30d</button>
+        <button class="date-btn" data-days="90" onclick="setDateFilter(90, this)">Last 90d</button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <div class="section-title-wrap">
+        <h2>Complaint Category</h2>
+        <button class="btn-link-reset" onclick="resetCategoryFilter()">All</button>
+      </div>
+      <div class="chip-row" id="categoryChips"></div>
+    </div>
+
+    <div class="filter-group">
+      <div class="section-title-wrap">
+        <h2>Severity / Priority</h2>
+      </div>
+      <div class="chip-row" id="priorityChips">
+        <button class="chip active" data-priority="all">All</button>
+        <button class="chip" data-priority="High">High</button>
+        <button class="chip" data-priority="Critical">Critical</button>
+      </div>
+    </div>
+
+    <div class="filter-group" style="flex:1;">
+      <div class="section-title-wrap">
+        <h2>Priority Hotspots (Ranked)</h2>
+        <span id="hotspotCountBadge" class="mono" style="font-size:11px;color:var(--accent);">3 zones</span>
+      </div>
+      <div id="hotspotList"></div>
+    </div>
+  </aside>
+
+  <main id="map-container">
+    <div class="map-tools-floating">
+      <div class="bm-row">
+        <button class="bm-btn active" id="bmStreet" onclick="switchBasemap('street')">Street</button>
+        <button class="bm-btn" id="bmSatellite" onclick="switchBasemap('satellite')">Satellite</button>
+        <button class="bm-btn" id="bmHybrid" onclick="switchBasemap('hybrid')">Hybrid</button>
+      </div>
+      
+      <div class="tool-row-divider"></div>
+      
+      <div class="proximity-tool-row">
+        <span>📍 Proximity Tool:</span>
+        <select id="proximityRadiusSelect" class="proximity-select" onchange="updateProximityRadius()">
+          <option value="250">250 m Radius</option>
+          <option value="500" selected>500 m Radius</option>
+          <option value="1000">1.0 km Radius</option>
+          <option value="2000">2.0 km Radius</option>
+        </select>
+      </div>
+
+      <div class="layer-toggles">
+        <label><input type="checkbox" id="toggleHeatmap" checked onchange="toggleLayers()" /> Heatmap</label>
+        <label><input type="checkbox" id="toggleHotspots" checked onchange="toggleLayers()" /> Hotspots</label>
+        <label><input type="checkbox" id="toggleComplaints" checked onchange="toggleLayers()" /> Markers</label>
+      </div>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="legend">
+      <div class="title">Hotspot Intervention Priority</div>
+      <div class="row"><span class="sw" style="background:var(--priority-low)"></span>Low Priority (0–30)</div>
+      <div class="row"><span class="sw" style="background:var(--priority-med)"></span>Moderate Priority (31–60)</div>
+      <div class="row"><span class="sw" style="background:var(--priority-high)"></span>High Priority (61–80)</div>
+      <div class="row"><span class="sw" style="background:var(--priority-crit)"></span>Critical Intervention (81–100)</div>
+    </div>
+  </main>
+
+  <aside id="detail"><div class="empty">Select any hotspot polygon, marker, or click on the map to activate the Spatial Intelligence Profile.</div></aside>
+
+  <footer class="trust-bar">
+    <div class="trust-item"><span class="trust-dot"></span><span>Data Source: <b>Municipal Citizen Ingestion Pipeline (MCGM)</b></span></div>
+    <div class="trust-item"><span>Coordinate Validation: <b>Strict GPS Bounds Verified</b></span></div>
+    <div class="trust-item"><span>Single Source of Truth: <b id="truthStatus">Synced</b></span></div>
+  </footer>
+</div>
+
+<!-- Explainability Modal -->
+<div id="explainModal" class="modal-backdrop" onclick="closeExplainModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <h3>How is Priority Score Calculated?</h3>
+      <button class="modal-close" onclick="closeExplainModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>The <b>Hotspot Priority Score (0–100)</b> is an explainable decision-support metric computed deterministically from verified citizen grievances within the cluster:</p>
+      <table class="weight-table">
+        <thead>
+          <tr><th>Dimension</th><th>Weight</th><th>Civic Rationale</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Density</b></td><td>25%</td><td>Volume of grievances concentrated within the spatial boundary.</td></tr>
+          <tr><td><b>Priority / Severity</b></td><td>35%</td><td>Proportion of High & Critical severity complaints reported by citizens.</td></tr>
+          <tr><td><b>Recency Velocity</b></td><td>15%</td><td>Recent 7-day complaint influx relative to historical baseline.</td></tr>
+          <tr><td><b>Persistence</b></td><td>10%</td><td>Percentage of grievances remaining in Pending / In Progress state.</td></tr>
+          <tr><td><b>Semantic Concentration</b></td><td>15%</td><td>Grievances describing identical root causes (shared defect clusters).</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:0;">Hotspots experiencing rapid escalation (&gt;+50% growth) receive an automated urgency boost to ensure prompt municipal dispatch.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+<script>
+// ============================================================
+// REAL-WORLD MUMBAI GAZETTEER (Instant zero-latency search)
+// ============================================================
+const MUMBAI_LOCATIONS = [
+  { name: 'Andheri East (MIDC / Chakala / Station)', lat: 19.1197, lon: 72.8464, zoom: 15 },
+  { name: 'Andheri West (Lokhandwala / Infinity)', lat: 19.1363, lon: 72.8276, zoom: 15 },
+  { name: 'Bandra West (Hill Road / Bandstand / Linking Rd)', lat: 19.0544, lon: 72.8402, zoom: 15 },
+  { name: 'Bandra East (BKC - Bandra Kurla Complex)', lat: 19.0662, lon: 72.8656, zoom: 15 },
+  { name: 'Powai (Powai Lake / IIT Bombay / Hiranandani)', lat: 19.1278, lon: 72.9044, zoom: 15 },
+  { name: 'Malad West (SV Road / Link Road)', lat: 19.1860, lon: 72.8488, zoom: 15 },
+  { name: 'Dadar (Shivaji Park / Central-Western Junction)', lat: 19.0178, lon: 72.8478, zoom: 15 },
+  { name: 'Worli (Sea Face / Century Mills)', lat: 19.0166, lon: 72.8185, zoom: 15 },
+  { name: 'Bandra-Worli Sea Link', lat: 19.0365, lon: 72.8173, zoom: 14 },
+  { name: 'Western Express Highway (WEH)', lat: 19.1150, lon: 72.8550, zoom: 14 },
+  { name: 'Eastern Express Highway (EEH)', lat: 19.0720, lon: 72.9000, zoom: 14 },
+  { name: 'Chhatrapati Shivaji Maharaj International Airport (T2)', lat: 19.0896, lon: 72.8656, zoom: 15 },
+  { name: 'Kurla Junction', lat: 19.0657, lon: 72.8794, zoom: 15 },
+  { name: 'Juhu Beach', lat: 19.0988, lon: 72.8264, zoom: 15 }
+];
+
+const RISK_COLOR = {
+  Low: '#10b981',
+  Medium: '#f59e0b',
+  High: '#f97316',
+  Critical: '#ef4444'
+};
+
+const CAT_ICON = {
+  Road: '🛣️',
+  Drainage: '💧',
+  Garbage: '🗑️',
+  Streetlight: '💡',
+  Water: '🚰',
+  Electricity: '⚡',
+  Traffic: '🚦',
+  'Public Safety': '🛡️'
+};
+
+const DEMO_BUNDLE = {
+  "generated_at": "2026-09-01T10:00:00",
+  "city": "Mumbai",
+  "complaints": [
+    {
+      "complaint_id": "C0063",
+      "description": "Waste dumped illegally on the roadside near station road",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.186734,
+      "longitude": 72.848761,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-23T23:56:46.877843",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0067",
+      "description": "Garbage not collected for over a week near link road",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.186599,
+      "longitude": 72.849832,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-16T02:12:05.427888",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0043",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.122172,
+      "longitude": 72.851764,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T20:18:51.561544",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0013",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.116918,
+      "longitude": 72.852601,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T00:08:00.125201",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0090",
+      "description": "Water pipeline leakage flooding the street near Powai Lake",
+      "category": "Water",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.136001,
+      "longitude": 72.895261,
+      "address": "Powai",
+      "ward": "Powai",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-14T13:06:57.391514",
+      "status": "In Progress",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0025",
+      "description": "Large pothole causing accidents near the junction",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.122521,
+      "longitude": 72.850385,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T19:39:56.659684",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A2",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0075",
+      "description": "Traffic signal malfunctioning at the main junction",
+      "category": "Traffic",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.195986,
+      "longitude": 72.855143,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T23:21:40.642054",
+      "status": "Resolved",
+      "department": "Traffic Police / Transport",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0024",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.117505,
+      "longitude": 72.84663,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T00:32:57.390142",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0001",
+      "description": "Deep pothole outside Andheri railway station is dangerous for bikes",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.121082,
+      "longitude": 72.841262,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-18T20:51:01.477646",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0009",
+      "description": "Blocked drain causing foul smell in the locality",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121167,
+      "longitude": 72.848072,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-24T19:23:45.387869",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0007",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.115199,
+      "longitude": 72.843628,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-22T21:03:05.153366",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0046",
+      "description": "Blocked drain causing foul smell in the locality near Hill Road",
+      "category": "Drainage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.057104,
+      "longitude": 72.831196,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T07:01:29.742284",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0087",
+      "description": "Sewage water logging on the main road after rain",
+      "category": "Drainage",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.136489,
+      "longitude": 72.850725,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-18T02:44:54.866661",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0069",
+      "description": "Garbage not collected for over a week near residential building",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.188429,
+      "longitude": 72.845311,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-23T03:46:52.792512",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0023",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.116927,
+      "longitude": 72.841798,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T01:50:07.589046",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0068",
+      "description": "Garbage not collected for over a week on SV Road",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.190865,
+      "longitude": 72.848689,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-13T23:34:17.157543",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0091",
+      "description": "No water supply in the area for two days near Bandstand",
+      "category": "Water",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.065254,
+      "longitude": 72.817028,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T20:39:59.913834",
+      "status": "Pending",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0056",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.056847,
+      "longitude": 72.831581,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T08:25:17.998185",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0004",
+      "description": "Streetlight not working for several nights near station lane",
+      "category": "Streetlight",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121664,
+      "longitude": 72.844938,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-20T19:10:36.166791",
+      "status": "Pending",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0050",
+      "description": "Waste dumped illegally on the roadside near Turner Road",
+      "category": "Garbage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.058981,
+      "longitude": 72.834258,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-22T21:32:13.666518",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0011",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.118721,
+      "longitude": 72.841742,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T05:47:02.060659",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0065",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.185949,
+      "longitude": 72.847467,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-14T03:58:59.936900",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0036",
+      "description": "Waste dumped illegally on the roadside near junction",
+      "category": "Garbage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.123459,
+      "longitude": 72.845279,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T19:12:30.440351",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0083",
+      "description": "Streetlight not working for several nights",
+      "category": "Streetlight",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.180362,
+      "longitude": 72.874719,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-15T17:29:54.863822",
+      "status": "Pending",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0041",
+      "description": "Large pothole causing accidents near the junction",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.123703,
+      "longitude": 72.847332,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T04:41:03.589002",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0064",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.190615,
+      "longitude": 72.844326,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-14T12:22:35.446492",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0027",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.116134,
+      "longitude": 72.84311,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T23:28:36.454647",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0049",
+      "description": "Sewage water logging on the main road after rain",
+      "category": "Drainage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.05739,
+      "longitude": 72.831713,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T22:29:13.888470",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": "SEM-B1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0014",
+      "description": "Streetlight not working for several nights",
+      "category": "Streetlight",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.118929,
+      "longitude": 72.841711,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T22:20:33.612040",
+      "status": "Resolved",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0071",
+      "description": "Large pothole causing accidents near the junction",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.130917,
+      "longitude": 72.823063,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-03T17:55:37.759787",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0044",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.122044,
+      "longitude": 72.844843,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T06:01:53.120657",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0047",
+      "description": "No water supply in the area for two days",
+      "category": "Water",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.063935,
+      "longitude": 72.829884,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-22T23:11:56.347079",
+      "status": "Resolved",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0054",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.059739,
+      "longitude": 72.830909,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T15:44:01.453658",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0080",
+      "description": "Water pipeline leakage flooding the street",
+      "category": "Water",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.059039,
+      "longitude": 72.821807,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-24T12:37:49.309555",
+      "status": "Pending",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0031",
+      "description": "Streetlight not working for several nights",
+      "category": "Streetlight",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.117853,
+      "longitude": 72.841555,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T23:40:30.141262",
+      "status": "Pending",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0012",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.119292,
+      "longitude": 72.844059,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-25T20:27:10.026388",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A3",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0051",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.057882,
+      "longitude": 72.828529,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T05:52:33.760833",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": "SEM-B1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0042",
+      "description": "Deep pothole outside the railway station is dangerous for bikes",
+      "category": "Road",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.123653,
+      "longitude": 72.84342,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T20:29:36.298857",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0058",
+      "description": "No water supply in the area for two days",
+      "category": "Water",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.062315,
+      "longitude": 72.831276,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-22T05:45:37.380393",
+      "status": "In Progress",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0060",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.189215,
+      "longitude": 72.851282,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T11:33:30.428904",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0088",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.13421,
+      "longitude": 72.841538,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T21:06:26.960157",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0066",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.187732,
+      "longitude": 72.849275,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T21:30:30.121593",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0079",
+      "description": "Exposed electrical wiring near the footpath is a hazard",
+      "category": "Electricity",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.109742,
+      "longitude": 72.844193,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-09T14:49:07.972854",
+      "status": "Pending",
+      "department": "Electrical / Power Distribution",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0053",
+      "description": "No water supply in the area for two days",
+      "category": "Water",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.059076,
+      "longitude": 72.831361,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T21:47:36.297459",
+      "status": "In Progress",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0002",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.115607,
+      "longitude": 72.84589,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-19T17:25:01.779860",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0017",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.119776,
+      "longitude": 72.842211,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T01:45:15.129756",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0052",
+      "description": "Sewage water logging on the main road after rain",
+      "category": "Drainage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.060641,
+      "longitude": 72.82739,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T22:29:24.711256",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": "SEM-B1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0021",
+      "description": "Blocked drain causing foul smell in the locality",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.118938,
+      "longitude": 72.84344,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T00:33:00.522874",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0048",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.05544,
+      "longitude": 72.830524,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T13:35:52.638210",
+      "status": "Resolved",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0028",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.115715,
+      "longitude": 72.848574,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T00:34:05.632080",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0003",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121841,
+      "longitude": 72.849147,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-20T22:52:23.798976",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0039",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.119754,
+      "longitude": 72.843898,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T05:42:51.215929",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A2",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0006",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.115526,
+      "longitude": 72.844389,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-23T01:48:03.445895",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0074",
+      "description": "Streetlight not working for several nights",
+      "category": "Streetlight",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.123244,
+      "longitude": 72.869529,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-14T16:31:48.150230",
+      "status": "In Progress",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0032",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.123182,
+      "longitude": 72.84177,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T17:57:05.227514",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0072",
+      "description": "Exposed electrical wiring near the footpath is a hazard",
+      "category": "Electricity",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.046058,
+      "longitude": 72.804083,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T18:46:12.213611",
+      "status": "Resolved",
+      "department": "Electrical / Power Distribution",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0033",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.117185,
+      "longitude": 72.847902,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T01:40:16.828121",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A3",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0018",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.122301,
+      "longitude": 72.847259,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T03:54:02.774523",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A2",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0078",
+      "description": "Frequent power cuts in the locality",
+      "category": "Electricity",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.201283,
+      "longitude": 72.850423,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-17T16:39:17.651837",
+      "status": "Pending",
+      "department": "Electrical / Power Distribution",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0062",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.184377,
+      "longitude": 72.845439,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-24T16:18:33.827163",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0073",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.029822,
+      "longitude": 72.830195,
+      "address": "Dadar",
+      "ward": "Dadar",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-13T19:48:24.107670",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0045",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.05653,
+      "longitude": 72.831633,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T13:43:31.048625",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": "SEM-B1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0081",
+      "description": "Illegal parking blocking the main road",
+      "category": "Traffic",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.207583,
+      "longitude": 72.82644,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-10T13:40:59.907658",
+      "status": "In Progress",
+      "department": "Traffic Police / Transport",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0016",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.119054,
+      "longitude": 72.84626,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T06:21:12.322747",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0057",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.062108,
+      "longitude": 72.82652,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-24T00:39:45.695526",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0084",
+      "description": "Blocked drain causing foul smell in the locality",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.051291,
+      "longitude": 72.842371,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-03T13:05:10.297921",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0040",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.121059,
+      "longitude": 72.844025,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T03:22:38.037781",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0022",
+      "description": "Deep pothole outside the railway station is dangerous for bikes",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121185,
+      "longitude": 72.846078,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T00:14:45.822388",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A2",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0008",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.119238,
+      "longitude": 72.850695,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-23T19:16:37.766497",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0082",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.130795,
+      "longitude": 72.884434,
+      "address": "Powai",
+      "ward": "Powai",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-25T10:08:56.924866",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0019",
+      "description": "Broken road surface near the market causing traffic issues",
+      "category": "Road",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.123453,
+      "longitude": 72.850667,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T21:18:18.711920",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0035",
+      "description": "Large pothole causing accidents near the junction",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.114837,
+      "longitude": 72.848213,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T00:52:54.879740",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A3",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0020",
+      "description": "Deep pothole outside the railway station is dangerous for bikes",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.122832,
+      "longitude": 72.852373,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T00:27:28.390944",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A3",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0029",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.123314,
+      "longitude": 72.851492,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T19:18:17.710919",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A2",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0070",
+      "description": "Illegal parking blocking the main road",
+      "category": "Traffic",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.1098,
+      "longitude": 72.919844,
+      "address": "Powai",
+      "ward": "Powai",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-20T16:00:18.024880",
+      "status": "Resolved",
+      "department": "Traffic Police / Transport",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0015",
+      "description": "Sewage water logging on the main road after rain",
+      "category": "Drainage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.121487,
+      "longitude": 72.842306,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T05:23:13.337887",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0055",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.056423,
+      "longitude": 72.82469,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-22T06:31:12.240680",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0026",
+      "description": "Broken road surface near the market causing traffic issues",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.121418,
+      "longitude": 72.852445,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T18:22:40.260706",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0076",
+      "description": "Large pothole causing accidents near the junction",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.019275,
+      "longitude": 72.85636,
+      "address": "Dadar",
+      "ward": "Dadar",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T00:34:50.270366",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0034",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121842,
+      "longitude": 72.843753,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T22:32:27.606678",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0086",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.12907,
+      "longitude": 72.827011,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T00:34:27.778977",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0010",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121565,
+      "longitude": 72.843531,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-24T21:32:23.849815",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0059",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.189782,
+      "longitude": 72.848806,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-14T02:24:58.482512",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0085",
+      "description": "Sewage water logging on the main road after rain",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.208869,
+      "longitude": 72.849706,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-23T21:02:04.633242",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0037",
+      "description": "Dark stretch of road due to broken streetlights",
+      "category": "Streetlight",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.119987,
+      "longitude": 72.848757,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T00:45:51.955037",
+      "status": "Resolved",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0030",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.12461,
+      "longitude": 72.84745,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T03:03:27.777075",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0005",
+      "description": "Broken road surface near the market causing traffic issues",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.118302,
+      "longitude": 72.844981,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-21T20:42:11.851708",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0038",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.115889,
+      "longitude": 72.842219,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T00:44:42.471501",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A3",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0061",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.185775,
+      "longitude": 72.844817,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T13:35:23.662683",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0077",
+      "description": "Dark stretch of road due to broken streetlights near IIT Powai",
+      "category": "Streetlight",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.138356,
+      "longitude": 72.913185,
+      "address": "Powai",
+      "ward": "Powai",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-07T04:50:34.916474",
+      "status": "In Progress",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0089",
+      "description": "Illegal parking blocking the main road",
+      "category": "Traffic",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.141949,
+      "longitude": 72.82658,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-09T04:19:29.667181",
+      "status": "Resolved",
+      "department": "Traffic Police / Transport",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    }
+  ],
+  "hotspots": [
+    {
+      "hotspot_id": "H01",
+      "centroid": {
+        "latitude": 19.119973636363635,
+        "longitude": 72.84599668181818
+      },
+      "radius_m": 772.6,
+      "complaint_count": 44,
+      "category_breakdown": [
+        {
+          "category": "Road",
+          "count": 27,
+          "pct": 61.4
+        },
+        {
+          "category": "Garbage",
+          "count": 8,
+          "pct": 18.2
+        },
+        {
+          "category": "Drainage",
+          "count": 5,
+          "pct": 11.4
+        },
+        {
+          "category": "Streetlight",
+          "count": 4,
+          "pct": 9.1
+        }
+      ],
+      "dominant_category": "Road",
+      "priority_breakdown": {
+        "Low": 13,
+        "Medium": 15,
+        "High": 13,
+        "Critical": 3
+      },
+      "high_priority_count": 16,
+      "critical_count": 3,
+      "avg_severity": 2.5,
+      "similar_complaint_count": 20,
+      "unique_underlying_issues": 3,
+      "recent_count": 34,
+      "baseline_count": 10,
+      "growth_pct": 240.0,
+      "growth_label": "Rapidly emerging hotspot",
+      "unresolved_count": 34,
+      "risk_score": 73.9,
+      "risk_label": "High",
+      "score_components": {
+        "density": 25.0,
+        "priority": 5.3,
+        "severity": 7.5,
+        "recency": 11.6,
+        "persistence": 7.7,
+        "similarity": 6.8
+      },
+      "primary_department": "Roads & Infrastructure",
+      "secondary_departments": [
+        "Traffic Police / Transport",
+        "Stormwater Drainage"
+      ],
+      "recommended_action": "Prioritize road inspection and repair. Growth rate indicates an emerging issue \u2014 escalate priority. 20 semantically related complaints confirm a concentrated root cause.",
+      "first_reported": "2026-08-18T20:51:01.477646",
+      "latest_reported": "2026-09-01T06:01:53.120657",
+      "boundary_geojson": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.841262,
+                19.121082
+              ],
+              [
+                72.841555,
+                19.117853
+              ],
+              [
+                72.841798,
+                19.116927
+              ],
+              [
+                72.842219,
+                19.115889
+              ],
+              [
+                72.843628,
+                19.115199
+              ],
+              [
+                72.848213,
+                19.114837
+              ],
+              [
+                72.852601,
+                19.116918
+              ],
+              [
+                72.852445,
+                19.121418
+              ],
+              [
+                72.852373,
+                19.122832
+              ],
+              [
+                72.851492,
+                19.123314
+              ],
+              [
+                72.84745,
+                19.12461
+              ],
+              [
+                72.84342,
+                19.123653
+              ],
+              [
+                72.84177,
+                19.123182
+              ],
+              [
+                72.841262,
+                19.121082
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H01",
+          "score": 73.9,
+          "complaint_count": 44,
+          "dominant_category": "Road",
+          "risk_label": "High"
+        }
+      },
+      "complaint_ids": [
+        "C0043",
+        "C0013",
+        "C0025",
+        "C0024",
+        "C0001",
+        "C0009",
+        "C0007",
+        "C0023",
+        "C0004",
+        "C0011",
+        "C0036",
+        "C0041",
+        "C0027",
+        "C0014",
+        "C0044",
+        "C0031",
+        "C0012",
+        "C0042",
+        "C0002",
+        "C0017",
+        "C0021",
+        "C0028",
+        "C0003",
+        "C0039",
+        "C0006",
+        "C0032",
+        "C0033",
+        "C0018",
+        "C0016",
+        "C0040",
+        "C0022",
+        "C0008",
+        "C0019",
+        "C0035",
+        "C0020",
+        "C0029",
+        "C0015",
+        "C0026",
+        "C0034",
+        "C0010",
+        "C0037",
+        "C0030",
+        "C0005",
+        "C0038"
+      ],
+      "nearby_infrastructure": [
+        {
+          "name": "Andheri Railway Station (Western / Harbour Line)",
+          "type": "railway_station",
+          "distance_km": 0.05,
+          "description": "Andheri Railway Station (Western / Harbour Line) is located 0.05 km from the hotspot centroid."
+        },
+        {
+          "name": "Western Express Highway (WEH)",
+          "type": "highway",
+          "distance_km": 1.1,
+          "description": "Western Express Highway (WEH) is located 1.1 km from the hotspot centroid."
+        }
+      ],
+      "timeline": [
+        {
+          "label": "Aug 18 - Aug 22",
+          "count": 5,
+          "unresolved": 4,
+          "resolved": 1
+        },
+        {
+          "label": "Aug 22 - Aug 25",
+          "count": 5,
+          "unresolved": 4,
+          "resolved": 1
+        },
+        {
+          "label": "Aug 25 - Aug 28",
+          "count": 9,
+          "unresolved": 8,
+          "resolved": 1
+        },
+        {
+          "label": "Aug 28 - Sep 01",
+          "count": 25,
+          "unresolved": 18,
+          "resolved": 7
+        }
+      ],
+      "intervention_impact": {
+        "total": 44,
+        "resolved": 10,
+        "unresolved": 34,
+        "resolution_rate_pct": 22.7,
+        "impact_summary": "Immediate municipal intervention required: 34 of 44 grievances (77.3%) remain unresolved."
+      }
+    },
+    {
+      "hotspot_id": "H02",
+      "centroid": {
+        "latitude": 19.058896666666666,
+        "longitude": 72.8295514
+      },
+      "radius_m": 814.1,
+      "complaint_count": 15,
+      "category_breakdown": [
+        {
+          "category": "Drainage",
+          "count": 7,
+          "pct": 46.7
+        },
+        {
+          "category": "Garbage",
+          "count": 4,
+          "pct": 26.7
+        },
+        {
+          "category": "Water",
+          "count": 4,
+          "pct": 26.7
+        }
+      ],
+      "dominant_category": "Drainage",
+      "priority_breakdown": {
+        "Low": 4,
+        "Medium": 3,
+        "High": 5,
+        "Critical": 3
+      },
+      "high_priority_count": 8,
+      "critical_count": 3,
+      "avg_severity": 3.0,
+      "similar_complaint_count": 4,
+      "unique_underlying_issues": 1,
+      "recent_count": 9,
+      "baseline_count": 6,
+      "growth_pct": 50.0,
+      "growth_label": "Rapidly emerging hotspot",
+      "unresolved_count": 10,
+      "risk_score": 49.6,
+      "risk_label": "Medium",
+      "score_components": {
+        "density": 12.5,
+        "priority": 8.4,
+        "severity": 9.0,
+        "recency": 9.0,
+        "persistence": 6.7,
+        "similarity": 4.0
+      },
+      "primary_department": "Water & Sewerage",
+      "secondary_departments": [
+        "Waste Management",
+        "Public Health"
+      ],
+      "recommended_action": "Inspect drainage/sewer network for blockage or damage. Growth rate indicates an emerging issue \u2014 escalate priority.",
+      "first_reported": "2026-08-22T05:45:37.380393",
+      "latest_reported": "2026-08-31T22:29:13.888470",
+      "boundary_geojson": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.821807,
+                19.059039
+              ],
+              [
+                72.82469,
+                19.056423
+              ],
+              [
+                72.830524,
+                19.05544
+              ],
+              [
+                72.834258,
+                19.058981
+              ],
+              [
+                72.829884,
+                19.063935
+              ],
+              [
+                72.82652,
+                19.062108
+              ],
+              [
+                72.821807,
+                19.059039
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H02",
+          "score": 49.6,
+          "complaint_count": 15,
+          "dominant_category": "Drainage",
+          "risk_label": "Medium"
+        }
+      },
+      "complaint_ids": [
+        "C0046",
+        "C0056",
+        "C0050",
+        "C0049",
+        "C0047",
+        "C0054",
+        "C0080",
+        "C0051",
+        "C0058",
+        "C0053",
+        "C0052",
+        "C0048",
+        "C0045",
+        "C0057",
+        "C0055"
+      ],
+      "nearby_infrastructure": [
+        {
+          "name": "Arabian Sea Coastline (Bandra Bandstand / Carter Rd)",
+          "type": "coastline",
+          "distance_km": 1.04,
+          "description": "Arabian Sea Coastline (Bandra Bandstand / Carter Rd) is located 1.04 km from the hotspot centroid."
+        },
+        {
+          "name": "Bandra Railway Station (Western Line)",
+          "type": "railway_station",
+          "distance_km": 1.23,
+          "description": "Bandra Railway Station (Western Line) is located 1.23 km from the hotspot centroid."
+        },
+        {
+          "name": "Bandra-Worli Sea Link (Rajiv Gandhi Sea Link)",
+          "type": "bridge_highway",
+          "distance_km": 2.8,
+          "description": "Bandra-Worli Sea Link (Rajiv Gandhi Sea Link) is located 2.8 km from the hotspot centroid."
+        }
+      ],
+      "timeline": [
+        {
+          "label": "Aug 22 - Aug 24",
+          "count": 6,
+          "unresolved": 3,
+          "resolved": 3
+        },
+        {
+          "label": "Aug 24 - Aug 27",
+          "count": 2,
+          "unresolved": 2,
+          "resolved": 0
+        },
+        {
+          "label": "Aug 27 - Aug 29",
+          "count": 6,
+          "unresolved": 4,
+          "resolved": 2
+        },
+        {
+          "label": "Aug 29 - Aug 31",
+          "count": 1,
+          "unresolved": 1,
+          "resolved": 0
+        }
+      ],
+      "intervention_impact": {
+        "total": 15,
+        "resolved": 5,
+        "unresolved": 10,
+        "resolution_rate_pct": 33.3,
+        "impact_summary": "Moderate resolution progress: 5 resolved, 10 pending field intervention."
+      }
+    },
+    {
+      "hotspot_id": "H03",
+      "centroid": {
+        "latitude": 19.18782472727273,
+        "longitude": 72.84763681818181
+      },
+      "radius_m": 466.0,
+      "complaint_count": 11,
+      "category_breakdown": [
+        {
+          "category": "Garbage",
+          "count": 11,
+          "pct": 100.0
+        }
+      ],
+      "dominant_category": "Garbage",
+      "priority_breakdown": {
+        "Low": 0,
+        "Medium": 11,
+        "High": 0,
+        "Critical": 0
+      },
+      "high_priority_count": 0,
+      "critical_count": 0,
+      "avg_severity": 2.0,
+      "similar_complaint_count": 0,
+      "unique_underlying_issues": 11,
+      "recent_count": 3,
+      "baseline_count": 3,
+      "growth_pct": 0.0,
+      "growth_label": "Persistent / stable hotspot",
+      "unresolved_count": 10,
+      "risk_score": 28.3,
+      "risk_label": "Low",
+      "score_components": {
+        "density": 9.2,
+        "priority": 0.0,
+        "severity": 6.0,
+        "recency": 4.1,
+        "persistence": 9.1,
+        "similarity": 0.0
+      },
+      "primary_department": "Waste Management (SWM)",
+      "secondary_departments": [
+        "Public Health",
+        "Pollution Control"
+      ],
+      "recommended_action": "Increase waste collection frequency in this area.",
+      "first_reported": "2026-08-13T23:34:17.157543",
+      "latest_reported": "2026-08-27T21:30:30.121593",
+      "boundary_geojson": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.844326,
+                19.190615
+              ],
+              [
+                72.844817,
+                19.185775
+              ],
+              [
+                72.845439,
+                19.184377
+              ],
+              [
+                72.849832,
+                19.186599
+              ],
+              [
+                72.851282,
+                19.189215
+              ],
+              [
+                72.848689,
+                19.190865
+              ],
+              [
+                72.844326,
+                19.190615
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H03",
+          "score": 28.3,
+          "complaint_count": 11,
+          "dominant_category": "Garbage",
+          "risk_label": "Low"
+        }
+      },
+      "complaint_ids": [
+        "C0063",
+        "C0067",
+        "C0069",
+        "C0068",
+        "C0065",
+        "C0064",
+        "C0060",
+        "C0066",
+        "C0062",
+        "C0059",
+        "C0061"
+      ],
+      "nearby_infrastructure": [
+        {
+          "name": "Malad Railway Station (Western Line)",
+          "type": "railway_station",
+          "distance_km": 0.24,
+          "description": "Malad Railway Station (Western Line) is located 0.24 km from the hotspot centroid."
+        }
+      ],
+      "timeline": [
+        {
+          "label": "Aug 13 - Aug 17",
+          "count": 5,
+          "unresolved": 4,
+          "resolved": 1
+        },
+        {
+          "label": "Aug 17 - Aug 20",
+          "count": 0,
+          "unresolved": 0,
+          "resolved": 0
+        },
+        {
+          "label": "Aug 20 - Aug 24",
+          "count": 2,
+          "unresolved": 2,
+          "resolved": 0
+        },
+        {
+          "label": "Aug 24 - Aug 27",
+          "count": 4,
+          "unresolved": 4,
+          "resolved": 0
+        }
+      ],
+      "intervention_impact": {
+        "total": 11,
+        "resolved": 1,
+        "unresolved": 10,
+        "resolution_rate_pct": 9.1,
+        "impact_summary": "Immediate municipal intervention required: 10 of 11 grievances (90.9%) remain unresolved."
+      }
+    }
+  ],
+  "hotspots_geojson": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.841262,
+                19.121082
+              ],
+              [
+                72.841555,
+                19.117853
+              ],
+              [
+                72.841798,
+                19.116927
+              ],
+              [
+                72.842219,
+                19.115889
+              ],
+              [
+                72.843628,
+                19.115199
+              ],
+              [
+                72.848213,
+                19.114837
+              ],
+              [
+                72.852601,
+                19.116918
+              ],
+              [
+                72.852445,
+                19.121418
+              ],
+              [
+                72.852373,
+                19.122832
+              ],
+              [
+                72.851492,
+                19.123314
+              ],
+              [
+                72.84745,
+                19.12461
+              ],
+              [
+                72.84342,
+                19.123653
+              ],
+              [
+                72.84177,
+                19.123182
+              ],
+              [
+                72.841262,
+                19.121082
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H01",
+          "score": 73.9,
+          "complaint_count": 44,
+          "dominant_category": "Road",
+          "risk_label": "High"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.821807,
+                19.059039
+              ],
+              [
+                72.82469,
+                19.056423
+              ],
+              [
+                72.830524,
+                19.05544
+              ],
+              [
+                72.834258,
+                19.058981
+              ],
+              [
+                72.829884,
+                19.063935
+              ],
+              [
+                72.82652,
+                19.062108
+              ],
+              [
+                72.821807,
+                19.059039
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H02",
+          "score": 49.6,
+          "complaint_count": 15,
+          "dominant_category": "Drainage",
+          "risk_label": "Medium"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.844326,
+                19.190615
+              ],
+              [
+                72.844817,
+                19.185775
+              ],
+              [
+                72.845439,
+                19.184377
+              ],
+              [
+                72.849832,
+                19.186599
+              ],
+              [
+                72.851282,
+                19.189215
+              ],
+              [
+                72.848689,
+                19.190865
+              ],
+              [
+                72.844326,
+                19.190615
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H03",
+          "score": 28.3,
+          "complaint_count": 11,
+          "dominant_category": "Garbage",
+          "risk_label": "Low"
+        }
+      }
+    ]
+  },
+  "statistics": {
+    "total_complaints": 91,
+    "unresolved_complaints": 69,
+    "total_hotspots": 3,
+    "category_totals": {
+      "Garbage": 25,
+      "Road": 31,
+      "Water": 6,
+      "Traffic": 4,
+      "Drainage": 15,
+      "Streetlight": 7,
+      "Electricity": 3
+    },
+    "priority_totals": {
+      "Low": 25,
+      "Medium": 35,
+      "High": 24,
+      "Critical": 7
+    },
+    "highest_risk_hotspot": "H01"
+  }
+};
+
+let rawData = DEMO_BUNDLE;
+let state = {
+  category: 'all',
+  priority: 'all',
+  timeWindow: 'all',
+  selectedHotspot: null,
+  basemapMode: 'street',
+  showHeatmap: true,
+  showHotspots: true,
+  showComplaints: true,
+  proximityMode: false,
+  proximityRadius: 500
+};
+
+let map;
+let basemapLayers = {};
+let complaintCluster;
+let hotspotLayer;
+let proximityCircleLayer;
+let heatmapLayer = null;
+
+// ============================================================
+// BASEMAP CONFIGURATION (Street: CARTO Voyager, Satellite: Esri, Hybrid: Esri+Places)
+// ============================================================
+function initBasemaps(){
+  basemapLayers.street = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    maxZoom: 19,
+    subdomains: 'abcd'
+  });
+
+  basemapLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP',
+    maxZoom: 18
+  });
+
+  const esriImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 18 });
+  const esriLabels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 18,
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom'
+  });
+  basemapLayers.hybrid = L.layerGroup([esriImagery, esriLabels]);
+}
+
+function switchBasemap(mode){
+  if(state.basemapMode === mode) return;
+  if(basemapLayers[state.basemapMode]){
+    map.removeLayer(basemapLayers[state.basemapMode]);
+  }
+  state.basemapMode = mode;
+  basemapLayers[mode].addTo(map);
+  basemapLayers[mode].bringToBack();
+
+  document.querySelectorAll('.bm-btn').forEach(btn => btn.classList.remove('active'));
+  if(mode === 'street') document.getElementById('bmStreet').classList.add('active');
+  if(mode === 'satellite') document.getElementById('bmSatellite').classList.add('active');
+  if(mode === 'hybrid') document.getElementById('bmHybrid').classList.add('active');
+}
+
+// ============================================================
+// INITIALIZATION
+// ============================================================
+async function init(){
+  map = L.map('map', { zoomControl: true }).setView([19.12, 72.86], 12);
+  initBasemaps();
+  basemapLayers.street.addTo(map);
+
+  complaintCluster = L.markerClusterGroup({
+    maxClusterRadius: 45,
+    disableClusteringAtZoom: 16,
+    showCoverageOnHover: false
+  });
+  hotspotLayer = L.layerGroup();
+  proximityCircleLayer = L.layerGroup();
+
+  map.addLayer(complaintCluster);
+  map.addLayer(hotspotLayer);
+  map.addLayer(proximityCircleLayer);
+
+  // Map click for spatial proximity analysis
+  map.on('click', e => {
+    runProximityAnalysis(e.latlng.lat, e.latlng.lng, state.proximityRadius);
+  });
+
+  setupSearch();
+  await loadData();
+  buildCategoryChips();
+  bindFilterEvents();
+  renderAll();
+}
+
+async function loadData(){
+  try {
+    const res = await fetch('/api/gis/hotspots');
+    if(res.ok){
+      const hotspots = await res.json();
+      const compRes = await fetch('/api/gis/complaints?limit=1000');
+      const complaints = await compRes.json();
+      const statsRes = await fetch('/api/gis/statistics');
+      const stats = await statsRes.json();
+      
+      rawData = {
+        city: 'Mumbai',
+        complaints: complaints,
+        hotspots: hotspots,
+        statistics: stats
+      };
+      document.getElementById('dataMode').innerHTML = '<span class="dot"></span>Live API Connected';
+      document.getElementById('dataMode').style.color = '#38bdf8';
+      return;
+    }
+  } catch (e) {}
+
+  // Fallback to local snapshot
+  try {
+    const res = await fetch('demo_bundle.json');
+    if(res.ok){
+      rawData = await res.json();
+      document.getElementById('dataMode').innerHTML = '<span class="dot"></span>Demo Snapshot Active';
+      return;
+    }
+  } catch (e) {}
+
+  if(typeof DEMO_BUNDLE !== 'undefined'){
+    rawData = DEMO_BUNDLE;
+  }
+}
+
+function buildCategoryChips(){
+  if(!rawData || !rawData.complaints) return;
+  const cats = [...new Set(rawData.complaints.map(c=>c.category))].filter(Boolean).sort();
+  const wrap = document.getElementById('categoryChips');
+  wrap.innerHTML = '<button class="chip active" data-category="all">All</button>' +
+    cats.map(c=>`<button class="chip" data-category="${c}">${CAT_ICON[c]||''} ${c}</button>`).join('');
+}
+
+function bindFilterEvents(){
+  document.getElementById('categoryChips').addEventListener('click', e=>{
+    const btn = e.target.closest('.chip');
+    if(!btn || !btn.dataset.category) return;
+    document.querySelectorAll('#categoryChips .chip').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    state.category = btn.dataset.category;
+    renderAll();
+  });
+
+  document.getElementById('priorityChips').addEventListener('click', e=>{
+    const btn = e.target.closest('.chip');
+    if(!btn || !btn.dataset.priority) return;
+    document.querySelectorAll('#priorityChips .chip').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    state.priority = btn.dataset.priority;
+    renderAll();
+  });
+}
+
+function setDateFilter(days, btn){
+  document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  state.timeWindow = days;
+  renderAll();
+}
+
+function resetCategoryFilter(){
+  document.querySelectorAll('#categoryChips .chip').forEach(c=>c.classList.remove('active'));
+  document.querySelector('#categoryChips .chip[data-category="all"]').classList.add('active');
+  state.category = 'all';
+  renderAll();
+}
+
+function resetDateFilter(){
+  document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.date-btn[data-days="all"]').classList.add('active');
+  state.timeWindow = 'all';
+  renderAll();
+}
+
+function resetAllFilters(){
+  resetCategoryFilter();
+  resetDateFilter();
+  document.querySelectorAll('#priorityChips .chip').forEach(c=>c.classList.remove('active'));
+  document.querySelector('#priorityChips .chip[data-priority="all"]').classList.add('active');
+  state.priority = 'all';
+  state.selectedHotspot = null;
+  proximityCircleLayer.clearLayers();
+  renderAll();
+}
+
+function setupSearch(){
+  const input = document.getElementById('locSearch');
+  const resBox = document.getElementById('searchResults');
+  let debounceTimer;
+
+  input.addEventListener('input', ()=>{
+    clearTimeout(debounceTimer);
+    const q = input.value.trim().toLowerCase();
+    if(q.length < 2){
+      resBox.style.display = 'none';
+      return;
+    }
+
+    const matches = MUMBAI_LOCATIONS.filter(l => l.name.toLowerCase().includes(q));
+    if(matches.length > 0){
+      resBox.innerHTML = matches.map(m => `
+        <div class="search-res-item" data-lat="${m.lat}" data-lon="${m.lon}" data-zoom="${m.zoom}">
+          📍 <b>${m.name}</b>
+        </div>
+      `).join('');
+      resBox.style.display = 'block';
+    } else {
+      debounceTimer = setTimeout(async ()=>{
+        try {
+          const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q + ', Mumbai')}`);
+          const geoRes = await r.json();
+          if(geoRes && geoRes.length > 0){
+            resBox.innerHTML = geoRes.slice(0, 4).map(g => `
+              <div class="search-res-item" data-lat="${g.lat}" data-lon="${g.lon}" data-zoom="15">
+                📍 <b>${g.display_name.split(',')[0]}</b> <small style="color:#94a3b8">${g.display_name}</small>
+              </div>
+            `).join('');
+            resBox.style.display = 'block';
+          } else {
+            resBox.style.display = 'none';
+          }
+        } catch(e){}
+      }, 400);
+    }
+  });
+
+  resBox.addEventListener('click', e=>{
+    const item = e.target.closest('.search-res-item');
+    if(!item) return;
+    const lat = parseFloat(item.dataset.lat);
+    const lon = parseFloat(item.dataset.lon);
+    const zoom = parseInt(item.dataset.zoom) || 15;
+    map.setView([lat, lon], zoom, { animate: true });
+    resBox.style.display = 'none';
+  });
+
+  document.addEventListener('click', e=>{
+    if(!e.target.closest('.search-wrap')) resBox.style.display = 'none';
+  });
+}
+
+function toggleLayers(){
+  state.showHeatmap = document.getElementById('toggleHeatmap').checked;
+  state.showHotspots = document.getElementById('toggleHotspots').checked;
+  state.showComplaints = document.getElementById('toggleComplaints').checked;
+  renderAll();
+}
+
+function updateProximityRadius(){
+  state.proximityRadius = parseFloat(document.getElementById('proximityRadiusSelect').value);
+}
+
+// Single Source of Truth Filtering Pipeline
+function filteredComplaints(){
+  if(!rawData || !rawData.complaints) return [];
+  const refNow = new Date('2026-09-01T10:00:00');
+
+  return rawData.complaints.filter(c=>{
+    // Coordinate validation
+    const lat = parseFloat(c.latitude);
+    const lon = parseFloat(c.longitude);
+    if(isNaN(lat) || isNaN(lon) || lat < -90 || lat > 90 || lon < -180 || lon > 180) return false;
+
+    if(state.category !== 'all' && c.category !== state.category) return false;
+    if(state.priority !== 'all' && c.priority !== state.priority) return false;
+    
+    if(state.timeWindow !== 'all'){
+      const days = parseInt(state.timeWindow);
+      const cDate = new Date(c.timestamp);
+      const diffDays = (refNow - cDate) / (1000 * 60 * 60 * 24);
+      if(diffDays > days) return false;
+    }
+    return true;
+  });
+}
+
+function filteredHotspots(complaints){
+  if(!rawData || !rawData.hotspots) return [];
+  return rawData.hotspots.filter(h=>{
+    if(state.category !== 'all' && h.dominant_category !== state.category) return false;
+    if(state.priority === 'High' && (h.high_priority_count || 0) === 0) return false;
+    if(state.priority === 'Critical' && (h.critical_count || 0) === 0) return false;
+    return true;
+  });
+}
+
+function renderAll(){
+  const complaints = filteredComplaints();
+  const hotspots = filteredHotspots(complaints);
+
+  document.getElementById('statTotal').textContent = rawData?.complaints?.length || 0;
+  document.getElementById('statMapped').textContent = complaints.length;
+  document.getElementById('statUnresolved').textContent =
+    complaints.filter(c=>c.status !== 'Resolved').length;
+  document.getElementById('statHotspots').textContent = hotspots.length;
+  document.getElementById('hotspotCountBadge').textContent = `${hotspots.length} zone${hotspots.length===1?'':'s'}`;
+
+  renderHeatmap(complaints);
+  renderMarkers(complaints);
+  renderHotspotBoundaries(hotspots);
+  renderHotspotList(hotspots);
+
+  if(state.selectedHotspot && !hotspots.find(h=>h.hotspot_id===state.selectedHotspot)){
+    state.selectedHotspot = null;
+    document.getElementById('detail').innerHTML = '<div class="empty">Select any hotspot polygon, marker, or click on the map to activate the Spatial Intelligence Profile.</div>';
+  }
+}
+
+function renderHeatmap(complaints){
+  if(heatmapLayer){
+    map.removeLayer(heatmapLayer);
+    heatmapLayer = null;
+  }
+  if(!state.showHeatmap || complaints.length === 0) return;
+
+  const points = complaints.map(c => {
+    let intensity = (c.severity || 2) / 5.0;
+    if(c.priority === 'Critical') intensity = 1.0;
+    else if(c.priority === 'High') intensity = 0.8;
+    return [c.latitude, c.longitude, intensity];
+  });
+
+  heatmapLayer = L.heatLayer(points, {
+    radius: 26,
+    blur: 16,
+    maxZoom: 16,
+    gradient: { 0.2: '#0284c7', 0.4: '#10b981', 0.6: '#f59e0b', 0.8: '#f97316', 1.0: '#ef4444' }
+  });
+  heatmapLayer.addTo(map);
+}
+
+function renderMarkers(complaints){
+  complaintCluster.clearLayers();
+  if(!state.showComplaints) return;
+
+  complaints.forEach(c=>{
+    const color = c.priority==='Critical'?RISK_COLOR.Critical
+                : c.priority==='High'?RISK_COLOR.High
+                : c.priority==='Medium'?RISK_COLOR.Medium:RISK_COLOR.Low;
+    const m = L.circleMarker([c.latitude, c.longitude], {
+      radius: 6,
+      color: '#ffffff',
+      weight: 1.5,
+      fillColor: color,
+      fillOpacity: 0.85
+    });
+    m.bindPopup(`
+      <b>${CAT_ICON[c.category]||''} ${c.category} · ${c.priority} Priority</b>
+      <div>${c.description}</div>
+      <div style="margin-top:6px;font-size:11px;color:#94a3b8;">
+        ID: <span class="mono">${c.complaint_id}</span> · Status: <b>${c.status}</b><br/>
+        Reported: ${new Date(c.timestamp).toLocaleDateString()} · ${c.address || 'Mumbai'}
+      </div>
+    `);
+    complaintCluster.addLayer(m);
+  });
+}
+
+function renderHotspotBoundaries(hotspots){
+  hotspotLayer.clearLayers();
+  if(!state.showHotspots) return;
+
+  hotspots.forEach(h=>{
+    const color = RISK_COLOR[h.risk_label] || '#f97316';
+    const isSelected = h.hotspot_id === state.selectedHotspot;
+
+    if(h.boundary_geojson){
+      const layer = L.geoJSON(h.boundary_geojson, {
+        style: {
+          color: color,
+          weight: isSelected ? 3 : 2,
+          fillColor: color,
+          fillOpacity: isSelected ? 0.25 : 0.12,
+          dashArray: isSelected ? null : '5 4'
+        }
+      });
+      layer.on('click', ()=>selectHotspot(h.hotspot_id));
+      layer.addTo(hotspotLayer);
+    }
+
+    const centroidLat = h.centroid ? h.centroid.latitude : h.center_lat;
+    const centroidLon = h.centroid ? h.centroid.longitude : h.center_lon;
+
+    if(centroidLat && centroidLon){
+      const marker = L.marker([centroidLat, centroidLon], {
+        icon: L.divIcon({
+          className: '',
+          html: `<div style="background:${color};color:#090d16;font:700 11px 'Consolas',monospace;
+            padding:2px 8px;border-radius:12px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.45);
+            border:1.5px solid #ffffff;cursor:pointer;">
+            ${h.hotspot_id} · ${h.risk_score}</div>`,
+          iconSize: [0, 0],
+          iconAnchor: [24, 10]
+        })
+      });
+      marker.on('click', ()=>selectHotspot(h.hotspot_id));
+      marker.addTo(hotspotLayer);
+    }
+  });
+}
+
+function renderHotspotList(hotspots){
+  const wrap = document.getElementById('hotspotList');
+  if(hotspots.length === 0){
+    wrap.innerHTML = `
+      <div class="empty-state">
+        No hotspots match the active filters.<br/>
+        <button class="btn-link-reset" style="margin-top:8px;" onclick="resetAllFilters()">Reset All Filters</button>
+      </div>
+    `;
+    return;
+  }
+  wrap.innerHTML = hotspots.map(h=>`
+    <div class="hotspot-list-item ${h.hotspot_id===state.selectedHotspot?'selected':''}" data-id="${h.hotspot_id}">
+      <div class="hli-top">
+        <span class="hli-id mono">${h.hotspot_id}</span>
+        <span class="badge ${h.risk_label}">${h.risk_label} · ${h.risk_score}</span>
+      </div>
+      <div class="hli-title">${CAT_ICON[h.dominant_category]||''} ${h.dominant_category} Concentration</div>
+      <div class="hli-meta">
+        <span>${h.complaint_count} complaints</span>
+        <span style="color:${(h.growth_pct||0)>=0?'var(--priority-high)':'var(--priority-low)'}">
+          ${(h.growth_pct||0)>=0?'+':''}${h.growth_pct}% trend
+        </span>
+      </div>
+    </div>
+  `).join('');
+
+  wrap.querySelectorAll('.hotspot-list-item').forEach(el=>{
+    el.addEventListener('click', ()=>selectHotspot(el.dataset.id));
+  });
+}
+
+function selectHotspot(id){
+  state.selectedHotspot = id;
+  proximityCircleLayer.clearLayers();
+  const h = rawData.hotspots.find(x=>x.hotspot_id===id);
+  if(!h) return;
+
+  document.querySelectorAll('.hotspot-list-item').forEach(el=>
+    el.classList.toggle('selected', el.dataset.id===id));
+
+  const lat = h.centroid ? h.centroid.latitude : h.center_lat;
+  const lon = h.centroid ? h.centroid.longitude : h.center_lon;
+  
+  if(lat && lon){
+    map.flyTo([lat, lon], 15, { animate: true, duration: 0.8 });
+  }
+
+  renderHotspotBoundaries(filteredHotspots(filteredComplaints()));
+  renderDetail(h);
+}
+
+// Interactive Proximity Analysis
+function runProximityAnalysis(lat, lon, radiusM){
+  proximityCircleLayer.clearLayers();
+  
+  const circle = L.circle([lat, lon], {
+    radius: radiusM,
+    color: '#38bdf8',
+    weight: 2,
+    dashArray: '6 4',
+    fillColor: '#38bdf8',
+    fillOpacity: 0.15
+  }).addTo(proximityCircleLayer);
+
+  const matched = (rawData.complaints || []).filter(c=>{
+    const d = haversineM(lat, lon, c.latitude, c.longitude);
+    return d <= radiusM;
+  });
+
+  const unresolved = matched.filter(c=>c.status !== 'Resolved').length;
+  const catBreakdown = {};
+  matched.forEach(c => {
+    catBreakdown[c.category] = (catBreakdown[c.category] || 0) + 1;
+  });
+
+  document.getElementById('detail').innerHTML = `
+    <div class="dh-head">
+      <div>
+        <div class="dh-id mono">PROXIMITY ZONE ANALYSIS</div>
+        <div class="dh-place">${radiusM >= 1000 ? (radiusM/1000).toFixed(1) + ' km' : radiusM + ' m'} Radius Zone</div>
+      </div>
+    </div>
+
+    <div class="risk-panel">
+      <div class="risk-score" style="color:var(--accent);">${matched.length}<small> complaints</small></div>
+      <div>
+        <span class="badge High">${unresolved} Unresolved</span>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:5px;">
+          Center: ${lat.toFixed(4)}°N, ${lon.toFixed(4)}°E
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-label">Category Concentration</h3>
+    ${Object.keys(catBreakdown).map(cat => `
+      <div class="bar-row">
+        <span class="label">${CAT_ICON[cat]||''} ${cat}</span>
+        <div class="bar-track"><div class="bar-fill" style="width:${(catBreakdown[cat]/matched.length)*100}%"></div></div>
+        <span class="count mono">${catBreakdown[cat]}</span>
+      </div>
+    `).join('')}
+
+    <h3 class="section-label">Grievances in Zone</h3>
+    <div class="complaints-list">
+      ${matched.slice(0, 8).map(c => `
+        <div class="complaint-row">
+          <div class="complaint-row-top">
+            <span class="mono" style="color:var(--accent);">${c.complaint_id}</span>
+            <span class="badge ${c.priority}">${c.priority}</span>
+          </div>
+          <div>${c.description}</div>
+          <div style="font-size:10.5px;color:var(--muted);margin-top:3px;">
+            ${new Date(c.timestamp).toLocaleDateString()} · ${c.status}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function haversineM(lat1, lon1, lat2, lon2){
+  const R = 6371000;
+  const phi1 = lat1 * Math.PI / 180;
+  const phi2 = lat2 * Math.PI / 180;
+  const deltaPhi = (lat2 - lat1) * Math.PI / 180;
+  const deltaLambda = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(deltaPhi/2)**2 + Math.cos(phi1)*Math.cos(phi2)*Math.sin(deltaLambda/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function renderDetail(h){
+  const growthUp = (h.growth_pct || 0) >= 0;
+  const catBreakdown = h.category_breakdown || [];
+  const catBars = catBreakdown.map(cb=>`
+    <div class="bar-row">
+      <span class="label">${CAT_ICON[cb.category]||''} ${cb.category}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${cb.pct}%"></div></div>
+      <span class="count mono">${cb.count}</span>
+    </div>`).join('');
+
+  const priOrder = ['Critical','High','Medium','Low'];
+  const priDict = h.priority_breakdown || { Critical: h.critical_count||0, High: h.high_priority_count||0, Medium: 0, Low: 0 };
+  const maxPri = Math.max(...Object.values(priDict), 1);
+  const priBars = priOrder.map(p=>`
+    <div class="bar-row">
+      <span class="label">${p}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${((priDict[p]||0)/maxPri*100)}%;background:${RISK_COLOR[p]}"></div></div>
+      <span class="count mono">${priDict[p]||0}</span>
+    </div>`).join('');
+
+  // Nearby real infrastructure
+  const nearbyList = (h.nearby_infrastructure || []).slice(0, 3);
+  const infraHtml = nearbyList.length > 0 ? `
+    <h3 class="section-label">Verified Surrounding Geography</h3>
+    <div class="infra-box">
+      ${nearbyList.map(item => `
+        <div class="infra-item">
+          <span class="infra-icon">${item.type==='railway_station'?'🚆':item.type==='water_body'?'🌊':item.type==='highway'?'🛣️':'📍'}</span>
+          <div><b>${item.name}</b> <span class="mono" style="color:var(--accent);font-size:11px;">(${item.distance_km} km)</span></div>
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
+
+  // Hotspot Timeline Evolution
+  const timeline = h.timeline || [];
+  const timelineHtml = timeline.length > 0 ? `
+    <h3 class="section-label">Spatio-Temporal Evolution</h3>
+    <div class="timeline-grid">
+      ${timeline.map(t => `
+        <div class="timeline-col">
+          <div class="val">${t.count}</div>
+          <div class="lbl">${t.label}</div>
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
+
+  // Before vs After Resolution Impact
+  const impact = h.intervention_impact || { resolution_rate_pct: 0, resolved: 0, total: h.complaint_count, impact_summary: 'Field intervention active' };
+  const impactHtml = `
+    <h3 class="section-label">Municipal Intervention & Resolution Impact</h3>
+    <div class="impact-box">
+      <div class="impact-rate">${impact.resolution_rate_pct}% Resolution Rate</div>
+      <div class="impact-txt">${impact.impact_summary}</div>
+    </div>
+  `;
+
+  // Matched individual complaints
+  const matchedComplaints = (rawData.complaints || []).filter(c => (h.complaint_ids || []).includes(c.complaint_id)).slice(0, 6);
+  const complaintsListHtml = matchedComplaints.length > 0 ? `
+    <h3 class="section-label">Grievances in Hotspot (${matchedComplaints.length})</h3>
+    <div class="complaints-list">
+      ${matchedComplaints.map(c => `
+        <div class="complaint-row">
+          <div class="complaint-row-top">
+            <span class="mono" style="color:var(--accent);">${c.complaint_id}</span>
+            <span class="badge ${c.priority}">${c.priority}</span>
+          </div>
+          <div>${c.description}</div>
+          <div style="font-size:10.5px;color:var(--muted);margin-top:3px;">
+            ${new Date(c.timestamp).toLocaleDateString()} · ${c.status}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
+
+  document.getElementById('detail').innerHTML = `
+    <div class="dh-head">
+      <div>
+        <div class="dh-id mono">HOTSPOT ${h.hotspot_id}</div>
+        <div class="dh-place">${h.dominant_category} Concentration</div>
+      </div>
+    </div>
+
+    <div class="risk-panel">
+      <div class="risk-score" style="color:${RISK_COLOR[h.risk_label]||'#fff'}">${h.risk_score}<small>/100</small></div>
+      <div>
+        <span class="badge ${h.risk_label}">${h.risk_label} Priority</span>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:4px;">
+          ${h.complaint_count} complaints within ~${Math.round(h.radius_m || 500)}m
+        </div>
+        <button class="btn-explain" onclick="openExplainModal()">ℹ️ How is Priority Calculated?</button>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi"><b>${h.high_priority_count || 0}</b><span>High Priority</span></div>
+      <div class="kpi"><b>${h.critical_count || 0}</b><span>Critical Severity</span></div>
+      <div class="kpi"><b>${h.similar_complaint_count || 0}</b><span>Semantically Linked</span></div>
+      <div class="kpi"><b>${h.unresolved_count || 0}</b><span>Unresolved</span></div>
+    </div>
+
+    <h3 class="section-label">Temporal Velocity</h3>
+    <div class="growth-box">
+      <div class="pct ${growthUp?'up':'down'}">${growthUp?'+':''}${h.growth_pct || 0}%</div>
+      <div>
+        <div class="label-txt strong">${h.growth_label || 'Stable'}</div>
+        <div class="label-txt mono">${h.baseline_count || 0} (prior 7d) → ${h.recent_count || 0} (recent 7d)</div>
+      </div>
+    </div>
+
+    ${timelineHtml}
+    ${infraHtml}
+
+    <h3 class="section-label">Category Breakdown</h3>
+    ${catBars}
+
+    <h3 class="section-label">Priority Distribution</h3>
+    ${priBars}
+
+    <h3 class="section-label">Actionable Civic Recommendation</h3>
+    <div class="action-box">
+      <div class="dept">Primary Dept: ${h.primary_department}</div>
+      <div class="rec">${h.recommended_action}</div>
+      ${(h.secondary_departments && h.secondary_departments.length > 0) ? `
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;">Coordinating: ${h.secondary_departments.join(', ')}</div>
+      ` : ''}
+    </div>
+
+    ${impactHtml}
+    ${complaintsListHtml}
+  `;
+}
+
+function openExplainModal(){
+  document.getElementById('explainModal').style.display = 'flex';
+}
+
+function closeExplainModal(e){
+  document.getElementById('explainModal').style.display = 'none';
+}
+
+init();
+</script>
+</body>
+</html>

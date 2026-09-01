@@ -1,0 +1,2398 @@
+{
+  "generated_at": "2026-09-01T10:00:00",
+  "city": "Mumbai",
+  "complaints": [
+    {
+      "complaint_id": "C0063",
+      "description": "Waste dumped illegally on the roadside near station road",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.186734,
+      "longitude": 72.848761,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-23T23:56:46.877843",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0067",
+      "description": "Garbage not collected for over a week near link road",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.186599,
+      "longitude": 72.849832,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-16T02:12:05.427888",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0043",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.122172,
+      "longitude": 72.851764,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T20:18:51.561544",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0013",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.116918,
+      "longitude": 72.852601,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T00:08:00.125201",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0090",
+      "description": "Water pipeline leakage flooding the street near Powai Lake",
+      "category": "Water",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.136001,
+      "longitude": 72.895261,
+      "address": "Powai",
+      "ward": "Powai",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-14T13:06:57.391514",
+      "status": "In Progress",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0025",
+      "description": "Large pothole causing accidents near the junction",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.122521,
+      "longitude": 72.850385,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T19:39:56.659684",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A2",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0075",
+      "description": "Traffic signal malfunctioning at the main junction",
+      "category": "Traffic",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.195986,
+      "longitude": 72.855143,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T23:21:40.642054",
+      "status": "Resolved",
+      "department": "Traffic Police / Transport",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0024",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.117505,
+      "longitude": 72.84663,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T00:32:57.390142",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0001",
+      "description": "Deep pothole outside Andheri railway station is dangerous for bikes",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.121082,
+      "longitude": 72.841262,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-18T20:51:01.477646",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0009",
+      "description": "Blocked drain causing foul smell in the locality",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121167,
+      "longitude": 72.848072,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-24T19:23:45.387869",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0007",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.115199,
+      "longitude": 72.843628,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-22T21:03:05.153366",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0046",
+      "description": "Blocked drain causing foul smell in the locality near Hill Road",
+      "category": "Drainage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.057104,
+      "longitude": 72.831196,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T07:01:29.742284",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0087",
+      "description": "Sewage water logging on the main road after rain",
+      "category": "Drainage",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.136489,
+      "longitude": 72.850725,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-18T02:44:54.866661",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0069",
+      "description": "Garbage not collected for over a week near residential building",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.188429,
+      "longitude": 72.845311,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-23T03:46:52.792512",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0023",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.116927,
+      "longitude": 72.841798,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T01:50:07.589046",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0068",
+      "description": "Garbage not collected for over a week on SV Road",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.190865,
+      "longitude": 72.848689,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-13T23:34:17.157543",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0091",
+      "description": "No water supply in the area for two days near Bandstand",
+      "category": "Water",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.065254,
+      "longitude": 72.817028,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T20:39:59.913834",
+      "status": "Pending",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0056",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.056847,
+      "longitude": 72.831581,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T08:25:17.998185",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0004",
+      "description": "Streetlight not working for several nights near station lane",
+      "category": "Streetlight",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121664,
+      "longitude": 72.844938,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-20T19:10:36.166791",
+      "status": "Pending",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0050",
+      "description": "Waste dumped illegally on the roadside near Turner Road",
+      "category": "Garbage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.058981,
+      "longitude": 72.834258,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-22T21:32:13.666518",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0011",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.118721,
+      "longitude": 72.841742,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T05:47:02.060659",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0065",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.185949,
+      "longitude": 72.847467,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-14T03:58:59.936900",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0036",
+      "description": "Waste dumped illegally on the roadside near junction",
+      "category": "Garbage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.123459,
+      "longitude": 72.845279,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T19:12:30.440351",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0083",
+      "description": "Streetlight not working for several nights",
+      "category": "Streetlight",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.180362,
+      "longitude": 72.874719,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-15T17:29:54.863822",
+      "status": "Pending",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0041",
+      "description": "Large pothole causing accidents near the junction",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.123703,
+      "longitude": 72.847332,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T04:41:03.589002",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0064",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.190615,
+      "longitude": 72.844326,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-14T12:22:35.446492",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0027",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.116134,
+      "longitude": 72.84311,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T23:28:36.454647",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0049",
+      "description": "Sewage water logging on the main road after rain",
+      "category": "Drainage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.05739,
+      "longitude": 72.831713,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T22:29:13.888470",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": "SEM-B1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0014",
+      "description": "Streetlight not working for several nights",
+      "category": "Streetlight",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.118929,
+      "longitude": 72.841711,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T22:20:33.612040",
+      "status": "Resolved",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0071",
+      "description": "Large pothole causing accidents near the junction",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.130917,
+      "longitude": 72.823063,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-03T17:55:37.759787",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0044",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.122044,
+      "longitude": 72.844843,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T06:01:53.120657",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0047",
+      "description": "No water supply in the area for two days",
+      "category": "Water",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.063935,
+      "longitude": 72.829884,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-22T23:11:56.347079",
+      "status": "Resolved",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0054",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.059739,
+      "longitude": 72.830909,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T15:44:01.453658",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0080",
+      "description": "Water pipeline leakage flooding the street",
+      "category": "Water",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.059039,
+      "longitude": 72.821807,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-24T12:37:49.309555",
+      "status": "Pending",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0031",
+      "description": "Streetlight not working for several nights",
+      "category": "Streetlight",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.117853,
+      "longitude": 72.841555,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T23:40:30.141262",
+      "status": "Pending",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0012",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.119292,
+      "longitude": 72.844059,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-25T20:27:10.026388",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A3",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0051",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.057882,
+      "longitude": 72.828529,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T05:52:33.760833",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": "SEM-B1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0042",
+      "description": "Deep pothole outside the railway station is dangerous for bikes",
+      "category": "Road",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.123653,
+      "longitude": 72.84342,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T20:29:36.298857",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0058",
+      "description": "No water supply in the area for two days",
+      "category": "Water",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.062315,
+      "longitude": 72.831276,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-22T05:45:37.380393",
+      "status": "In Progress",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0060",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.189215,
+      "longitude": 72.851282,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T11:33:30.428904",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0088",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.13421,
+      "longitude": 72.841538,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T21:06:26.960157",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0066",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.187732,
+      "longitude": 72.849275,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T21:30:30.121593",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0079",
+      "description": "Exposed electrical wiring near the footpath is a hazard",
+      "category": "Electricity",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.109742,
+      "longitude": 72.844193,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-09T14:49:07.972854",
+      "status": "Pending",
+      "department": "Electrical / Power Distribution",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0053",
+      "description": "No water supply in the area for two days",
+      "category": "Water",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.059076,
+      "longitude": 72.831361,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T21:47:36.297459",
+      "status": "In Progress",
+      "department": "Water Supply Department",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0002",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.115607,
+      "longitude": 72.84589,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-19T17:25:01.779860",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0017",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.119776,
+      "longitude": 72.842211,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T01:45:15.129756",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0052",
+      "description": "Sewage water logging on the main road after rain",
+      "category": "Drainage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.060641,
+      "longitude": 72.82739,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T22:29:24.711256",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": "SEM-B1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0021",
+      "description": "Blocked drain causing foul smell in the locality",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.118938,
+      "longitude": 72.84344,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T00:33:00.522874",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0048",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.05544,
+      "longitude": 72.830524,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T13:35:52.638210",
+      "status": "Resolved",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0028",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.115715,
+      "longitude": 72.848574,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T00:34:05.632080",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0003",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121841,
+      "longitude": 72.849147,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-20T22:52:23.798976",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0039",
+      "description": "Road has a huge pothole near the main signal",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.119754,
+      "longitude": 72.843898,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T05:42:51.215929",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A2",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0006",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.115526,
+      "longitude": 72.844389,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-23T01:48:03.445895",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0074",
+      "description": "Streetlight not working for several nights",
+      "category": "Streetlight",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.123244,
+      "longitude": 72.869529,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-14T16:31:48.150230",
+      "status": "In Progress",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0032",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.123182,
+      "longitude": 72.84177,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T17:57:05.227514",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0072",
+      "description": "Exposed electrical wiring near the footpath is a hazard",
+      "category": "Electricity",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.046058,
+      "longitude": 72.804083,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T18:46:12.213611",
+      "status": "Resolved",
+      "department": "Electrical / Power Distribution",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0033",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.117185,
+      "longitude": 72.847902,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T01:40:16.828121",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A3",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0018",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.122301,
+      "longitude": 72.847259,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T03:54:02.774523",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A2",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0078",
+      "description": "Frequent power cuts in the locality",
+      "category": "Electricity",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.201283,
+      "longitude": 72.850423,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-17T16:39:17.651837",
+      "status": "Pending",
+      "department": "Electrical / Power Distribution",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0062",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.184377,
+      "longitude": 72.845439,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-24T16:18:33.827163",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0073",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.029822,
+      "longitude": 72.830195,
+      "address": "Dadar",
+      "ward": "Dadar",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-13T19:48:24.107670",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0045",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.05653,
+      "longitude": 72.831633,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T13:43:31.048625",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": "SEM-B1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0081",
+      "description": "Illegal parking blocking the main road",
+      "category": "Traffic",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.207583,
+      "longitude": 72.82644,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-10T13:40:59.907658",
+      "status": "In Progress",
+      "department": "Traffic Police / Transport",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0016",
+      "description": "Garbage not collected for over a week",
+      "category": "Garbage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.119054,
+      "longitude": 72.84626,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-28T06:21:12.322747",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0057",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.062108,
+      "longitude": 72.82652,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-24T00:39:45.695526",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0084",
+      "description": "Blocked drain causing foul smell in the locality",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.051291,
+      "longitude": 72.842371,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-03T13:05:10.297921",
+      "status": "In Progress",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0040",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.121059,
+      "longitude": 72.844025,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T03:22:38.037781",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0022",
+      "description": "Deep pothole outside the railway station is dangerous for bikes",
+      "category": "Road",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121185,
+      "longitude": 72.846078,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T00:14:45.822388",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A2",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0008",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.119238,
+      "longitude": 72.850695,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-23T19:16:37.766497",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0082",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.130795,
+      "longitude": 72.884434,
+      "address": "Powai",
+      "ward": "Powai",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-25T10:08:56.924866",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0019",
+      "description": "Broken road surface near the market causing traffic issues",
+      "category": "Road",
+      "priority": "Critical",
+      "severity": 5,
+      "latitude": 19.123453,
+      "longitude": 72.850667,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T21:18:18.711920",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0035",
+      "description": "Large pothole causing accidents near the junction",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.114837,
+      "longitude": 72.848213,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T00:52:54.879740",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A3",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0020",
+      "description": "Deep pothole outside the railway station is dangerous for bikes",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.122832,
+      "longitude": 72.852373,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T00:27:28.390944",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A3",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0029",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.123314,
+      "longitude": 72.851492,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T19:18:17.710919",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A2",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0070",
+      "description": "Illegal parking blocking the main road",
+      "category": "Traffic",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.1098,
+      "longitude": 72.919844,
+      "address": "Powai",
+      "ward": "Powai",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-20T16:00:18.024880",
+      "status": "Resolved",
+      "department": "Traffic Police / Transport",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0015",
+      "description": "Sewage water logging on the main road after rain",
+      "category": "Drainage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.121487,
+      "longitude": 72.842306,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-27T05:23:13.337887",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0055",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.056423,
+      "longitude": 72.82469,
+      "address": "Bandra West",
+      "ward": "Bandra West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-22T06:31:12.240680",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0026",
+      "description": "Broken road surface near the market causing traffic issues",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.121418,
+      "longitude": 72.852445,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-29T18:22:40.260706",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0076",
+      "description": "Large pothole causing accidents near the junction",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.019275,
+      "longitude": 72.85636,
+      "address": "Dadar",
+      "ward": "Dadar",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T00:34:50.270366",
+      "status": "Resolved",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0034",
+      "description": "Open drain overflowing near residential lane",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121842,
+      "longitude": 72.843753,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T22:32:27.606678",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0086",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.12907,
+      "longitude": 72.827011,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-31T00:34:27.778977",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0010",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.121565,
+      "longitude": 72.843531,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-24T21:32:23.849815",
+      "status": "Resolved",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0059",
+      "description": "Overflowing garbage bin near the market",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.189782,
+      "longitude": 72.848806,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-14T02:24:58.482512",
+      "status": "In Progress",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0085",
+      "description": "Sewage water logging on the main road after rain",
+      "category": "Drainage",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.208869,
+      "longitude": 72.849706,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-23T21:02:04.633242",
+      "status": "Pending",
+      "department": "Water & Sewerage",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0037",
+      "description": "Dark stretch of road due to broken streetlights",
+      "category": "Streetlight",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.119987,
+      "longitude": 72.848757,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T00:45:51.955037",
+      "status": "Resolved",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0030",
+      "description": "Cracked road near the bus stop needs urgent repair",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.12461,
+      "longitude": 72.84745,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-30T03:03:27.777075",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A1",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0005",
+      "description": "Broken road surface near the market causing traffic issues",
+      "category": "Road",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.118302,
+      "longitude": 72.844981,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-21T20:42:11.851708",
+      "status": "Pending",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0038",
+      "description": "Vehicles are getting damaged because of the pothole on this street",
+      "category": "Road",
+      "priority": "High",
+      "severity": 4,
+      "latitude": 19.115889,
+      "longitude": 72.842219,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-09-01T00:44:42.471501",
+      "status": "In Progress",
+      "department": "Roads & Infrastructure",
+      "semantic_cluster_id": "SEM-A3",
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0061",
+      "description": "Waste dumped illegally on the roadside",
+      "category": "Garbage",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.185775,
+      "longitude": 72.844817,
+      "address": "Malad West",
+      "ward": "Malad West",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-26T13:35:23.662683",
+      "status": "Pending",
+      "department": "Waste Management",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0077",
+      "description": "Dark stretch of road due to broken streetlights near IIT Powai",
+      "category": "Streetlight",
+      "priority": "Low",
+      "severity": 1,
+      "latitude": 19.138356,
+      "longitude": 72.913185,
+      "address": "Powai",
+      "ward": "Powai",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-07T04:50:34.916474",
+      "status": "In Progress",
+      "department": "Electrical / Energy",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    },
+    {
+      "complaint_id": "C0089",
+      "description": "Illegal parking blocking the main road",
+      "category": "Traffic",
+      "priority": "Medium",
+      "severity": 2,
+      "latitude": 19.141949,
+      "longitude": 72.82658,
+      "address": "Andheri East",
+      "ward": "Andheri East",
+      "zone": "Zone-1",
+      "city": "Mumbai",
+      "timestamp": "2026-08-09T04:19:29.667181",
+      "status": "Resolved",
+      "department": "Traffic Police / Transport",
+      "semantic_cluster_id": null,
+      "duplicate_group_id": null
+    }
+  ],
+  "hotspots": [
+    {
+      "hotspot_id": "H01",
+      "centroid": {
+        "latitude": 19.119973636363635,
+        "longitude": 72.84599668181818
+      },
+      "radius_m": 772.6,
+      "complaint_count": 44,
+      "category_breakdown": [
+        {
+          "category": "Road",
+          "count": 27,
+          "pct": 61.4
+        },
+        {
+          "category": "Garbage",
+          "count": 8,
+          "pct": 18.2
+        },
+        {
+          "category": "Drainage",
+          "count": 5,
+          "pct": 11.4
+        },
+        {
+          "category": "Streetlight",
+          "count": 4,
+          "pct": 9.1
+        }
+      ],
+      "dominant_category": "Road",
+      "priority_breakdown": {
+        "Low": 13,
+        "Medium": 15,
+        "High": 13,
+        "Critical": 3
+      },
+      "high_priority_count": 16,
+      "critical_count": 3,
+      "avg_severity": 2.5,
+      "similar_complaint_count": 20,
+      "unique_underlying_issues": 3,
+      "recent_count": 34,
+      "baseline_count": 10,
+      "growth_pct": 240.0,
+      "growth_label": "Rapidly emerging hotspot",
+      "unresolved_count": 34,
+      "risk_score": 73.9,
+      "risk_label": "High",
+      "score_components": {
+        "density": 25.0,
+        "priority": 5.3,
+        "severity": 7.5,
+        "recency": 11.6,
+        "persistence": 7.7,
+        "similarity": 6.8
+      },
+      "primary_department": "Roads & Infrastructure",
+      "secondary_departments": [
+        "Traffic Police / Transport",
+        "Stormwater Drainage"
+      ],
+      "recommended_action": "Prioritize road inspection and repair. Growth rate indicates an emerging issue \u2014 escalate priority. 20 semantically related complaints confirm a concentrated root cause.",
+      "first_reported": "2026-08-18T20:51:01.477646",
+      "latest_reported": "2026-09-01T06:01:53.120657",
+      "boundary_geojson": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.841262,
+                19.121082
+              ],
+              [
+                72.841555,
+                19.117853
+              ],
+              [
+                72.841798,
+                19.116927
+              ],
+              [
+                72.842219,
+                19.115889
+              ],
+              [
+                72.843628,
+                19.115199
+              ],
+              [
+                72.848213,
+                19.114837
+              ],
+              [
+                72.852601,
+                19.116918
+              ],
+              [
+                72.852445,
+                19.121418
+              ],
+              [
+                72.852373,
+                19.122832
+              ],
+              [
+                72.851492,
+                19.123314
+              ],
+              [
+                72.84745,
+                19.12461
+              ],
+              [
+                72.84342,
+                19.123653
+              ],
+              [
+                72.84177,
+                19.123182
+              ],
+              [
+                72.841262,
+                19.121082
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H01",
+          "score": 73.9,
+          "complaint_count": 44,
+          "dominant_category": "Road",
+          "risk_label": "High"
+        }
+      },
+      "complaint_ids": [
+        "C0043",
+        "C0013",
+        "C0025",
+        "C0024",
+        "C0001",
+        "C0009",
+        "C0007",
+        "C0023",
+        "C0004",
+        "C0011",
+        "C0036",
+        "C0041",
+        "C0027",
+        "C0014",
+        "C0044",
+        "C0031",
+        "C0012",
+        "C0042",
+        "C0002",
+        "C0017",
+        "C0021",
+        "C0028",
+        "C0003",
+        "C0039",
+        "C0006",
+        "C0032",
+        "C0033",
+        "C0018",
+        "C0016",
+        "C0040",
+        "C0022",
+        "C0008",
+        "C0019",
+        "C0035",
+        "C0020",
+        "C0029",
+        "C0015",
+        "C0026",
+        "C0034",
+        "C0010",
+        "C0037",
+        "C0030",
+        "C0005",
+        "C0038"
+      ],
+      "nearby_infrastructure": [
+        {
+          "name": "Andheri Railway Station (Western / Harbour Line)",
+          "type": "railway_station",
+          "distance_km": 0.05,
+          "description": "Andheri Railway Station (Western / Harbour Line) is located 0.05 km from the hotspot centroid."
+        },
+        {
+          "name": "Western Express Highway (WEH)",
+          "type": "highway",
+          "distance_km": 1.1,
+          "description": "Western Express Highway (WEH) is located 1.1 km from the hotspot centroid."
+        }
+      ],
+      "timeline": [
+        {
+          "label": "Aug 18 - Aug 22",
+          "count": 5,
+          "unresolved": 4,
+          "resolved": 1
+        },
+        {
+          "label": "Aug 22 - Aug 25",
+          "count": 5,
+          "unresolved": 4,
+          "resolved": 1
+        },
+        {
+          "label": "Aug 25 - Aug 28",
+          "count": 9,
+          "unresolved": 8,
+          "resolved": 1
+        },
+        {
+          "label": "Aug 28 - Sep 01",
+          "count": 25,
+          "unresolved": 18,
+          "resolved": 7
+        }
+      ],
+      "intervention_impact": {
+        "total": 44,
+        "resolved": 10,
+        "unresolved": 34,
+        "resolution_rate_pct": 22.7,
+        "impact_summary": "Immediate municipal intervention required: 34 of 44 grievances (77.3%) remain unresolved."
+      }
+    },
+    {
+      "hotspot_id": "H02",
+      "centroid": {
+        "latitude": 19.058896666666666,
+        "longitude": 72.8295514
+      },
+      "radius_m": 814.1,
+      "complaint_count": 15,
+      "category_breakdown": [
+        {
+          "category": "Drainage",
+          "count": 7,
+          "pct": 46.7
+        },
+        {
+          "category": "Garbage",
+          "count": 4,
+          "pct": 26.7
+        },
+        {
+          "category": "Water",
+          "count": 4,
+          "pct": 26.7
+        }
+      ],
+      "dominant_category": "Drainage",
+      "priority_breakdown": {
+        "Low": 4,
+        "Medium": 3,
+        "High": 5,
+        "Critical": 3
+      },
+      "high_priority_count": 8,
+      "critical_count": 3,
+      "avg_severity": 3.0,
+      "similar_complaint_count": 4,
+      "unique_underlying_issues": 1,
+      "recent_count": 9,
+      "baseline_count": 6,
+      "growth_pct": 50.0,
+      "growth_label": "Rapidly emerging hotspot",
+      "unresolved_count": 10,
+      "risk_score": 49.6,
+      "risk_label": "Medium",
+      "score_components": {
+        "density": 12.5,
+        "priority": 8.4,
+        "severity": 9.0,
+        "recency": 9.0,
+        "persistence": 6.7,
+        "similarity": 4.0
+      },
+      "primary_department": "Water & Sewerage",
+      "secondary_departments": [
+        "Waste Management",
+        "Public Health"
+      ],
+      "recommended_action": "Inspect drainage/sewer network for blockage or damage. Growth rate indicates an emerging issue \u2014 escalate priority.",
+      "first_reported": "2026-08-22T05:45:37.380393",
+      "latest_reported": "2026-08-31T22:29:13.888470",
+      "boundary_geojson": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.821807,
+                19.059039
+              ],
+              [
+                72.82469,
+                19.056423
+              ],
+              [
+                72.830524,
+                19.05544
+              ],
+              [
+                72.834258,
+                19.058981
+              ],
+              [
+                72.829884,
+                19.063935
+              ],
+              [
+                72.82652,
+                19.062108
+              ],
+              [
+                72.821807,
+                19.059039
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H02",
+          "score": 49.6,
+          "complaint_count": 15,
+          "dominant_category": "Drainage",
+          "risk_label": "Medium"
+        }
+      },
+      "complaint_ids": [
+        "C0046",
+        "C0056",
+        "C0050",
+        "C0049",
+        "C0047",
+        "C0054",
+        "C0080",
+        "C0051",
+        "C0058",
+        "C0053",
+        "C0052",
+        "C0048",
+        "C0045",
+        "C0057",
+        "C0055"
+      ],
+      "nearby_infrastructure": [
+        {
+          "name": "Arabian Sea Coastline (Bandra Bandstand / Carter Rd)",
+          "type": "coastline",
+          "distance_km": 1.04,
+          "description": "Arabian Sea Coastline (Bandra Bandstand / Carter Rd) is located 1.04 km from the hotspot centroid."
+        },
+        {
+          "name": "Bandra Railway Station (Western Line)",
+          "type": "railway_station",
+          "distance_km": 1.23,
+          "description": "Bandra Railway Station (Western Line) is located 1.23 km from the hotspot centroid."
+        },
+        {
+          "name": "Bandra-Worli Sea Link (Rajiv Gandhi Sea Link)",
+          "type": "bridge_highway",
+          "distance_km": 2.8,
+          "description": "Bandra-Worli Sea Link (Rajiv Gandhi Sea Link) is located 2.8 km from the hotspot centroid."
+        }
+      ],
+      "timeline": [
+        {
+          "label": "Aug 22 - Aug 24",
+          "count": 6,
+          "unresolved": 3,
+          "resolved": 3
+        },
+        {
+          "label": "Aug 24 - Aug 27",
+          "count": 2,
+          "unresolved": 2,
+          "resolved": 0
+        },
+        {
+          "label": "Aug 27 - Aug 29",
+          "count": 6,
+          "unresolved": 4,
+          "resolved": 2
+        },
+        {
+          "label": "Aug 29 - Aug 31",
+          "count": 1,
+          "unresolved": 1,
+          "resolved": 0
+        }
+      ],
+      "intervention_impact": {
+        "total": 15,
+        "resolved": 5,
+        "unresolved": 10,
+        "resolution_rate_pct": 33.3,
+        "impact_summary": "Moderate resolution progress: 5 resolved, 10 pending field intervention."
+      }
+    },
+    {
+      "hotspot_id": "H03",
+      "centroid": {
+        "latitude": 19.18782472727273,
+        "longitude": 72.84763681818181
+      },
+      "radius_m": 466.0,
+      "complaint_count": 11,
+      "category_breakdown": [
+        {
+          "category": "Garbage",
+          "count": 11,
+          "pct": 100.0
+        }
+      ],
+      "dominant_category": "Garbage",
+      "priority_breakdown": {
+        "Low": 0,
+        "Medium": 11,
+        "High": 0,
+        "Critical": 0
+      },
+      "high_priority_count": 0,
+      "critical_count": 0,
+      "avg_severity": 2.0,
+      "similar_complaint_count": 0,
+      "unique_underlying_issues": 11,
+      "recent_count": 3,
+      "baseline_count": 3,
+      "growth_pct": 0.0,
+      "growth_label": "Persistent / stable hotspot",
+      "unresolved_count": 10,
+      "risk_score": 28.3,
+      "risk_label": "Low",
+      "score_components": {
+        "density": 9.2,
+        "priority": 0.0,
+        "severity": 6.0,
+        "recency": 4.1,
+        "persistence": 9.1,
+        "similarity": 0.0
+      },
+      "primary_department": "Waste Management (SWM)",
+      "secondary_departments": [
+        "Public Health",
+        "Pollution Control"
+      ],
+      "recommended_action": "Increase waste collection frequency in this area.",
+      "first_reported": "2026-08-13T23:34:17.157543",
+      "latest_reported": "2026-08-27T21:30:30.121593",
+      "boundary_geojson": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.844326,
+                19.190615
+              ],
+              [
+                72.844817,
+                19.185775
+              ],
+              [
+                72.845439,
+                19.184377
+              ],
+              [
+                72.849832,
+                19.186599
+              ],
+              [
+                72.851282,
+                19.189215
+              ],
+              [
+                72.848689,
+                19.190865
+              ],
+              [
+                72.844326,
+                19.190615
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H03",
+          "score": 28.3,
+          "complaint_count": 11,
+          "dominant_category": "Garbage",
+          "risk_label": "Low"
+        }
+      },
+      "complaint_ids": [
+        "C0063",
+        "C0067",
+        "C0069",
+        "C0068",
+        "C0065",
+        "C0064",
+        "C0060",
+        "C0066",
+        "C0062",
+        "C0059",
+        "C0061"
+      ],
+      "nearby_infrastructure": [
+        {
+          "name": "Malad Railway Station (Western Line)",
+          "type": "railway_station",
+          "distance_km": 0.24,
+          "description": "Malad Railway Station (Western Line) is located 0.24 km from the hotspot centroid."
+        }
+      ],
+      "timeline": [
+        {
+          "label": "Aug 13 - Aug 17",
+          "count": 5,
+          "unresolved": 4,
+          "resolved": 1
+        },
+        {
+          "label": "Aug 17 - Aug 20",
+          "count": 0,
+          "unresolved": 0,
+          "resolved": 0
+        },
+        {
+          "label": "Aug 20 - Aug 24",
+          "count": 2,
+          "unresolved": 2,
+          "resolved": 0
+        },
+        {
+          "label": "Aug 24 - Aug 27",
+          "count": 4,
+          "unresolved": 4,
+          "resolved": 0
+        }
+      ],
+      "intervention_impact": {
+        "total": 11,
+        "resolved": 1,
+        "unresolved": 10,
+        "resolution_rate_pct": 9.1,
+        "impact_summary": "Immediate municipal intervention required: 10 of 11 grievances (90.9%) remain unresolved."
+      }
+    }
+  ],
+  "hotspots_geojson": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.841262,
+                19.121082
+              ],
+              [
+                72.841555,
+                19.117853
+              ],
+              [
+                72.841798,
+                19.116927
+              ],
+              [
+                72.842219,
+                19.115889
+              ],
+              [
+                72.843628,
+                19.115199
+              ],
+              [
+                72.848213,
+                19.114837
+              ],
+              [
+                72.852601,
+                19.116918
+              ],
+              [
+                72.852445,
+                19.121418
+              ],
+              [
+                72.852373,
+                19.122832
+              ],
+              [
+                72.851492,
+                19.123314
+              ],
+              [
+                72.84745,
+                19.12461
+              ],
+              [
+                72.84342,
+                19.123653
+              ],
+              [
+                72.84177,
+                19.123182
+              ],
+              [
+                72.841262,
+                19.121082
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H01",
+          "score": 73.9,
+          "complaint_count": 44,
+          "dominant_category": "Road",
+          "risk_label": "High"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.821807,
+                19.059039
+              ],
+              [
+                72.82469,
+                19.056423
+              ],
+              [
+                72.830524,
+                19.05544
+              ],
+              [
+                72.834258,
+                19.058981
+              ],
+              [
+                72.829884,
+                19.063935
+              ],
+              [
+                72.82652,
+                19.062108
+              ],
+              [
+                72.821807,
+                19.059039
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H02",
+          "score": 49.6,
+          "complaint_count": 15,
+          "dominant_category": "Drainage",
+          "risk_label": "Medium"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                72.844326,
+                19.190615
+              ],
+              [
+                72.844817,
+                19.185775
+              ],
+              [
+                72.845439,
+                19.184377
+              ],
+              [
+                72.849832,
+                19.186599
+              ],
+              [
+                72.851282,
+                19.189215
+              ],
+              [
+                72.848689,
+                19.190865
+              ],
+              [
+                72.844326,
+                19.190615
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "hotspot_id": "H03",
+          "score": 28.3,
+          "complaint_count": 11,
+          "dominant_category": "Garbage",
+          "risk_label": "Low"
+        }
+      }
+    ]
+  },
+  "statistics": {
+    "total_complaints": 91,
+    "mapped_complaints": 91,
+    "unmapped_complaints": 0,
+    "unresolved_complaints": 69,
+    "resolved_complaints": 22,
+    "total_hotspots": 3,
+    "category_totals": {
+      "Garbage": 25,
+      "Road": 31,
+      "Water": 6,
+      "Traffic": 4,
+      "Drainage": 15,
+      "Streetlight": 7,
+      "Electricity": 3
+    },
+    "priority_totals": {
+      "Low": 25,
+      "Medium": 35,
+      "High": 24,
+      "Critical": 7
+    },
+    "highest_risk_hotspot": "H01",
+    "avg_risk_score": 50.6,
+    "last_updated": "2026-09-01 10:00:00 IST"
+  }
+}
