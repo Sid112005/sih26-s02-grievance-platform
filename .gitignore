@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+ai_service/models/
+.dart_tool/
+build/
+.pub-cache/
+.env
