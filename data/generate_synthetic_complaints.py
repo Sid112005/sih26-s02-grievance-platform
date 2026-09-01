@@ -175,7 +175,9 @@ CLUSTER_DEFINITIONS = [
             "Dangerous pothole near Majiwada flyover ramp on Thane West side. Road is completely broken and causing severe bottleneck.",
             "Big pothole unfilled since last rain near Kapurbawdi Majiwada service lane. Vehicles getting damaged.",
             "Please fix the deep pothole on Majiwada service lane immediately. Very unsafe for two wheelers at night.",
-            "Severe road damage and large ditch on Majiwada service road. Daily traffic jams because cars are swerving suddenly to avoid it."
+            "Severe road damage and large ditch on Majiwada service road. Daily traffic jams because cars are swerving suddenly to avoid it.",
+            "Deep asphalt crater on the Thane-bound service road past Majiwada junction. Damaged my car rim yesterday evening.",
+            "Majiwada service road has an open trench-like pothole right after the flyover descent. Heavy risk of accident."
         ]
     },
     {
@@ -190,7 +192,8 @@ CLUSTER_DEFINITIONS = [
             "Dark street outside National College on Waterfield Rd. Street lamp poles 14 and 15 not working at all. Highly unsafe for pedestrians.",
             "No streetlight working on Waterfield Road Bandra West. Street is pitch black at night, risk of theft and accidents.",
             "Multiple lamp posts turned off on Waterfield road. Please send municipal electrician team to repair.",
-            "Total darkness on Waterfield Road near the college signal due to faulty streetlights."
+            "Total darkness on Waterfield Road near the college signal due to faulty streetlights.",
+            "Urgent: lights out across the entire Waterfield Road curve opposite National College. Ladies feeling unsafe walking home from station."
         ]
     },
     {
@@ -206,7 +209,9 @@ CLUSTER_DEFINITIONS = [
             "Water pipe broken in front of MIDC industrial complex. Lakhs of liters getting wasted while our buildings have no water supply.",
             "Huge water line rupture near SEEPZ entrance, water gushing out with high pressure causing waterlogging.",
             "Pipeline leak on Andheri MIDC Central road. Please shut the supply valve and repair the leakage ASAP.",
-            "Drinking water pipeline leakage creating a mini river on the road outside Seepz Gate 1."
+            "Drinking water pipeline leakage creating a mini river on the road outside Seepz Gate 1.",
+            "Underground municipal water pipeline cracked open near SEEPZ Gate 1. Fresh water running down the street for past 5 hours.",
+            "High pressure water stream erupting from broken BMC line on MIDC Central Road. Pedestrians cannot cross the road."
         ]
     },
     {
@@ -220,7 +225,9 @@ CLUSTER_DEFINITIONS = [
             "Garbage bins near Dadar Flower Market on Senapati Bapat Marg overflowing onto the main road. Rotten smell unbearable.",
             "No BMC garbage truck has collected waste from the Dadar West market corner for three days. Waste piled up on footpath.",
             "Huge heap of organic waste and plastic spilled across Senapati Bapat Marg near flower market. Breeding mosquitoes and dogs.",
-            "Uncleaned municipal trash bin near Dadar station market. Pedestrians forced to walk on road due to garbage mound on sidewalk."
+            "Uncleaned municipal trash bin near Dadar station market. Pedestrians forced to walk on road due to garbage mound on sidewalk.",
+            "Piles of rotten flowers and wet waste dumped on Senapati Bapat Marg curb. BMC dumper hasn't arrived since Friday.",
+            "Garbage overflow creating severe hygiene hazard outside Dadar Flower Market. Foul stench spreading across 200 meters."
         ]
     },
     {
@@ -235,7 +242,8 @@ CLUSTER_DEFINITIONS = [
             "Severe sewage overflow on LBS Road Kurla West. Black drain water bubbling out of chamber and spreading onto street.",
             "Choked sewer line causing gutter overflow near the bus stand on LBS Marg. Health hazard for commuters and shopkeepers.",
             "Manhole cover leaking filthy drain water continuously in Kurla West. Please dispatch vacuum cleaning suction tanker.",
-            "Open drainage leakage and filthy water stagnation outside Phoenix Mall gate on LBS road."
+            "Open drainage leakage and filthy water stagnation outside Phoenix Mall gate on LBS road.",
+            "Contaminated gutter sewage spilling all over the walkway near Phoenix bus stop Kurla. Commuters unable to step off buses."
         ]
     },
     {
@@ -249,7 +257,9 @@ CLUSTER_DEFINITIONS = [
             "Pack of 6-7 aggressive stray dogs barking and chasing two-wheelers on Ram Maruti Road near Talao Pali.",
             "Stray dog menace near Talao Pali garden Naupada. Two delivery boys were bitten over the weekend. Need TMC veterinary team to sterilize and vaccinate.",
             "Dangerous stray dogs attacking pedestrians walking towards Talao Pali in the early morning.",
-            "Excessive stray dogs roaming aggressively in packs near Ram Maruti Road junction. Posing danger to children and senior citizens."
+            "Excessive stray dogs roaming aggressively in packs near Ram Maruti Road junction. Posing danger to children and senior citizens.",
+            "Biker fell down trying to escape attacking pack of street dogs on Ram Maruti Road near Talao Pali corner.",
+            "Furious stray dogs continuously growling at cyclists and joggers near Talao Pali lake side in Naupada."
         ]
     },
     {
@@ -263,7 +273,9 @@ CLUSTER_DEFINITIONS = [
             "Extremely loud music and DJ bass playing past 12:30 AM at Lokhandwala Back Road commercial venue. Cannot sleep.",
             "Illegal high decibel loudspeaker noise continuing after midnight near High Street Market, Lokhandwala. Disturbing entire residential society.",
             "Noise pollution violation on Lokhandwala back road. Blaring music with heavy subwoofers vibrating residential building windows late at night.",
-            "Loud sound system operating till 1:30 AM in residential zone near Lokhandwala Complex. Please enforce 10 PM noise curfew rules."
+            "Loud sound system operating till 1:30 AM in residential zone near Lokhandwala Complex. Please enforce 10 PM noise curfew rules.",
+            "Commercial rooftop party blasting EDM and subwoofers on Lokhandwala Back Road well after 1 AM. Senior citizens unable to rest.",
+            "Midnight loud music and acoustic thumping continuing unabated on Lokhandwala back road."
         ]
     },
     {
@@ -277,7 +289,9 @@ CLUSTER_DEFINITIONS = [
             "Unauthorized tin shed construction on the municipal footpath near Shimpoli signal. Completely blocked pedestrian walkway.",
             "Illegal encroachment and commercial extension occupying the public sidewalk on Borivali Link Road near Shimpoli.",
             "New illegal structure being erected on public walkway without municipal BMC approval at Shimpoli junction.",
-            "Encroachment on footpath by shopkeeper building temporary structure on Link Road Borivali West. Pedestrians forced into heavy traffic."
+            "Encroachment on footpath by shopkeeper building temporary structure on Link Road Borivali West. Pedestrians forced into heavy traffic.",
+            "Permanent tin sheet shed being erected over public pavement right next to Shimpoli signal Borivali West. Clear encroachment of municipal land.",
+            "Sidewalk illegally seized and fenced off with iron sheets near Shimpoli Signal Borivali West."
         ]
     },
     {
@@ -291,7 +305,137 @@ CLUSTER_DEFINITIONS = [
             "Series of sharp, deep potholes on JVLR eastbound lane near Powai lake. Multiple cars suffered tyre punctures.",
             "Horrible road condition on JVLR Powai stretch near the lake signal. Huge crater on right fast lane causing sudden braking.",
             "Dangerous pothole cluster on Jogeshwari Vikhroli Link Road near Powai promenade. High risk of fatal motorcycle crash.",
-            "Please resurface the badly damaged road on JVLR near Powai Lake. Potholes are getting deeper with heavy vehicle movement."
+            "Please resurface the badly damaged road on JVLR near Powai Lake. Potholes are getting deeper with heavy vehicle movement.",
+            "Huge crater on JVLR towards Kanjurmarg just before Powai Lake promenade. Severe traffic bottleneck every evening.",
+            "Multiple deep pits in the road asphalt on JVLR near Powai promenade. Causing major risk of skidding for two wheelers."
+        ]
+    },
+    {
+        "cluster_id": "CLUST-WATERLEAK-10",
+        "category": "Water Leak",
+        "area_idx": 5,  # Bandra East BKC
+        "base_location": {"lat": 19.0635, "lng": 72.8620},
+        "address": "Near BKC Connector junction, Kalanagar, Bandra East",
+        "incident_summary": "Main feeder waterline ruptured under pavement flooding BKC connector approach road",
+        "complaints": [
+            "Massive water pipe breakage under the footpath near BKC Connector entry Kalanagar. Clean water flooding both lanes.",
+            "Pressurized drinking water pipeline burst at Kalanagar junction near BKC connector ramp. Huge volume of water being wasted.",
+            "Water gushing onto the road from a broken BMC pipeline near BKC Connector, Bandra East. Causing waterlogging on morning commute.",
+            "Huge water supply rupture outside Kalanagar towards BKC. Water stream rising 3 feet high and eroding the road curb.",
+            "Urgent: main municipal supply pipe burst at BKC Connector junction Bandra East. Potable water flooding highway access lane.",
+            "Water line leak near Kalanagar flyover approach. Clean municipal water gushing out since 5:00 AM."
+        ]
+    },
+    {
+        "cluster_id": "CLUST-GARBAGE-11",
+        "category": "Garbage Collection",
+        "area_idx": 0,  # Thane Majiwada & Ghodbunder
+        "base_location": {"lat": 19.2310, "lng": 72.9860},
+        "address": "Near Hiranandani Estate Gate, Patlipada, Ghodbunder Rd, Thane West",
+        "incident_summary": "Illegal open dumping ground formed outside residential estate gate attracting stray cattle and foul odor",
+        "complaints": [
+            "Garbage and household waste piled high on service road outside Hiranandani Estate Gate at Patlipada. TMC garbage vans haven't cleared it.",
+            "Illegal open garbage dump created along Ghodbunder Road near Patlipada Hiranandani Estate entrance. Severe stench and flies.",
+            "Huge accumulation of uncollected trash and plastic bags at Patlipada junction, Thane West. Health risk for residential towers.",
+            "TMC municipal bin overflowing and waste scattered all over the walkway near Hiranandani Estate Patlipada gate.",
+            "Unattended municipal garbage dump outside Hiranandani Estate entrance Ghodbunder road. Rotten smell entering ground floor shops.",
+            "Piles of municipal waste neglected for 4 days near Patlipada bridge turn towards Hiranandani Estate, Thane West."
+        ]
+    },
+    {
+        "cluster_id": "CLUST-STREETLIGHT-12",
+        "category": "Streetlight",
+        "area_idx": 2,  # Andheri West Lokhandwala & Link Road
+        "base_location": {"lat": 19.1365, "lng": 72.8310},
+        "address": "Link Road, between Infinity Mall and Oshiwara Metro, Andheri West",
+        "incident_summary": "Continuous string of 8 median streetlights non-operational creating hazardous dark zone along metro corridor",
+        "complaints": [
+            "All median streetlights from Infinity Mall to Oshiwara Metro on Link Road are completely dark. Extremely dangerous driving conditions.",
+            "Link Road Andheri West is pitch dark between Infinity Mall and Oshiwara station. None of the street lights are working for past 3 nights.",
+            "Blackout of streetlights on Link Road stretch near Infinity Mall. High risk of pedestrian accidents while crossing.",
+            "Series of streetlight poles off along the Link Road metro pillar line. Urgent maintenance needed from BMC ward team.",
+            "No streetlights working outside Infinity Mall Andheri West on the main Link Road carriageway. Total darkness after sunset.",
+            "Entire stretch of street lamps non-functional on Link Road between Oshiwara signal and Infinity Mall."
+        ]
+    },
+    {
+        "cluster_id": "CLUST-SEWAGE-13",
+        "category": "Sewage Overflow",
+        "area_idx": 6,  # Dadar West
+        "base_location": {"lat": 19.0205, "lng": 72.8435},
+        "address": "NC Kelkar Road, near Plaza Cinema junction, Dadar West",
+        "incident_summary": "Collapsed municipal sewer line causing foul wastewater backflow onto crowded market sidewalk",
+        "complaints": [
+            "Severe sewage backflow from manhole on NC Kelkar Road near Plaza Cinema Dadar. Gutter water flooding the shopping street.",
+            "Choked sewer line overflowing black drain water in front of shops near Plaza Cinema Dadar West. Pedestrians unable to cross.",
+            "Filthy drainage water bubbling out of pavement chamber on NC Kelkar Marg. Unbearable stench in busy market area.",
+            "Manhole blockage causing sewage overflow onto NC Kelkar Road near Plaza Cinema. Urgent desilting suction truck required.",
+            "Open drainage spillage near Plaza Cinema signal Dadar West. Rotten gutter water entering storefronts.",
+            "Gutter chamber cracked and overflowing with raw sewage right on NC Kelkar Road near Dadar Plaza. Major sanitary hazard."
+        ]
+    },
+    {
+        "cluster_id": "CLUST-ILLEGALCONST-14",
+        "category": "Illegal Construction",
+        "area_idx": 7,  # Kurla West
+        "base_location": {"lat": 19.0680, "lng": 72.8790},
+        "address": "Near Kurla West Railway Bus Depot, Station Road, Kurla West",
+        "incident_summary": "Illegal permanent wooden & tin shop extensions blocking BEST bus turning radius outside station",
+        "complaints": [
+            "Unauthorized commercial shop extensions erected on public road outside Kurla West Bus Depot. BEST buses struggling to turn.",
+            "Illegal wooden stalls and tin shed encroaching the bus depot entry lane at Kurla Station West. Causing massive traffic bottlenecks.",
+            "Permanent illegal encroachment on station access road near Kurla West depot. Public footpath completely taken over by unauthorized vendors.",
+            "Shopkeepers extending steel and tin structures onto the municipal road near Kurla Bus Depot. Severe obstruction to pedestrian flow.",
+            "Encroachment on road boundary near Kurla West railway depot. Illegal constructions blocking emergency vehicle movement.",
+            "New illegal shed constructed on municipal sidewalk outside Kurla station bus depot without any BMC municipal permit."
+        ]
+    },
+    {
+        "cluster_id": "CLUST-STRAYANIMAL-15",
+        "category": "Stray Animal",
+        "area_idx": 8,  # Powai Hiranandani & JVLR
+        "base_location": {"lat": 19.1255, "lng": 72.9180},
+        "address": "JVLR opposite IIT Bombay Main Gate, Powai",
+        "incident_summary": "Herd of 6-8 unattended cattle sitting on central fast lane of JVLR near IIT Bombay causing traffic gridlock",
+        "complaints": [
+            "Herd of stray cows sitting in the middle of JVLR right opposite IIT Bombay Main Gate. Traffic backed up for 2 kms.",
+            "Cattle menace on JVLR Powai near IIT entrance. Multiple cows blocking two main lanes, sudden braking causing near-accidents.",
+            "Stray cattle wandering on the fast carriageway of JVLR in front of IIT Bombay. BMC cattle catcher van needed immediately.",
+            "Big herd of stray cows blocking evening traffic near IIT Main Gate Powai on JVLR. Very dangerous for two-wheelers in low light.",
+            "Stray cows gathered on JVLR road divider and carriageway opposite IIT gate. Huge vehicular traffic jam created.",
+            "Several cows occupying the right lane on JVLR near IIT Bombay Powai gate. Heavy vehicles having to swerve dangerously."
+        ]
+    },
+    {
+        "cluster_id": "CLUST-NOISE-16",
+        "category": "Noise Complaint",
+        "area_idx": 6,  # Dadar West Shivaji Park
+        "base_location": {"lat": 19.0265, "lng": 72.8390},
+        "address": "Cadell Road, near Shivaji Park Gate 3, Dadar West",
+        "incident_summary": "Commercial event using illegal high-decibel box speakers and DJ setup past midnight in silence zone",
+        "complaints": [
+            "Extremely loud amplified speakers blaring music after 11:30 PM near Shivaji Park Gate 3 on Cadell Road. Silence zone violation.",
+            "Illegal DJ and loudspeaker system operating past midnight near Shivaji Park Cadell Road. High bass disturbing elderly residents.",
+            "Noise pollution complaint: Heavy sound system running at high decibels near Cadell Road Shivaji Park entrance past permissible hours.",
+            "Loud music and public address system continuing after midnight near Shivaji Park gate. Please take immediate action against organizers.",
+            "Severe noise disturbance on Cadell Road Dadar near Shivaji Park due to midnight party speakers vibrating apartment windows.",
+            "Sound limits completely exceeded past midnight near Shivaji Park Cadell Road. Please send police patrol van to stop the DJ music."
+        ]
+    },
+    {
+        "cluster_id": "CLUST-POTHOLE-17",
+        "category": "Pothole",
+        "area_idx": 9,  # Borivali West Gorai
+        "base_location": {"lat": 19.2360, "lng": 72.8520},
+        "address": "Near Gorai Bridge junction, Gorai 1, Borivali West",
+        "incident_summary": "Series of deep waterlogged craters on descent of Gorai Bridge causing severe vehicular damage and bike falls",
+        "complaints": [
+            "Deadly pothole right at the bottom of Gorai Bridge slope in Borivali West. Multiple scooter riders slipping in waterlogged ditch.",
+            "Massive craters formed on Gorai Bridge junction road Borivali West. Vehicles bottoming out and damaging suspensions.",
+            "Broken road surface with deep holes near Gorai 1 bridge ramp. Daily traffic gridlock because auto rickshaws have to slow to a crawl.",
+            "Deep pothole submerged under water near Gorai Bridge Borivali West. Very hazardous for two-wheelers traveling at normal speed.",
+            "Severe road crater on the descent of Gorai bridge towards Link Road. Please do urgent cold mix patching before major accident occurs.",
+            "Road completely ruined near Gorai Bridge junction Borivali West. Big potholes causing long vehicular queues during morning rush hour."
         ]
     }
 ]
@@ -304,6 +448,9 @@ DISTINCT_TEMPLATES = [
     ("Pothole", "Uneven road surface and sunken patch along {landmark}, causing severe balance issues for two wheelers."),
     ("Pothole", "Large crater on the road near {landmark}. Buses cannot pull over properly to pick passengers."),
     ("Pothole", "Asphalt washed away creating multiple potholes outside the entrance of {landmark}."),
+    ("Pothole", "Sharp-edged pothole on the left lane near {landmark}. Causing auto rickshaws to swerve into oncoming lane."),
+    ("Pothole", "Sunken road patch and multiple small potholes developing rapidly along {landmark}."),
+    ("Pothole", "Road surface stripped down to bare gravel and jagged stones near {landmark}."),
     
     # Streetlight
     ("Streetlight", "Streetlight pole flickering continuously outside {landmark}, causing visibility disturbance at night."),
@@ -311,6 +458,9 @@ DISTINCT_TEMPLATES = [
     ("Streetlight", "Street light pole bent at 45 degree angle after vehicle collision near {landmark}. Might collapse anytime."),
     ("Streetlight", "Solar streetlight battery unit damaged and light not turning on near {landmark}."),
     ("Streetlight", "Underground cable fault caused single lamp outage opposite {landmark}."),
+    ("Streetlight", "Sodium vapor lamp fused on the main mast light near {landmark}. Dark zone created on pedestrian crossing."),
+    ("Streetlight", "Street lamp bracket broken and hanging loosely over traffic lane near {landmark}."),
+    ("Streetlight", "Streetlight timer misconfigured; lights turning on at noon and switching off at dusk near {landmark}."),
     
     # Water Leak
     ("Water Leak", "Fire hydrant leaking clean water continuously on the pavement near {landmark}."),
@@ -318,6 +468,9 @@ DISTINCT_TEMPLATES = [
     ("Water Leak", "Slow water seepage through asphalt road surface creating a wet puddle outside {landmark}."),
     ("Water Leak", "Broken air valve on water supply line spraying water onto passing vehicles at {landmark}."),
     ("Water Leak", "Drinking water line connection cracked near public tap at {landmark}."),
+    ("Water Leak", "Underground supply pipe leaking into stormwater gutter near {landmark}, massive wastage of potable water."),
+    ("Water Leak", "Municipal distribution valve leaking water heavily onto the sidewalk near {landmark}."),
+    ("Water Leak", "Submerged pipeline rupture causing fountain of drinking water near {landmark}."),
     
     # Garbage Collection
     ("Garbage Collection", "Green waste and tree branches dumped on the roadside near {landmark} not collected for a week."),
@@ -325,6 +478,9 @@ DISTINCT_TEMPLATES = [
     ("Garbage Collection", "Construction debris and cement bags dumped illegally on the pavement near {landmark}."),
     ("Garbage Collection", "Dry waste collection van has not visited our locality near {landmark} for the past 5 days."),
     ("Garbage Collection", "Commercial vendor dumping organic waste in open drain near {landmark}."),
+    ("Garbage Collection", "Litter bin overturned and plastic waste scattered across pedestrian walkway near {landmark}."),
+    ("Garbage Collection", "Unsegregated garbage accumulation spreading across road curb near {landmark}."),
+    ("Garbage Collection", "Hotel dumping discarded vegetable waste and plastic crates near {landmark} creating fly infestation."),
     
     # Sewage Overflow
     ("Sewage Overflow", "Storm water drain choked with plastic silt causing foul water to back up near {landmark}."),
@@ -332,6 +488,9 @@ DISTINCT_TEMPLATES = [
     ("Sewage Overflow", "Underground drainage line blocked causing dirty water backflow in shops near {landmark}."),
     ("Sewage Overflow", "Gutter chamber overflowing into nearby residential compound gate near {landmark}."),
     ("Sewage Overflow", "Sewage water leaking into open garden area near {landmark}, strong unbearable odor."),
+    ("Sewage Overflow", "Choked sewer inspection chamber discharging dark wastewater onto the street near {landmark}."),
+    ("Sewage Overflow", "Blocked drain line causing contaminated gutter water to flood the footpath near {landmark}."),
+    ("Sewage Overflow", "Broken nullah retaining wall spilling municipal sewage onto service road near {landmark}."),
     
     # Illegal Construction
     ("Illegal Construction", "Unauthorized hawker stalls erected on pedestrian walkway blocking fire exit near {landmark}."),
@@ -339,6 +498,9 @@ DISTINCT_TEMPLATES = [
     ("Illegal Construction", "Commercial restaurant converted open parking space into kitchen extension near {landmark}."),
     ("Illegal Construction", "Illegal billboard hoardings erected without structural stability certificate on {landmark}."),
     ("Illegal Construction", "Unauthorized road digging and trenching without municipal display board near {landmark}."),
+    ("Illegal Construction", "Encroachment on storm water drain boundary by illegal tin shed shop near {landmark}."),
+    ("Illegal Construction", "Unauthorized concrete ramp built across public footpath by commercial building near {landmark}."),
+    ("Illegal Construction", "Illegal rooftop shed construction using corrugated metal sheets in residential building near {landmark}."),
     
     # Stray Animal
     ("Stray Animal", "Injured stray cow sitting in the middle of fast lane near {landmark}, causing traffic bottleneck."),
@@ -346,13 +508,19 @@ DISTINCT_TEMPLATES = [
     ("Stray Animal", "Stray cattle roaming around busy traffic junction near {landmark} during morning school hours."),
     ("Stray Animal", "Stray dog reported biting multiple passers-by near {landmark}. Urgent animal control needed."),
     ("Stray Animal", "Injured stray animal stuck on electric substation boundary wall near {landmark}."),
+    ("Stray Animal", "Pack of feral dogs barking and chasing delivery bikes late at night near {landmark}."),
+    ("Stray Animal", "Stray bulls fighting on main road causing pedestrian panic near {landmark}."),
+    ("Stray Animal", "Injured stray dog in need of municipal veterinary rescue near {landmark}."),
     
     # Noise Complaint
     ("Noise Complaint", "Heavy construction drilling and rock excavation noise at 2:00 AM near residential flats at {landmark}."),
     ("Noise Complaint", "Auto repair workshop using loud pneumatic hammers and metal grinding in residential zone near {landmark}."),
     ("Noise Complaint", "Commercial banquet hall bursting firecrackers after midnight near {landmark}."),
     ("Noise Complaint", "Generator set of mobile tower making high decibel rattling noise 24/7 near {landmark}."),
-    ("Noise Complaint", "Religious function using unauthorized horn loudspeakers above permissible decibel limits near {landmark}.")
+    ("Noise Complaint", "Religious function using unauthorized horn loudspeakers above permissible decibel limits near {landmark}."),
+    ("Noise Complaint", "Late night commercial loading and unloading causing loud clattering noise past 1:30 AM near {landmark}."),
+    ("Noise Complaint", "Industrial exhaust fan vibrating loudly in residential building courtyard near {landmark}."),
+    ("Noise Complaint", "Unauthorized musical event using high-wattage amplifiers without police/municipal permit near {landmark}.")
 ]
 
 
@@ -372,12 +540,12 @@ def random_timestamp_past_30_days(base_date=None):
     return random_time.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def generate_dataset(target_total=130):
+def generate_dataset(target_total=350):
     """
     Generate dataset with:
-    - Target: ~130 total complaints
-    - 30-40% in realistic semantic duplicate clusters (around 40-50 complaints)
-    - 60-70% distinct single complaints (around 80-90 complaints)
+    - Target: 350 total complaints
+    - ~30% in realistic semantic duplicate clusters (~105 complaints across 17 clusters)
+    - ~70% distinct single complaints (~245 complaints)
     """
     complaints = []
     cluster_records = []
@@ -440,7 +608,7 @@ def generate_dataset(target_total=130):
     cluster_complaint_count = len(complaints)
     distinct_target_count = target_total - cluster_complaint_count
 
-    # 2. Generate Distinct Complaints (~60-70% of total)
+    # 2. Generate Distinct Complaints (~70% of total)
     distinct_sample_templates = []
     while len(distinct_sample_templates) < distinct_target_count:
         # Pick from templates and cycle with randomized neighborhood hubs
@@ -529,7 +697,7 @@ def export_files(complaints, cluster_records, output_dir="data"):
     # 2. Export Citizen Intake Contract JSON format
     intake_json_data = {
         "metadata": {
-            "dataset_version": "1.0.0",
+            "dataset_version": "1.1.0",
             "region": "Mumbai / Thane Metropolitan Region (MMR)",
             "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "total_records": len(complaints),
@@ -574,7 +742,7 @@ def export_files(complaints, cluster_records, output_dir="data"):
 
 
 if __name__ == "__main__":
-    complaints, cluster_records = generate_dataset(target_total=130)
+    complaints, cluster_records = generate_dataset(target_total=350)
     csv_file, json_file, cluster_file = export_files(complaints, cluster_records, output_dir="data")
     
     total = len(complaints)
@@ -588,3 +756,4 @@ if __name__ == "__main__":
     print(f"CSV Output                : {csv_file}")
     print(f"JSON Output               : {json_file}")
     print(f"Clusters Ground Truth     : {cluster_file}")
+
