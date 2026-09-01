@@ -1,0 +1,609 @@
+@import "tailwindcss";
+
+/* =========================================================
+   JANSEVA AI - CITIZEN PORTAL THEME
+   Consistent with Authority Dashboard
+   ========================================================= */
+
+:root {
+  /* Backgrounds */
+  --bg-main: #11172b;
+  --bg-secondary: #171e33;
+  --bg-sidebar: #222b45;
+  --bg-card: #222b45;
+  --bg-card-hover: #29334f;
+  --bg-input: #1b233a;
+
+  /* Brand */
+  --primary: #6573ff;
+  --primary-light: #7582ff;
+  --primary-dark: #5361e8;
+
+  /* Secondary */
+  --secondary: #6fcdb5;
+  --secondary-light: #82d9c1;
+
+  /* Text */
+  --text-main: #f1f3f8;
+  --text-secondary: #c4cada;
+  --text-muted: #929db6;
+  --text-dark: #11172b;
+
+  /* Borders */
+  --border: #303a55;
+  --border-light: #3b4664;
+
+  /* Status */
+  --success: #6fcdb5;
+  --warning: #e5b45e;
+  --danger: #e57979;
+  --info: #7280ff;
+
+  /* Shadows */
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.18);
+  --shadow-primary: 0 8px 25px rgba(101, 115, 255, 0.22);
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+
+  background: var(--bg-main);
+  color: var(--text-main);
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+
+  background: var(--bg-input);
+  color: var(--text-main);
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  padding: 12px 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #727d98;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--border-light);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px rgba(101, 115, 255, 0.15);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================================================
+   CITIZEN CARDS
+   ========================================================= */
+
+.citizen-card {
+  background: var(--bg-card);
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  box-shadow: var(--shadow-card);
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.citizen-card:hover {
+  background: var(--bg-card-hover);
+
+  border-color: var(--border-light);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================================================
+   SMALL CARDS / QUICK ACTIONS
+   ========================================================= */
+
+.quick-action-card {
+  background: var(--bg-card);
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.quick-action-card:hover {
+  background: var(--bg-card-hover);
+
+  border-color: rgba(101, 115, 255, 0.5);
+
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.btn-primary {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: var(--primary);
+  color: white;
+
+  border: none;
+  border-radius: 10px;
+
+  padding: 12px 20px;
+
+  font-weight: 600;
+
+  box-shadow: var(--shadow-primary);
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--primary-light);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 30px rgba(101, 115, 255, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   SECONDARY BUTTON
+   ========================================================= */
+
+.btn-secondary {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  padding: 11px 18px;
+
+  font-weight: 500;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card);
+
+  border-color: var(--primary);
+
+  color: white;
+}
+
+/* =========================================================
+   BRAND / GRADIENT TEXT
+   ========================================================= */
+
+.brand-text {
+  color: var(--primary-light);
+}
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    #7582ff,
+    #6fcdb5
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero-glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: rgba(101, 115, 255, 0.10);
+
+  filter: blur(100px);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.status-badge {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* In Progress */
+
+.status-progress {
+  color: #9ca8ff;
+
+  background: rgba(114, 128, 255, 0.14);
+
+  border: 1px solid rgba(114, 128, 255, 0.25);
+}
+
+/* Resolved */
+
+.status-resolved {
+  color: var(--success);
+
+  background: rgba(111, 205, 181, 0.12);
+
+  border: 1px solid rgba(111, 205, 181, 0.25);
+}
+
+/* Pending */
+
+.status-pending {
+  color: var(--warning);
+
+  background: rgba(229, 180, 94, 0.12);
+
+  border: 1px solid rgba(229, 180, 94, 0.25);
+}
+
+/* High Priority */
+
+.status-high {
+  color: var(--danger);
+
+  background: rgba(229, 121, 121, 0.12);
+
+  border: 1px solid rgba(229, 121, 121, 0.25);
+}
+
+/* =========================================================
+   ICON CONTAINERS
+   ========================================================= */
+
+.icon-box {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 10px;
+
+  background: rgba(101, 115, 255, 0.12);
+
+  color: var(--primary-light);
+}
+
+.icon-box-success {
+  background: rgba(111, 205, 181, 0.12);
+  color: var(--success);
+}
+
+.icon-box-warning {
+  background: rgba(229, 180, 94, 0.12);
+  color: var(--warning);
+}
+
+.icon-box-danger {
+  background: rgba(229, 121, 121, 0.12);
+  color: var(--danger);
+}
+
+/* =========================================================
+   DIVIDERS
+   ========================================================= */
+
+.divider {
+  width: 100%;
+  height: 1px;
+
+  background: var(--border);
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.nav-link {
+  position: relative;
+
+  color: var(--text-muted);
+
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-main);
+}
+
+.nav-link-active {
+  color: var(--primary-light);
+}
+
+.nav-link-active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -8px;
+
+  height: 2px;
+
+  background: var(--primary);
+
+  border-radius: 2px;
+}
+
+/* =========================================================
+   NOTIFICATION DOT
+   ========================================================= */
+
+.notification-dot {
+  position: absolute;
+
+  top: -2px;
+  right: -2px;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: var(--danger);
+
+  border: 2px solid var(--bg-main);
+}
+
+/* =========================================================
+   AI PROCESSING
+   ========================================================= */
+
+.ai-processing {
+  position: relative;
+
+  border: 1px solid rgba(101, 115, 255, 0.25);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(101, 115, 255, 0.08),
+      rgba(111, 205, 181, 0.04)
+    );
+}
+
+.ai-pulse {
+  animation: aiPulse 2s ease-in-out infinite;
+}
+
+@keyframes aiPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================================================
+   SUCCESS STATE
+   ========================================================= */
+
+.success-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 64px;
+
+  border-radius: 50%;
+
+  background: rgba(111, 205, 181, 0.12);
+
+  color: var(--success);
+
+  border: 1px solid rgba(111, 205, 181, 0.3);
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #171e33;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b4664;
+
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4b587a;
+}
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: var(--primary);
+
+  color: white;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  body {
+    min-width: 320px;
+  }
+
+  .citizen-card {
+    border-radius: 12px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    min-height: 44px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
