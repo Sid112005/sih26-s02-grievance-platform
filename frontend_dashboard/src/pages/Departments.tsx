@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -6,72 +7,170 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
 } from "recharts";
 
-const departments = [
-  {
-    name: "Water Supply",
-    head: "Anil Mehta",
-    complaints: 1240,
-    resolved: 940,
-    pending: 210,
-    critical: 90,
-    avgTime: "2.4 days",
-  },
-  {
-    name: "Electricity",
-    head: "Rajesh Kumar",
-    complaints: 980,
-    resolved: 790,
-    pending: 140,
-    critical: 50,
-    avgTime: "1.8 days",
-  },
-  {
-    name: "Roads & Infrastructure",
-    head: "Sanjay Verma",
-    complaints: 860,
-    resolved: 610,
-    pending: 180,
-    critical: 70,
-    avgTime: "4.2 days",
-  },
-  {
-    name: "Sanitation",
-    head: "Meena Joshi",
-    complaints: 720,
-    resolved: 590,
-    pending: 100,
-    critical: 30,
-    avgTime: "2.1 days",
-  },
-  {
-    name: "Public Safety",
-    head: "Vivek Singh",
-    complaints: 540,
-    resolved: 420,
-    pending: 80,
-    critical: 40,
-    avgTime: "1.5 days",
-  },
-  {
-    name: "Transport",
-    head: "Karan Patel",
-    complaints: 420,
-    resolved: 330,
-    pending: 70,
-    critical: 20,
-    avgTime: "3.1 days",
-  },
-];
-
-const chartData = departments.map((department) => ({
-  department: department.name,
-  complaints: department.complaints,
-  resolved: department.resolved,
-}));
+import { getComplaints } from "../api/complaintsApi";
+import type { Complaint } from "../types/complaint";
 
 export default function Departments() {
+  const [complaints, setComplaints] = useState<Complaint[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await getComplaints();
+        setComplaints(data.complaints);
+      } catch (err) {
+        console.error(err);
+        setError("Unable to connect to the grievance backend.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  const departments = useMemo(() => {
+    const map: Record<
+      string,
+      {
+        department: string;
+        complaints: number;
+        critical: number;
+        high: number;
+        pending: number;
+        resolved: number;
+        duplicates: number;
+      }
+    > = {};
+
+    complaints.forEach((complaint) => {
+      const department =
+        complaint.classification.department_routing ||
+        "Unassigned Department";
+
+      if (!map[department]) {
+        map[department] = {
+          department,
+          complaints: 0,
+          critical: 0,
+          high: 0,
+          pending: 0,
+          resolved: 0,
+          duplicates: 0,
+        };
+      }
+
+      map[department].complaints++;
+
+      if (
+        complaint.classification.urgency === "CRITICAL"
+      ) {
+        map[department].critical++;
+      }
+
+      if (
+        complaint.classification.urgency === "HIGH"
+      ) {
+        map[department].high++;
+      }
+
+      if (
+        complaint.status === "UNASSIGNED" ||
+        complaint.status === "PENDING"
+      ) {
+        map[department].pending++;
+      }
+
+      if (
+        complaint.status === "RESOLVED"
+      ) {
+        map[department].resolved++;
+      }
+
+      if (
+        complaint.duplicate_info.is_duplicate
+      ) {
+        map[department].duplicates++;
+      }
+    });
+
+    return Object.values(map).sort(
+      (a, b) => b.complaints - a.complaints
+    );
+  }, [complaints]);
+
+  const totalDepartments = departments.length;
+
+  const criticalComplaints = complaints.filter(
+    (c) => c.classification.urgency === "CRITICAL"
+  ).length;
+
+  const pendingComplaints = complaints.filter(
+    (c) =>
+      c.status === "UNASSIGNED" ||
+      c.status === "PENDING"
+  ).length;
+
+  const resolvedComplaints = complaints.filter(
+    (c) => c.status === "RESOLVED"
+  ).length;
+
+  const pieData = departments.map((item) => ({
+    name: item.department,
+    value: item.complaints,
+  }));
+
+  const pieColors = [
+    "#6573ff",
+    "#6fcdb5",
+    "#e5b45e",
+    "#e57979",
+    "#8b7cff",
+    "#5da9e9",
+  ];
+
+  if (loading) {
+    return (
+      <div className="flex min-h-[400px] items-center justify-center">
+        <div className="text-center">
+          <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-[#303a55] border-t-[#6573ff]" />
+
+          <p className="mt-4 text-sm text-[#929db6]">
+            Loading department data...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <h1 className="text-3xl font-bold text-[#f1f3f8]">
+          Departments
+        </h1>
+
+        <div className="rounded-[6px] border border-[#e57979]/30 bg-[#e57979]/10 p-6">
+          <p className="font-semibold text-[#e57979]">
+            Backend connection failed
+          </p>
+
+          <p className="mt-2 text-sm text-[#929db6]">
+            {error}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
 
@@ -79,109 +178,200 @@ export default function Departments() {
 
       <div>
         <h1 className="text-3xl font-bold text-[#f1f3f8]">
-          Departments
+          Department Overview
         </h1>
 
         <p className="mt-2 text-sm text-[#929db6]">
-          Monitor department workload, performance and grievance resolution.
+          Monitor grievance distribution and workload across government departments.
         </p>
       </div>
 
 
-      {/* SUMMARY */}
+      {/* SUMMARY CARDS */}
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-
-        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-5">
-          <p className="text-xs uppercase text-[#929db6]">
-            Active Departments
-          </p>
-
-          <h2 className="mt-2 text-3xl font-bold text-[#6573ff]">
-            6
-          </h2>
-        </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
 
         <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-5">
           <p className="text-xs uppercase text-[#929db6]">
-            Total Assigned
+            Departments
           </p>
 
           <h2 className="mt-2 text-3xl font-bold text-[#f1f3f8]">
-            4,760
+            {totalDepartments}
           </h2>
+
+          <p className="mt-1 text-xs text-[#6fcdb5]">
+            Receiving complaints
+          </p>
         </div>
+
 
         <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-5">
           <p className="text-xs uppercase text-[#929db6]">
-            Overall Resolution
+            Critical
+          </p>
+
+          <h2 className="mt-2 text-3xl font-bold text-[#e57979]">
+            {criticalComplaints}
+          </h2>
+
+          <p className="mt-1 text-xs text-[#929db6]">
+            Immediate attention
+          </p>
+        </div>
+
+
+        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-5">
+          <p className="text-xs uppercase text-[#929db6]">
+            Pending
+          </p>
+
+          <h2 className="mt-2 text-3xl font-bold text-[#e5b45e]">
+            {pendingComplaints}
+          </h2>
+
+          <p className="mt-1 text-xs text-[#929db6]">
+            Awaiting action
+          </p>
+        </div>
+
+
+        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-5">
+          <p className="text-xs uppercase text-[#929db6]">
+            Resolved
           </p>
 
           <h2 className="mt-2 text-3xl font-bold text-[#6fcdb5]">
-            77.8%
+            {resolvedComplaints}
           </h2>
+
+          <p className="mt-1 text-xs text-[#929db6]">
+            Successfully closed
+          </p>
         </div>
 
       </div>
 
 
-      {/* CHART */}
+      {/* CHARTS */}
 
-      <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
 
-        <h2 className="text-lg font-semibold text-[#f1f3f8]">
-          Department Workload
-        </h2>
+        {/* BAR CHART */}
 
-        <p className="mt-1 text-xs text-[#929db6]">
-          Assigned complaints versus resolved complaints
-        </p>
+        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
 
-        <div className="mt-6 h-[320px]">
+          <h2 className="text-lg font-semibold text-[#f1f3f8]">
+            Complaints by Department
+          </h2>
 
-          <ResponsiveContainer width="100%" height="100%">
+          <p className="mt-1 text-xs text-[#929db6]">
+            Department-wise grievance workload
+          </p>
 
-            <BarChart data={chartData}>
+          <div className="mt-6 h-[320px]">
 
-              <CartesianGrid
-                stroke="#303a55"
-                strokeDasharray="3 3"
-              />
+            <ResponsiveContainer width="100%" height="100%">
 
-              <XAxis
-                dataKey="department"
-                stroke="#929db6"
-                tick={{
-                  fill: "#929db6",
-                  fontSize: 10,
-                }}
-              />
+              <BarChart data={departments}>
 
-              <YAxis
-                stroke="#929db6"
-                tick={{
-                  fill: "#929db6",
-                  fontSize: 11,
-                }}
-              />
+                <CartesianGrid
+                  stroke="#303a55"
+                  vertical={false}
+                />
 
-              <Tooltip />
+                <XAxis
+                  dataKey="department"
+                  stroke="#929db6"
+                  tick={{
+                    fill: "#c4cada",
+                    fontSize: 10,
+                  }}
+                  angle={-20}
+                  textAnchor="end"
+                  height={80}
+                />
 
-              <Bar
-                dataKey="complaints"
-                name="Complaints"
-                fill="#6573ff"
-              />
+                <YAxis
+                  stroke="#929db6"
+                  tick={{
+                    fill: "#929db6",
+                    fontSize: 10,
+                  }}
+                />
 
-              <Bar
-                dataKey="resolved"
-                name="Resolved"
-                fill="#6fcdb5"
-              />
+                <Tooltip />
 
-            </BarChart>
+                <Bar
+                  dataKey="complaints"
+                  fill="#6573ff"
+                  radius={[3, 3, 0, 0]}
+                />
 
-          </ResponsiveContainer>
+              </BarChart>
+
+            </ResponsiveContainer>
+
+          </div>
+
+        </div>
+
+
+        {/* PIE CHART */}
+
+        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
+
+          <h2 className="text-lg font-semibold text-[#f1f3f8]">
+            Department Distribution
+          </h2>
+
+          <p className="mt-1 text-xs text-[#929db6]">
+            Share of total complaints
+          </p>
+
+          <div className="mt-6 h-[320px]">
+
+            <ResponsiveContainer width="100%" height="100%">
+
+              <PieChart>
+
+                <Pie
+                  data={pieData}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="45%"
+                  outerRadius={100}
+                  label
+                >
+
+                  {pieData.map((_, index) => (
+                    <Cell
+                      key={index}
+                      fill={
+                        pieColors[
+                          index % pieColors.length
+                        ]
+                      }
+                    />
+                  ))}
+
+                </Pie>
+
+                <Tooltip />
+
+                <Legend
+                  wrapperStyle={{
+                    fontSize: "10px",
+                    color: "#929db6",
+                  }}
+                />
+
+              </PieChart>
+
+            </ResponsiveContainer>
+
+          </div>
 
         </div>
 
@@ -196,6 +386,10 @@ export default function Departments() {
           Department Performance
         </h2>
 
+        <p className="mt-1 text-xs text-[#929db6]">
+          Live statistics calculated from citizen complaints
+        </p>
+
         <div className="mt-5 overflow-x-auto">
 
           <table className="w-full min-w-[900px] text-left">
@@ -203,13 +397,8 @@ export default function Departments() {
             <thead className="bg-[#1b233a]">
 
               <tr>
-
                 <th className="px-4 py-3 text-xs uppercase text-[#929db6]">
                   Department
-                </th>
-
-                <th className="px-4 py-3 text-xs uppercase text-[#929db6]">
-                  Head
                 </th>
 
                 <th className="px-4 py-3 text-xs uppercase text-[#929db6]">
@@ -217,7 +406,11 @@ export default function Departments() {
                 </th>
 
                 <th className="px-4 py-3 text-xs uppercase text-[#929db6]">
-                  Resolved
+                  Critical
+                </th>
+
+                <th className="px-4 py-3 text-xs uppercase text-[#929db6]">
+                  High
                 </th>
 
                 <th className="px-4 py-3 text-xs uppercase text-[#929db6]">
@@ -225,92 +418,56 @@ export default function Departments() {
                 </th>
 
                 <th className="px-4 py-3 text-xs uppercase text-[#929db6]">
-                  Critical
+                  Resolved
                 </th>
 
                 <th className="px-4 py-3 text-xs uppercase text-[#929db6]">
-                  Avg. Time
+                  Duplicates
                 </th>
-
-                <th className="px-4 py-3 text-xs uppercase text-[#929db6]">
-                  Performance
-                </th>
-
               </tr>
 
             </thead>
 
-
             <tbody>
 
-              {departments.map((department) => {
+              {departments.map((department) => (
 
-                const performance = Math.round(
-                  (department.resolved /
-                    department.complaints) *
-                    100
-                );
+                <tr
+                  key={department.department}
+                  className="border-t border-[#303a55] hover:bg-[#29334f]"
+                >
 
-                return (
-                  <tr
-                    key={department.name}
-                    className="border-t border-[#303a55] hover:bg-[#29334f]"
-                  >
+                  <td className="px-4 py-4 text-sm font-semibold text-[#f1f3f8]">
+                    {department.department}
+                  </td>
 
-                    <td className="px-4 py-4 text-sm font-semibold text-[#f1f3f8]">
-                      {department.name}
-                    </td>
+                  <td className="px-4 py-4 text-sm font-bold text-[#6573ff]">
+                    {department.complaints}
+                  </td>
 
-                    <td className="px-4 py-4 text-xs text-[#c4cada]">
-                      {department.head}
-                    </td>
+                  <td className="px-4 py-4 text-sm text-[#e57979]">
+                    {department.critical}
+                  </td>
 
-                    <td className="px-4 py-4 text-sm text-[#c4cada]">
-                      {department.complaints}
-                    </td>
+                  <td className="px-4 py-4 text-sm text-[#e5b45e]">
+                    {department.high}
+                  </td>
 
-                    <td className="px-4 py-4 text-sm text-[#6fcdb5]">
-                      {department.resolved}
-                    </td>
+                  <td className="px-4 py-4 text-sm text-[#e5b45e]">
+                    {department.pending}
+                  </td>
 
-                    <td className="px-4 py-4 text-sm text-[#e5b45e]">
-                      {department.pending}
-                    </td>
+                  <td className="px-4 py-4 text-sm text-[#6fcdb5]">
+                    {department.resolved}
+                  </td>
 
-                    <td className="px-4 py-4 text-sm text-[#e57979]">
-                      {department.critical}
-                    </td>
+                  <td className="px-4 py-4 text-sm text-[#6573ff]">
+                    {department.duplicates}
+                  </td>
 
-                    <td className="px-4 py-4 text-xs text-[#929db6]">
-                      {department.avgTime}
-                    </td>
+                </tr>
 
-                    <td className="px-4 py-4">
-
-                      <div className="flex items-center gap-3">
-
-                        <div className="h-2 w-20 overflow-hidden rounded-full bg-[#151c30]">
-
-                          <div
-                            className="h-full bg-[#6573ff]"
-                            style={{
-                              width: `${performance}%`,
-                            }}
-                          />
-
-                        </div>
-
-                        <span className="text-xs text-[#c4cada]">
-                          {performance}%
-                        </span>
-
-                      </div>
-
-                    </td>
-
-                  </tr>
-                );
-              })}
+              ))}
 
             </tbody>
 

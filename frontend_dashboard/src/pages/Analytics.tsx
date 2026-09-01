@@ -1,409 +1,401 @@
+import { useEffect, useMemo, useState } from "react";
+
 import {
   ResponsiveContainer,
+  BarChart,
+  Bar,
   LineChart,
   Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
-  BarChart,
-  Bar,
   PieChart,
   Pie,
   Cell,
-  AreaChart,
-  Area,
+  Legend,
 } from "recharts";
 
+import { getComplaints } from "../api/complaintsApi";
+import type { Complaint } from "../types/complaint";
 
-// ================================
-// MOCK DATA
-// ================================
+export default function Analytics() {
+  const [complaints, setComplaints] = useState<Complaint[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-const complaintsTrend = [
-  { month: "Jan", complaints: 320, resolved: 240 },
-  { month: "Feb", complaints: 410, resolved: 310 },
-  { month: "Mar", complaints: 380, resolved: 290 },
-  { month: "Apr", complaints: 520, resolved: 390 },
-  { month: "May", complaints: 610, resolved: 470 },
-  { month: "Jun", complaints: 580, resolved: 510 },
-  { month: "Jul", complaints: 720, resolved: 590 },
-  { month: "Aug", complaints: 680, resolved: 620 },
-];
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await getComplaints();
+        setComplaints(data.complaints);
+      } catch (err) {
+        console.error(err);
+        setError("Unable to connect to the grievance backend.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-const departmentData = [
-  { department: "Water Supply", complaints: 1240 },
-  { department: "Electricity", complaints: 980 },
-  { department: "Roads", complaints: 860 },
-  { department: "Sanitation", complaints: 720 },
-  { department: "Public Safety", complaints: 540 },
-  { department: "Transport", complaints: 420 },
-];
+    loadData();
+  }, []);
 
-const priorityData = [
-  { name: "Critical", value: 120 },
-  { name: "High", value: 360 },
-  { name: "Medium", value: 850 },
-  { name: "Low", value: 520 },
-];
+  // -----------------------------------------
+  // PRIORITY DATA
+  // -----------------------------------------
 
-const statusData = [
-  { name: "Resolved", value: 1240 },
-  { name: "In Progress", value: 680 },
-  { name: "Pending", value: 390 },
-  { name: "Escalated", value: 140 },
-];
+  const priorityData = useMemo(() => {
+    const priorities = [
+      "CRITICAL",
+      "HIGH",
+      "MEDIUM",
+      "LOW",
+    ];
 
-const duplicateData = [
-  { month: "Jan", duplicates: 42 },
-  { month: "Feb", duplicates: 56 },
-  { month: "Mar", duplicates: 49 },
-  { month: "Apr", duplicates: 71 },
-  { month: "May", duplicates: 83 },
-  { month: "Jun", duplicates: 94 },
-  { month: "Jul", duplicates: 110 },
-  { month: "Aug", duplicates: 102 },
-];
+    return priorities.map((priority) => ({
+      priority,
+      complaints: complaints.filter(
+        (c) =>
+          c.classification.urgency ===
+          priority
+      ).length,
+    }));
+  }, [complaints]);
 
+  // -----------------------------------------
+  // STATUS DATA
+  // -----------------------------------------
 
-// ================================
-// COLORS
-// ================================
+  const statusData = useMemo(() => {
+    const statuses: Record<
+      string,
+      number
+    > = {};
 
-const PURPLE = "#6573ff";
-const TEAL = "#6fcdb5";
-const PINK = "#e5b9b5";
-const YELLOW = "#e5b45e";
-const RED = "#e57979";
+    complaints.forEach((complaint) => {
+      const status =
+        complaint.status.replace(
+          /_/g,
+          " "
+        );
 
-const priorityColors = [
-  RED,
-  PINK,
-  YELLOW,
-  TEAL,
-];
+      statuses[status] =
+        (statuses[status] || 0) + 1;
+    });
 
-const statusColors = [
-  TEAL,
-  PURPLE,
-  YELLOW,
-  RED,
-];
+    return Object.entries(statuses).map(
+      ([status, count]) => ({
+        status,
+        count,
+      })
+    );
+  }, [complaints]);
 
+  // -----------------------------------------
+  // CATEGORY DATA
+  // -----------------------------------------
 
-// ================================
-// CUSTOM TOOLTIP
-// ================================
+  const categoryData = useMemo(() => {
+    const categories: Record<
+      string,
+      number
+    > = {};
 
-function CustomTooltip({ active, payload, label }: any) {
-  if (!active || !payload || !payload.length) {
-    return null;
+    complaints.forEach((complaint) => {
+      const category =
+        complaint.classification
+          .category;
+
+      categories[category] =
+        (categories[category] || 0) + 1;
+    });
+
+    return Object.entries(categories)
+      .map(([category, count]) => ({
+        category,
+        count,
+      }))
+      .sort(
+        (a, b) => b.count - a.count
+      )
+      .slice(0, 8);
+  }, [complaints]);
+
+  // -----------------------------------------
+  // DEPARTMENT DATA
+  // -----------------------------------------
+
+  const departmentData = useMemo(() => {
+    const departments: Record<
+      string,
+      number
+    > = {};
+
+    complaints.forEach((complaint) => {
+      const department =
+        complaint.classification
+          .department_routing;
+
+      departments[department] =
+        (departments[department] || 0) + 1;
+    });
+
+    return Object.entries(departments)
+      .map(([department, count]) => ({
+        department,
+        count,
+      }))
+      .sort(
+        (a, b) => b.count - a.count
+      );
+  }, [complaints]);
+
+  // -----------------------------------------
+  // DUPLICATES
+  // -----------------------------------------
+
+  const duplicateCount = complaints.filter(
+    (c) =>
+      c.duplicate_info.is_duplicate
+  ).length;
+
+  const uniqueCount =
+    complaints.length - duplicateCount;
+
+  const duplicateData = [
+    {
+      name: "Unique",
+      value: uniqueCount,
+    },
+    {
+      name: "Duplicates",
+      value: duplicateCount,
+    },
+  ];
+
+  // -----------------------------------------
+  // SUMMARY
+  // -----------------------------------------
+
+  const total = complaints.length;
+
+  const critical = complaints.filter(
+    (c) =>
+      c.classification.urgency ===
+      "CRITICAL"
+  ).length;
+
+  const high = complaints.filter(
+    (c) =>
+      c.classification.urgency ===
+      "HIGH"
+  ).length;
+
+  const resolved = complaints.filter(
+    (c) =>
+      c.status === "RESOLVED"
+  ).length;
+
+  const resolutionRate =
+    total > 0
+      ? ((resolved / total) * 100).toFixed(
+          1
+        )
+      : "0";
+
+  const pieColors = [
+    "#6573ff",
+    "#e57979",
+  ];
+
+  if (loading) {
+    return (
+      <div className="flex min-h-[400px] items-center justify-center">
+
+        <div className="text-center">
+
+          <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-[#303a55] border-t-[#6573ff]" />
+
+          <p className="mt-4 text-sm text-[#929db6]">
+            Loading analytics...
+          </p>
+
+        </div>
+
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="space-y-6">
+
+        <h1 className="text-3xl font-bold text-[#f1f3f8]">
+          Analytics
+        </h1>
+
+        <div className="rounded-[6px] border border-[#e57979]/30 bg-[#e57979]/10 p-6">
+
+          <p className="font-semibold text-[#e57979]">
+            Backend connection failed
+          </p>
+
+          <p className="mt-2 text-sm text-[#929db6]">
+            {error}
+          </p>
+
+        </div>
+
+      </div>
+    );
   }
 
   return (
-    <div className="rounded-[4px] border border-[#303a55] bg-[#1b233a] px-4 py-3 shadow-xl">
-      <p className="mb-2 text-xs font-semibold text-[#f1f3f8]">
-        {label}
-      </p>
-
-      {payload.map((item: any, index: number) => (
-        <p
-          key={index}
-          className="text-xs text-[#c4cada]"
-        >
-          {item.name}:{" "}
-          <span className="font-bold text-[#6fcdb5]">
-            {item.value}
-          </span>
-        </p>
-      ))}
-    </div>
-  );
-}
-
-
-// ================================
-// ANALYTICS PAGE
-// ================================
-
-export default function Analytics() {
-  return (
     <div className="space-y-6">
 
-      {/* ============================
-          PAGE HEADER
-          ============================ */}
+      {/* HEADER */}
 
-      <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+      <div>
 
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight text-[#f1f3f8]">
-            Analytics
-          </h1>
+        <h1 className="text-3xl font-bold text-[#f1f3f8]">
+          Analytics
+        </h1>
 
-          <p className="mt-2 text-sm text-[#929db6]">
-            Monitor grievance trends, department performance,
-            AI classification and complaint resolution.
-          </p>
-        </div>
-
-        <button className="rounded-[4px] bg-[#6573ff] px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition hover:bg-[#7582ff]">
-          Download Report
-        </button>
+        <p className="mt-2 text-sm text-[#929db6]">
+          AI-powered insights from citizen grievance data.
+        </p>
 
       </div>
 
 
-      {/* ============================
-          SUMMARY CARDS
-          ============================ */}
+      {/* SUMMARY */}
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
 
-        {/* Total Complaints */}
-
         <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-5">
 
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#929db6]">
+          <p className="text-xs uppercase text-[#929db6]">
             Total Complaints
           </p>
 
-          <div className="mt-2 flex items-end justify-between">
+          <h2 className="mt-2 text-3xl font-bold text-[#f1f3f8]">
+            {total}
+          </h2>
 
-            <h2 className="text-3xl font-bold text-[#f1f3f8]">
-              2,410
-            </h2>
-
-            <span className="text-xs font-semibold text-[#6fcdb5]">
-              +12.8%
-            </span>
-
-          </div>
-
-          <p className="mt-2 text-xs text-[#929db6]">
-            Compared with last month
+          <p className="mt-1 text-xs text-[#6fcdb5]">
+            Live backend data
           </p>
 
         </div>
 
-
-        {/* Resolution Rate */}
 
         <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-5">
 
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#929db6]">
-            Resolution Rate
+          <p className="text-xs uppercase text-[#929db6]">
+            Critical + High
           </p>
 
-          <div className="mt-2 flex items-end justify-between">
-
-            <h2 className="text-3xl font-bold text-[#6fcdb5]">
-              78.4%
-            </h2>
-
-            <span className="text-xs font-semibold text-[#6fcdb5]">
-              +5.2%
-            </span>
-
-          </div>
-
-          <p className="mt-2 text-xs text-[#929db6]">
-            Complaints successfully resolved
-          </p>
-
-        </div>
-
-
-        {/* Duplicate Detection */}
-
-        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-5">
-
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#929db6]">
-            Duplicate Detected
-          </p>
-
-          <div className="mt-2 flex items-end justify-between">
-
-            <h2 className="text-3xl font-bold text-[#6573ff]">
-              607
-            </h2>
-
-            <span className="text-xs font-semibold text-[#6fcdb5]">
-              25.2%
-            </span>
-
-          </div>
-
-          <p className="mt-2 text-xs text-[#929db6]">
-            Similar complaints grouped by AI
-          </p>
-
-        </div>
-
-
-        {/* AI Accuracy */}
-
-        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-5">
-
-          <p className="text-xs font-semibold uppercase tracking-wide text-[#929db6]">
-            AI Accuracy
-          </p>
-
-          <div className="mt-2 flex items-end justify-between">
-
-            <h2 className="text-3xl font-bold text-[#e5b9b5]">
-              94.2%
-            </h2>
-
-            <span className="text-xs font-semibold text-[#6fcdb5]">
-              +2.4%
-            </span>
-
-          </div>
-
-          <p className="mt-2 text-xs text-[#929db6]">
-            Classification accuracy
-          </p>
-
-        </div>
-
-      </div>
-
-
-      {/* ============================
-          COMPLAINT TREND
-          ============================ */}
-
-      <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
-
-        <div className="mb-5">
-
-          <h2 className="text-lg font-semibold text-[#f1f3f8]">
-            Complaint Trends
+          <h2 className="mt-2 text-3xl font-bold text-[#e57979]">
+            {critical + high}
           </h2>
 
           <p className="mt-1 text-xs text-[#929db6]">
-            Complaints received vs resolved over the last 8 months
+            High-priority grievances
           </p>
 
         </div>
 
-        <div className="h-[330px]">
 
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-5">
 
-            <LineChart data={complaintsTrend}>
+          <p className="text-xs uppercase text-[#929db6]">
+            AI Duplicates
+          </p>
 
-              <CartesianGrid
-                stroke="#303a55"
-                strokeDasharray="3 3"
-              />
+          <h2 className="mt-2 text-3xl font-bold text-[#6573ff]">
+            {duplicateCount}
+          </h2>
 
-              <XAxis
-                dataKey="month"
-                stroke="#929db6"
-                tick={{ fill: "#929db6", fontSize: 12 }}
-              />
+          <p className="mt-1 text-xs text-[#929db6]">
+            Semantically grouped
+          </p>
 
-              <YAxis
-                stroke="#929db6"
-                tick={{ fill: "#929db6", fontSize: 12 }}
-              />
+        </div>
 
-              <Tooltip content={<CustomTooltip />} />
 
-              <Legend
-                wrapperStyle={{
-                  color: "#c4cada",
-                  fontSize: "12px",
-                }}
-              />
+        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-5">
 
-              <Line
-                type="monotone"
-                dataKey="complaints"
-                name="Complaints"
-                stroke={PINK}
-                strokeWidth={3}
-                dot={{ r: 4 }}
-              />
+          <p className="text-xs uppercase text-[#929db6]">
+            Resolution Rate
+          </p>
 
-              <Line
-                type="monotone"
-                dataKey="resolved"
-                name="Resolved"
-                stroke={TEAL}
-                strokeWidth={3}
-                dot={{ r: 4 }}
-              />
+          <h2 className="mt-2 text-3xl font-bold text-[#6fcdb5]">
+            {resolutionRate}%
+          </h2>
 
-            </LineChart>
-
-          </ResponsiveContainer>
+          <p className="mt-1 text-xs text-[#929db6]">
+            Based on current data
+          </p>
 
         </div>
 
       </div>
 
 
-      {/* ============================
-          DEPARTMENT + PRIORITY
-          ============================ */}
+      {/* ROW 1 */}
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
 
-        {/* Department */}
+        {/* PRIORITY */}
 
         <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
 
           <h2 className="text-lg font-semibold text-[#f1f3f8]">
-            Complaints by Department
+            Complaints by Priority
           </h2>
 
           <p className="mt-1 text-xs text-[#929db6]">
-            Number of complaints assigned to each department
+            AI-generated urgency classification
           </p>
 
-          <div className="mt-6 h-[320px]">
+          <div className="mt-6 h-[300px]">
 
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer
+              width="100%"
+              height="100%"
+            >
 
-              <BarChart
-                data={departmentData}
-                layout="vertical"
-                margin={{
-                  left: 10,
-                  right: 20,
-                }}
-              >
+              <BarChart data={priorityData}>
 
                 <CartesianGrid
                   stroke="#303a55"
-                  horizontal={false}
+                  vertical={false}
                 />
 
                 <XAxis
-                  type="number"
+                  dataKey="priority"
                   stroke="#929db6"
-                  tick={{ fill: "#929db6", fontSize: 11 }}
+                  tick={{
+                    fill: "#c4cada",
+                    fontSize: 10,
+                  }}
                 />
 
                 <YAxis
-                  type="category"
-                  dataKey="department"
-                  width={100}
                   stroke="#929db6"
-                  tick={{ fill: "#c4cada", fontSize: 11 }}
                 />
 
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip />
 
                 <Bar
                   dataKey="complaints"
-                  name="Complaints"
-                  fill={PURPLE}
-                  radius={[0, 3, 3, 0]}
+                  fill="#6573ff"
+                  radius={[
+                    3,
+                    3,
+                    0,
+                    0,
+                  ]}
                 />
 
               </BarChart>
@@ -415,71 +407,7 @@ export default function Analytics() {
         </div>
 
 
-        {/* Priority */}
-
-        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
-
-          <h2 className="text-lg font-semibold text-[#f1f3f8]">
-            Priority Distribution
-          </h2>
-
-          <p className="mt-1 text-xs text-[#929db6]">
-            Complaints categorized according to urgency
-          </p>
-
-          <div className="mt-4 h-[320px]">
-
-            <ResponsiveContainer width="100%" height="100%">
-
-              <PieChart>
-
-                <Pie
-                  data={priorityData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={75}
-                  outerRadius={115}
-                  paddingAngle={3}
-                  dataKey="value"
-                  nameKey="name"
-                >
-
-                  {priorityData.map((_, index) => (
-                    <Cell
-                      key={`priority-${index}`}
-                      fill={priorityColors[index]}
-                    />
-                  ))}
-
-                </Pie>
-
-                <Tooltip content={<CustomTooltip />} />
-
-                <Legend
-                  wrapperStyle={{
-                    color: "#c4cada",
-                    fontSize: "12px",
-                  }}
-                />
-
-              </PieChart>
-
-            </ResponsiveContainer>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      {/* ============================
-          STATUS + DUPLICATES
-          ============================ */}
-
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-
-        {/* Status */}
+        {/* STATUS */}
 
         <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
 
@@ -488,125 +416,53 @@ export default function Analytics() {
           </h2>
 
           <p className="mt-1 text-xs text-[#929db6]">
-            Current status of submitted grievances
+            Current grievance lifecycle
           </p>
 
-          <div className="mt-4 h-[300px]">
+          <div className="mt-6 h-[300px]">
 
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer
+              width="100%"
+              height="100%"
+            >
 
-              <PieChart>
-
-                <Pie
-                  data={statusData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={70}
-                  outerRadius={110}
-                  paddingAngle={3}
-                  dataKey="value"
-                  nameKey="name"
-                >
-
-                  {statusData.map((_, index) => (
-                    <Cell
-                      key={`status-${index}`}
-                      fill={statusColors[index]}
-                    />
-                  ))}
-
-                </Pie>
-
-                <Tooltip content={<CustomTooltip />} />
-
-                <Legend
-                  wrapperStyle={{
-                    color: "#c4cada",
-                    fontSize: "12px",
-                  }}
-                />
-
-              </PieChart>
-
-            </ResponsiveContainer>
-
-          </div>
-
-        </div>
-
-
-        {/* Duplicate Detection */}
-
-        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
-
-          <h2 className="text-lg font-semibold text-[#f1f3f8]">
-            AI Duplicate Detection
-          </h2>
-
-          <p className="mt-1 text-xs text-[#929db6]">
-            Duplicate complaints detected by semantic similarity
-          </p>
-
-          <div className="mt-6 h-[280px]">
-
-            <ResponsiveContainer width="100%" height="100%">
-
-              <AreaChart data={duplicateData}>
-
-                <defs>
-
-                  <linearGradient
-                    id="duplicateGradient"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
-
-                    <stop
-                      offset="5%"
-                      stopColor={PURPLE}
-                      stopOpacity={0.4}
-                    />
-
-                    <stop
-                      offset="95%"
-                      stopColor={PURPLE}
-                      stopOpacity={0}
-                    />
-
-                  </linearGradient>
-
-                </defs>
+              <BarChart data={statusData}>
 
                 <CartesianGrid
                   stroke="#303a55"
-                  strokeDasharray="3 3"
+                  vertical={false}
                 />
 
                 <XAxis
-                  dataKey="month"
+                  dataKey="status"
                   stroke="#929db6"
-                  tick={{ fill: "#929db6", fontSize: 12 }}
+                  tick={{
+                    fill: "#c4cada",
+                    fontSize: 9,
+                  }}
+                  angle={-20}
+                  textAnchor="end"
+                  height={70}
                 />
 
                 <YAxis
                   stroke="#929db6"
-                  tick={{ fill: "#929db6", fontSize: 12 }}
                 />
 
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip />
 
-                <Area
-                  type="monotone"
-                  dataKey="duplicates"
-                  name="Duplicates"
-                  stroke={PURPLE}
-                  strokeWidth={3}
-                  fill="url(#duplicateGradient)"
+                <Bar
+                  dataKey="count"
+                  fill="#6fcdb5"
+                  radius={[
+                    3,
+                    3,
+                    0,
+                    0,
+                  ]}
                 />
 
-              </AreaChart>
+              </BarChart>
 
             </ResponsiveContainer>
 
@@ -617,79 +473,199 @@ export default function Analytics() {
       </div>
 
 
-      {/* ============================
-          AI INSIGHTS
-          ============================ */}
+      {/* ROW 2 */}
 
-      <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
 
-        <div className="flex items-center gap-3">
+        {/* CATEGORY */}
 
-          <div className="flex h-10 w-10 items-center justify-center rounded-[4px] bg-[#6573ff]/10 text-[#6573ff]">
-            ✦
-          </div>
+        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
 
-          <div>
-            <h2 className="text-lg font-semibold text-[#f1f3f8]">
-              AI Insights
-            </h2>
+          <h2 className="text-lg font-semibold text-[#f1f3f8]">
+            Complaints by Category
+          </h2>
 
-            <p className="text-xs text-[#929db6]">
-              Automatically generated observations from grievance data
-            </p>
+          <p className="mt-1 text-xs text-[#929db6]">
+            Most common grievance types
+          </p>
+
+          <div className="mt-6 h-[320px]">
+
+            <ResponsiveContainer
+              width="100%"
+              height="100%"
+            >
+
+              <BarChart
+                data={categoryData}
+                layout="vertical"
+              >
+
+                <CartesianGrid
+                  stroke="#303a55"
+                  horizontal={false}
+                />
+
+                <XAxis
+                  type="number"
+                  stroke="#929db6"
+                />
+
+                <YAxis
+                  type="category"
+                  dataKey="category"
+                  width={150}
+                  stroke="#929db6"
+                  tick={{
+                    fill: "#c4cada",
+                    fontSize: 9,
+                  }}
+                />
+
+                <Tooltip />
+
+                <Bar
+                  dataKey="count"
+                  fill="#e5b45e"
+                  radius={[
+                    0,
+                    3,
+                    3,
+                    0,
+                  ]}
+                />
+
+              </BarChart>
+
+            </ResponsiveContainer>
+
           </div>
 
         </div>
 
 
-        <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
+        {/* DUPLICATES */}
 
-          <div className="border-l-2 border-[#e57979] bg-[#1b233a] p-4">
+        <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
 
-            <p className="text-xs font-semibold text-[#e57979]">
-              HIGH PRIORITY
-            </p>
+          <h2 className="text-lg font-semibold text-[#f1f3f8]">
+            AI Duplicate Detection
+          </h2>
 
-            <p className="mt-2 text-sm text-[#c4cada]">
-              Water supply complaints have increased by
-              <span className="font-bold text-[#f1f3f8]">
-                {" "}28%
-              </span>
-              this month.
-            </p>
+          <p className="mt-1 text-xs text-[#929db6]">
+            Unique versus semantically similar complaints
+          </p>
+
+          <div className="mt-6 h-[320px]">
+
+            <ResponsiveContainer
+              width="100%"
+              height="100%"
+            >
+
+              <PieChart>
+
+                <Pie
+                  data={duplicateData}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="45%"
+                  outerRadius={100}
+                  label
+                >
+
+                  {duplicateData.map(
+                    (_, index) => (
+                      <Cell
+                        key={index}
+                        fill={
+                          pieColors[
+                            index
+                          ]
+                        }
+                      />
+                    )
+                  )}
+
+                </Pie>
+
+                <Tooltip />
+
+                <Legend />
+
+              </PieChart>
+
+            </ResponsiveContainer>
 
           </div>
 
+        </div>
 
-          <div className="border-l-2 border-[#6573ff] bg-[#1b233a] p-4">
-
-            <p className="text-xs font-semibold text-[#6573ff]">
-              DUPLICATE PATTERN
-            </p>
-
-            <p className="mt-2 text-sm text-[#c4cada]">
-              Multiple complaints regarding the same
-              road damage have been grouped automatically.
-            </p>
-
-          </div>
+      </div>
 
 
-          <div className="border-l-2 border-[#6fcdb5] bg-[#1b233a] p-4">
+      {/* DEPARTMENT ANALYTICS */}
 
-            <p className="text-xs font-semibold text-[#6fcdb5]">
-              PERFORMANCE
-            </p>
+      <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
 
-            <p className="mt-2 text-sm text-[#c4cada]">
-              Average complaint resolution time has
-              improved by
-              <span className="font-bold text-[#f1f3f8]">
-                {" "}18%
-              </span>.
-            </p>
+        <h2 className="text-lg font-semibold text-[#f1f3f8]">
+          Department Workload
+        </h2>
 
-          </div>
+        <p className="mt-1 text-xs text-[#929db6]">
+          Number of grievances routed to each department by the AI classification system.
+        </p>
+
+        <div className="mt-6 h-[320px]">
+
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
+
+            <BarChart
+              data={departmentData}
+              layout="vertical"
+            >
+
+              <CartesianGrid
+                stroke="#303a55"
+                horizontal={false}
+              />
+
+              <XAxis
+                type="number"
+                stroke="#929db6"
+              />
+
+              <YAxis
+                type="category"
+                dataKey="department"
+                width={180}
+                stroke="#929db6"
+                tick={{
+                  fill: "#c4cada",
+                  fontSize: 9,
+                }}
+              />
+
+              <Tooltip />
+
+              <Bar
+                dataKey="count"
+                fill="#6573ff"
+                radius={[
+                  0,
+                  3,
+                  3,
+                  0,
+                ]}
+              />
+
+            </BarChart>
+
+          </ResponsiveContainer>
 
         </div>
 

@@ -1,3 +1,5 @@
+import { useEffect, useMemo, useState } from "react";
+
 import {
   ResponsiveContainer,
   BarChart,
@@ -8,64 +10,181 @@ import {
   Tooltip,
 } from "recharts";
 
-const hotspots = [
-  {
-    area: "Sector 12",
-    complaints: 284,
-    critical: 32,
-    duplicates: 48,
-    issue: "Water Supply",
-    severity: "Critical",
-  },
-  {
-    area: "Gandhi Nagar",
-    complaints: 231,
-    critical: 21,
-    duplicates: 37,
-    issue: "Road Damage",
-    severity: "High",
-  },
-  {
-    area: "Shivaji Chowk",
-    complaints: 198,
-    critical: 15,
-    duplicates: 29,
-    issue: "Electricity",
-    severity: "High",
-  },
-  {
-    area: "Civil Lines",
-    complaints: 176,
-    critical: 9,
-    duplicates: 24,
-    issue: "Sanitation",
-    severity: "Medium",
-  },
-  {
-    area: "Station Road",
-    complaints: 143,
-    critical: 7,
-    duplicates: 18,
-    issue: "Traffic",
-    severity: "Medium",
-  },
-  {
-    area: "MG Road",
-    complaints: 119,
-    critical: 5,
-    duplicates: 13,
-    issue: "Street Lighting",
-    severity: "Low",
-  },
-];
+import { getComplaints } from "../api/complaintsApi";
+import type { Complaint } from "../types/complaint";
+
+interface Hotspot {
+  area: string;
+  complaints: number;
+  critical: number;
+  duplicates: number;
+  issue: string;
+  severity: string;
+  lat: number;
+  lng: number;
+}
 
 export default function Hotspots() {
+  const [complaints, setComplaints] = useState<Complaint[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await getComplaints();
+        setComplaints(data.complaints);
+      } catch (err) {
+        console.error(err);
+        setError("Unable to connect to the grievance backend.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  /*
+   * GROUP COMPLAINTS BY ADDRESS
+   *
+   * Later this can be replaced with proper
+   * geographical clustering using latitude/longitude.
+   */
+
+  const hotspots = useMemo<Hotspot[]>(() => {
+    const groups: Record<string, Hotspot> = {};
+
+    complaints.forEach((complaint) => {
+      const area =
+        complaint.location.address_context ||
+        "Unknown Area";
+
+      if (!groups[area]) {
+        groups[area] = {
+          area,
+          complaints: 0,
+          critical: 0,
+          duplicates: 0,
+          issue:
+            complaint.classification.category ||
+            "General",
+          severity:
+            complaint.classification.urgency ||
+            "LOW",
+          lat: complaint.location.lat,
+          lng: complaint.location.lng,
+        };
+      }
+
+      groups[area].complaints++;
+
+      if (
+        complaint.classification.urgency === "CRITICAL"
+      ) {
+        groups[area].critical++;
+      }
+
+      if (
+        complaint.duplicate_info.is_duplicate
+      ) {
+        groups[area].duplicates++;
+      }
+
+      /*
+       * Use the most severe urgency found
+       * in the area.
+       */
+
+      const severityRank: Record<string, number> = {
+        LOW: 1,
+        MEDIUM: 2,
+        HIGH: 3,
+        CRITICAL: 4,
+      };
+
+      if (
+        severityRank[
+          complaint.classification.urgency
+        ] >
+        severityRank[groups[area].severity]
+      ) {
+        groups[area].severity =
+          complaint.classification.urgency;
+      }
+    });
+
+    return Object.values(groups)
+      .sort(
+        (a, b) =>
+          b.complaints - a.complaints
+      )
+      .slice(0, 10);
+  }, [complaints]);
+
+  const criticalAreas = hotspots.filter(
+    (h) => h.severity === "CRITICAL"
+  ).length;
+
+  const hotspotComplaints = hotspots.reduce(
+    (sum, hotspot) =>
+      sum + hotspot.complaints,
+    0
+  );
+
+  const duplicateComplaints = hotspots.reduce(
+    (sum, hotspot) =>
+      sum + hotspot.duplicates,
+    0
+  );
+
+  if (loading) {
+    return (
+      <div className="flex min-h-[400px] items-center justify-center">
+        <div className="text-center">
+
+          <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-[#303a55] border-t-[#6573ff]" />
+
+          <p className="mt-4 text-sm text-[#929db6]">
+            Loading hotspot data...
+          </p>
+
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="space-y-6">
+
+        <h1 className="text-3xl font-bold text-[#f1f3f8]">
+          Grievance Hotspots
+        </h1>
+
+        <div className="rounded-[6px] border border-[#e57979]/30 bg-[#e57979]/10 p-6">
+
+          <p className="font-semibold text-[#e57979]">
+            Backend connection failed
+          </p>
+
+          <p className="mt-2 text-sm text-[#929db6]">
+            {error}
+          </p>
+
+        </div>
+
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
 
       {/* HEADER */}
 
       <div>
+
         <h1 className="text-3xl font-bold text-[#f1f3f8]">
           Grievance Hotspots
         </h1>
@@ -73,6 +192,7 @@ export default function Hotspots() {
         <p className="mt-2 text-sm text-[#929db6]">
           Identify geographical areas with high concentrations of citizen complaints.
         </p>
+
       </div>
 
 
@@ -87,7 +207,7 @@ export default function Hotspots() {
           </p>
 
           <h2 className="mt-2 text-3xl font-bold text-[#e57979]">
-            6
+            {hotspots.length}
           </h2>
 
           <p className="mt-1 text-xs text-[#929db6]">
@@ -104,7 +224,7 @@ export default function Hotspots() {
           </p>
 
           <h2 className="mt-2 text-3xl font-bold text-[#e57979]">
-            2
+            {criticalAreas}
           </h2>
 
           <p className="mt-1 text-xs text-[#929db6]">
@@ -121,11 +241,11 @@ export default function Hotspots() {
           </p>
 
           <h2 className="mt-2 text-3xl font-bold text-[#f1f3f8]">
-            1,151
+            {hotspotComplaints}
           </h2>
 
           <p className="mt-1 text-xs text-[#6fcdb5]">
-            47.8% of total complaints
+            Based on backend location data
           </p>
 
         </div>
@@ -138,7 +258,7 @@ export default function Hotspots() {
           </p>
 
           <h2 className="mt-2 text-3xl font-bold text-[#6573ff]">
-            169
+            {duplicateComplaints}
           </h2>
 
           <p className="mt-1 text-xs text-[#929db6]">
@@ -150,7 +270,7 @@ export default function Hotspots() {
       </div>
 
 
-      {/* MAP PLACEHOLDER */}
+      {/* LOCATION VIEW */}
 
       <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
 
@@ -159,37 +279,39 @@ export default function Hotspots() {
           <div>
 
             <h2 className="text-lg font-semibold text-[#f1f3f8]">
-              Geographical Hotspot Map
+              Geographical Complaint View
             </h2>
 
             <p className="mt-1 text-xs text-[#929db6]">
-              Complaint density across monitored areas
+              Locations received from the grievance backend
             </p>
 
           </div>
 
           <span className="rounded-[4px] bg-[#6573ff]/10 px-3 py-2 text-xs text-[#6573ff]">
-            GIS View
+            GIS DATA
           </span>
 
         </div>
 
 
-        {/* MOCK MAP */}
+        {/* COORDINATE VISUALIZATION */}
 
-        <div className="relative mt-5 h-[400px] overflow-hidden rounded-[4px] border border-[#303a55] bg-[#151c30]">
-
-          {/* Grid */}
+        <div className="relative mt-5 min-h-[400px] overflow-hidden rounded-[4px] border border-[#303a55] bg-[#151c30]">
 
           <div className="absolute inset-0 opacity-20">
 
             <div className="grid h-full w-full grid-cols-8 grid-rows-6">
 
-              {Array.from({ length: 48 }).map((_, index) => (
+              {Array.from({
+                length: 48,
+              }).map((_, index) => (
+
                 <div
                   key={index}
                   className="border border-[#6573ff]/20"
                 />
+
               ))}
 
             </div>
@@ -197,100 +319,79 @@ export default function Hotspots() {
           </div>
 
 
-          {/* Roads */}
+          {hotspots.map((hotspot, index) => {
 
-          <div className="absolute left-0 top-1/2 h-[2px] w-full rotate-[-8deg] bg-[#303a55]" />
+            const left =
+              10 + (index % 5) * 18;
 
-          <div className="absolute left-1/2 top-0 h-full w-[2px] rotate-[15deg] bg-[#303a55]" />
+            const top =
+              18 +
+              Math.floor(index / 5) * 35;
 
-          <div className="absolute left-0 top-[30%] h-[2px] w-full rotate-[12deg] bg-[#303a55]" />
+            const size =
+              Math.min(
+                64,
+                30 +
+                  hotspot.complaints * 2
+              );
 
+            const severityClass =
+              hotspot.severity ===
+              "CRITICAL"
+                ? "bg-[#e57979]"
+                : hotspot.severity ===
+                  "HIGH"
+                ? "bg-[#e5b45e]"
+                : hotspot.severity ===
+                  "MEDIUM"
+                ? "bg-[#6573ff]"
+                : "bg-[#6fcdb5]";
 
-          {/* HOTSPOT MARKERS */}
+            return (
 
-          <div className="absolute left-[20%] top-[25%] flex flex-col items-center">
+              <div
+                key={hotspot.area}
+                className="absolute flex flex-col items-center"
+                style={{
+                  left: `${left}%`,
+                  top: `${top}%`,
+                }}
+                title={`${hotspot.area}: ${hotspot.complaints} complaints`}
+              >
 
-            <div className="flex h-14 w-14 animate-pulse items-center justify-center rounded-full bg-[#e57979]/20">
+                <div
+                  className="flex items-center justify-center rounded-full bg-[#6573ff]/10"
+                  style={{
+                    width: `${size + 20}px`,
+                    height: `${size + 20}px`,
+                  }}
+                >
 
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#e57979] text-xs font-bold text-white">
-                284
+                  <div
+                    className={`flex items-center justify-center rounded-full ${severityClass} text-[9px] font-bold text-white`}
+                    style={{
+                      width: `${size}px`,
+                      height: `${size}px`,
+                    }}
+                  >
+                    {hotspot.complaints}
+                  </div>
+
+                </div>
+
+                <span className="mt-1 max-w-[100px] text-center text-[10px] font-semibold text-[#f1f3f8]">
+                  {hotspot.area}
+                </span>
+
+                <span className="text-[8px] text-[#66718a]">
+                  {hotspot.lat.toFixed(4)},{" "}
+                  {hotspot.lng.toFixed(4)}
+                </span>
+
               </div>
 
-            </div>
-
-            <span className="mt-1 text-[10px] font-semibold text-[#f1f3f8]">
-              Sector 12
-            </span>
-
-          </div>
-
-
-          <div className="absolute left-[65%] top-[20%] flex flex-col items-center">
-
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e5b45e]/20">
-
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#e5b45e] text-[9px] font-bold text-white">
-                231
-              </div>
-
-            </div>
-
-            <span className="mt-1 text-[10px] text-[#f1f3f8]">
-              Gandhi Nagar
-            </span>
-
-          </div>
-
-
-          <div className="absolute left-[45%] top-[55%] flex flex-col items-center">
-
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e5b45e]/20">
-
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#e5b45e] text-[9px] font-bold text-white">
-                198
-              </div>
-
-            </div>
-
-            <span className="mt-1 text-[10px] text-[#f1f3f8]">
-              Shivaji Chowk
-            </span>
-
-          </div>
-
-
-          <div className="absolute left-[75%] top-[65%] flex flex-col items-center">
-
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#6573ff]/20">
-
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#6573ff] text-[8px] font-bold text-white">
-                176
-              </div>
-
-            </div>
-
-            <span className="mt-1 text-[10px] text-[#f1f3f8]">
-              Civil Lines
-            </span>
-
-          </div>
-
-
-          <div className="absolute left-[30%] top-[70%] flex flex-col items-center">
-
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#6573ff]/20">
-
-              <div className="flex h-4 w-4 items-center justify-center rounded-full bg-[#6573ff] text-[7px] font-bold text-white">
-                143
-              </div>
-
-            </div>
-
-            <span className="mt-1 text-[10px] text-[#f1f3f8]">
-              Station Road
-            </span>
-
-          </div>
+            );
+          })}
 
 
           {/* LEGEND */}
@@ -298,10 +399,10 @@ export default function Hotspots() {
           <div className="absolute bottom-4 left-4 rounded-[4px] border border-[#303a55] bg-[#1b233a]/95 p-3">
 
             <p className="mb-2 text-[10px] font-semibold text-[#f1f3f8]">
-              Complaint Density
+              Complaint Severity
             </p>
 
-            <div className="flex gap-4 text-[9px]">
+            <div className="flex flex-wrap gap-4 text-[9px]">
 
               <span className="text-[#e57979]">
                 ● Critical
@@ -328,7 +429,7 @@ export default function Hotspots() {
       </div>
 
 
-      {/* HOTSPOT CHART */}
+      {/* CHART */}
 
       <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
 
@@ -342,7 +443,10 @@ export default function Hotspots() {
 
         <div className="mt-6 h-[300px]">
 
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
 
             <BarChart
               data={hotspots}
@@ -362,11 +466,11 @@ export default function Hotspots() {
               <YAxis
                 type="category"
                 dataKey="area"
-                width={100}
+                width={120}
                 stroke="#929db6"
                 tick={{
                   fill: "#c4cada",
-                  fontSize: 11,
+                  fontSize: 10,
                 }}
               />
 
@@ -375,7 +479,12 @@ export default function Hotspots() {
               <Bar
                 dataKey="complaints"
                 fill="#6573ff"
-                radius={[0, 3, 3, 0]}
+                radius={[
+                  0,
+                  3,
+                  3,
+                  0,
+                ]}
               />
 
             </BarChart>
@@ -387,7 +496,7 @@ export default function Hotspots() {
       </div>
 
 
-      {/* HOTSPOT DETAILS */}
+      {/* DETAILS */}
 
       <div className="rounded-[4px] border border-[#303a55] bg-[#222b45] p-6">
 
@@ -395,9 +504,13 @@ export default function Hotspots() {
           Hotspot Details
         </h2>
 
+        <p className="mt-1 text-xs text-[#929db6]">
+          Location-based grievance concentration
+        </p>
+
         <div className="mt-5 overflow-x-auto">
 
-          <table className="w-full min-w-[800px] text-left">
+          <table className="w-full min-w-[900px] text-left">
 
             <thead className="bg-[#1b233a]">
 
@@ -424,13 +537,16 @@ export default function Hotspots() {
                 </th>
 
                 <th className="px-4 py-3 text-xs uppercase text-[#929db6]">
+                  Coordinates
+                </th>
+
+                <th className="px-4 py-3 text-xs uppercase text-[#929db6]">
                   Severity
                 </th>
 
               </tr>
 
             </thead>
-
 
             <tbody>
 
@@ -461,15 +577,24 @@ export default function Hotspots() {
                     {hotspot.duplicates}
                   </td>
 
+                  <td className="px-4 py-4 font-mono text-[10px] text-[#929db6]">
+                    {hotspot.lat.toFixed(4)},
+                    {" "}
+                    {hotspot.lng.toFixed(4)}
+                  </td>
+
                   <td className="px-4 py-4">
 
                     <span
                       className={`rounded-[4px] px-2 py-1 text-[10px] font-bold ${
-                        hotspot.severity === "Critical"
+                        hotspot.severity ===
+                        "CRITICAL"
                           ? "bg-[#e57979]/10 text-[#e57979]"
-                          : hotspot.severity === "High"
+                          : hotspot.severity ===
+                            "HIGH"
                           ? "bg-[#e5b45e]/10 text-[#e5b45e]"
-                          : hotspot.severity === "Medium"
+                          : hotspot.severity ===
+                            "MEDIUM"
                           ? "bg-[#6573ff]/10 text-[#6573ff]"
                           : "bg-[#6fcdb5]/10 text-[#6fcdb5]"
                       }`}
