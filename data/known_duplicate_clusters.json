@@ -1,0 +1,353 @@
+{
+  "metadata": {
+    "description": "Ground-truth semantic duplicate complaint clusters for benchmarking AI deduplication model",
+    "evaluation_metric": "Precision, Recall, and F1-Score of Cluster Assignment / Pairwise Duplicate Matching",
+    "total_clusters": 17,
+    "total_clustered_complaints": 105
+  },
+  "clusters": [
+    {
+      "cluster_id": "CLUST-POTHOLE-01",
+      "category": "Pothole",
+      "incident_summary": "Massive deep pothole on Majiwada service road causing two-wheeler skids and traffic jam",
+      "neighborhood": "Thane - Majiwada & Ghodbunder",
+      "base_coordinates": {
+        "latitude": 19.2178,
+        "longitude": 72.9782
+      },
+      "address_context": "Near Majiwada Flyover service lane towards Kapurbawdi, Thane West",
+      "cluster_size": 7,
+      "complaint_ids": [
+        "CMP_1001",
+        "CMP_1002",
+        "CMP_1003",
+        "CMP_1004",
+        "CMP_1005",
+        "CMP_1006",
+        "CMP_1007"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-STREETLIGHT-02",
+      "category": "Streetlight",
+      "incident_summary": "Row of 3 consecutive streetlights completely dead on Waterfield Road causing dark unsafe stretch",
+      "neighborhood": "Bandra - Hill Road & Pali Hill",
+      "base_coordinates": {
+        "latitude": 19.0592,
+        "longitude": 72.8315
+      },
+      "address_context": "Waterfield Road, opposite National College lane, Bandra West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1008",
+        "CMP_1009",
+        "CMP_1010",
+        "CMP_1011",
+        "CMP_1012",
+        "CMP_1013"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-WATERLEAK-03",
+      "category": "Water Leak",
+      "incident_summary": "Major municipal underground water supply pipeline burst gushing thousands of liters onto road",
+      "neighborhood": "Andheri - Marol & MIDC",
+      "base_coordinates": {
+        "latitude": 19.1195,
+        "longitude": 72.8762
+      },
+      "address_context": "MIDC Central Road, near Seepz Gate 1, Andheri East",
+      "cluster_size": 8,
+      "complaint_ids": [
+        "CMP_1014",
+        "CMP_1015",
+        "CMP_1016",
+        "CMP_1017",
+        "CMP_1018",
+        "CMP_1019",
+        "CMP_1020",
+        "CMP_1021"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-GARBAGE-04",
+      "category": "Garbage Collection",
+      "incident_summary": "Municipal waste dumpster overflowing with organic waste for 3 days, foul stench and road blockage",
+      "neighborhood": "Dadar - Shivaji Park & Plaza",
+      "base_coordinates": {
+        "latitude": 19.0225,
+        "longitude": 72.842
+      },
+      "address_context": "Senapati Bapat Marg, near Dadar Flower Market, Dadar West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1022",
+        "CMP_1023",
+        "CMP_1024",
+        "CMP_1025",
+        "CMP_1026",
+        "CMP_1027"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-SEWAGE-05",
+      "category": "Sewage Overflow",
+      "incident_summary": "Manhole chamber overflowing with black drainage water and foul sewage flooding the sidewalk",
+      "neighborhood": "Kurla - LBS Marg & Station Area",
+      "base_coordinates": {
+        "latitude": 19.0715,
+        "longitude": 72.8825
+      },
+      "address_context": "LBS Marg, opposite Phoenix Marketcity bus stop, Kurla West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1028",
+        "CMP_1029",
+        "CMP_1030",
+        "CMP_1031",
+        "CMP_1032",
+        "CMP_1033"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-STRAYANIMAL-06",
+      "category": "Stray Animal",
+      "incident_summary": "Pack of aggressive stray dogs chasing two-wheelers and morning joggers near Talao Pali",
+      "neighborhood": "Thane - Naupada & Station Area",
+      "base_coordinates": {
+        "latitude": 19.1912,
+        "longitude": 72.9718
+      },
+      "address_context": "Ram Maruti Road, near Talao Pali junction, Naupada, Thane West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1034",
+        "CMP_1035",
+        "CMP_1036",
+        "CMP_1037",
+        "CMP_1038",
+        "CMP_1039"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-NOISE-07",
+      "category": "Noise Complaint",
+      "incident_summary": "Commercial party venue running heavy bass loudspeakers past 1:00 AM violating noise regulations",
+      "neighborhood": "Andheri - Lokhandwala & Link Road",
+      "base_coordinates": {
+        "latitude": 19.1382,
+        "longitude": 72.8335
+      },
+      "address_context": "Lokhandwala Back Road, near High Street Market, Andheri West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1040",
+        "CMP_1041",
+        "CMP_1042",
+        "CMP_1043",
+        "CMP_1044",
+        "CMP_1045"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-ILLEGALCONST-08",
+      "category": "Illegal Construction",
+      "incident_summary": "Unauthorized commercial shed and tin barrier constructed on public pedestrian footpath",
+      "neighborhood": "Borivali - Link Road & Station Area",
+      "base_coordinates": {
+        "latitude": 19.2315,
+        "longitude": 72.856
+      },
+      "address_context": "Near Shimpoli Signal, Link Road, Borivali West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1046",
+        "CMP_1047",
+        "CMP_1048",
+        "CMP_1049",
+        "CMP_1050",
+        "CMP_1051"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-POTHOLE-09",
+      "category": "Pothole",
+      "incident_summary": "Cluster of 3 large continuous potholes on JVLR right lane before Powai Lake signal",
+      "neighborhood": "Powai - Hiranandani & JVLR",
+      "base_coordinates": {
+        "latitude": 19.123,
+        "longitude": 72.915
+      },
+      "address_context": "JVLR Eastbound, near Powai Lake promenade junction, Powai",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1052",
+        "CMP_1053",
+        "CMP_1054",
+        "CMP_1055",
+        "CMP_1056",
+        "CMP_1057"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-WATERLEAK-10",
+      "category": "Water Leak",
+      "incident_summary": "Main feeder waterline ruptured under pavement flooding BKC connector approach road",
+      "neighborhood": "Bandra East - BKC Area",
+      "base_coordinates": {
+        "latitude": 19.0635,
+        "longitude": 72.862
+      },
+      "address_context": "Near BKC Connector junction, Kalanagar, Bandra East",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1058",
+        "CMP_1059",
+        "CMP_1060",
+        "CMP_1061",
+        "CMP_1062",
+        "CMP_1063"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-GARBAGE-11",
+      "category": "Garbage Collection",
+      "incident_summary": "Illegal open dumping ground formed outside residential estate gate attracting stray cattle and foul odor",
+      "neighborhood": "Thane - Majiwada & Ghodbunder",
+      "base_coordinates": {
+        "latitude": 19.231,
+        "longitude": 72.986
+      },
+      "address_context": "Near Hiranandani Estate Gate, Patlipada, Ghodbunder Rd, Thane West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1064",
+        "CMP_1065",
+        "CMP_1066",
+        "CMP_1067",
+        "CMP_1068",
+        "CMP_1069"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-STREETLIGHT-12",
+      "category": "Streetlight",
+      "incident_summary": "Continuous string of 8 median streetlights non-operational creating hazardous dark zone along metro corridor",
+      "neighborhood": "Andheri - Lokhandwala & Link Road",
+      "base_coordinates": {
+        "latitude": 19.1365,
+        "longitude": 72.831
+      },
+      "address_context": "Link Road, between Infinity Mall and Oshiwara Metro, Andheri West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1070",
+        "CMP_1071",
+        "CMP_1072",
+        "CMP_1073",
+        "CMP_1074",
+        "CMP_1075"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-SEWAGE-13",
+      "category": "Sewage Overflow",
+      "incident_summary": "Collapsed municipal sewer line causing foul wastewater backflow onto crowded market sidewalk",
+      "neighborhood": "Dadar - Shivaji Park & Plaza",
+      "base_coordinates": {
+        "latitude": 19.0205,
+        "longitude": 72.8435
+      },
+      "address_context": "NC Kelkar Road, near Plaza Cinema junction, Dadar West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1076",
+        "CMP_1077",
+        "CMP_1078",
+        "CMP_1079",
+        "CMP_1080",
+        "CMP_1081"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-ILLEGALCONST-14",
+      "category": "Illegal Construction",
+      "incident_summary": "Illegal permanent wooden & tin shop extensions blocking BEST bus turning radius outside station",
+      "neighborhood": "Kurla - LBS Marg & Station Area",
+      "base_coordinates": {
+        "latitude": 19.068,
+        "longitude": 72.879
+      },
+      "address_context": "Near Kurla West Railway Bus Depot, Station Road, Kurla West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1082",
+        "CMP_1083",
+        "CMP_1084",
+        "CMP_1085",
+        "CMP_1086",
+        "CMP_1087"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-STRAYANIMAL-15",
+      "category": "Stray Animal",
+      "incident_summary": "Herd of 6-8 unattended cattle sitting on central fast lane of JVLR near IIT Bombay causing traffic gridlock",
+      "neighborhood": "Powai - Hiranandani & JVLR",
+      "base_coordinates": {
+        "latitude": 19.1255,
+        "longitude": 72.918
+      },
+      "address_context": "JVLR opposite IIT Bombay Main Gate, Powai",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1088",
+        "CMP_1089",
+        "CMP_1090",
+        "CMP_1091",
+        "CMP_1092",
+        "CMP_1093"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-NOISE-16",
+      "category": "Noise Complaint",
+      "incident_summary": "Commercial event using illegal high-decibel box speakers and DJ setup past midnight in silence zone",
+      "neighborhood": "Dadar - Shivaji Park & Plaza",
+      "base_coordinates": {
+        "latitude": 19.0265,
+        "longitude": 72.839
+      },
+      "address_context": "Cadell Road, near Shivaji Park Gate 3, Dadar West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1094",
+        "CMP_1095",
+        "CMP_1096",
+        "CMP_1097",
+        "CMP_1098",
+        "CMP_1099"
+      ]
+    },
+    {
+      "cluster_id": "CLUST-POTHOLE-17",
+      "category": "Pothole",
+      "incident_summary": "Series of deep waterlogged craters on descent of Gorai Bridge causing severe vehicular damage and bike falls",
+      "neighborhood": "Borivali - Link Road & Station Area",
+      "base_coordinates": {
+        "latitude": 19.236,
+        "longitude": 72.852
+      },
+      "address_context": "Near Gorai Bridge junction, Gorai 1, Borivali West",
+      "cluster_size": 6,
+      "complaint_ids": [
+        "CMP_1100",
+        "CMP_1101",
+        "CMP_1102",
+        "CMP_1103",
+        "CMP_1104",
+        "CMP_1105"
+      ]
+    }
+  ]
+}
