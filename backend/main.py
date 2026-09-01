@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import func
+from fastapi.middleware.cors import CORSMiddleware
 import httpx
 import uuid
 from datetime import datetime
@@ -17,6 +18,21 @@ app = FastAPI(
     title="AI Grievance Platform - Core API",
     description="Backend API for managing citizen intake, AI routing, and dashboard analytics.",
     version="1.0"
+)
+
+# --- ADD THIS CORS CONFIGURATION ---
+origins = [
+    "http://localhost:5173",  # Vite / React dev server
+    "http://localhost:3000",  # Alternative frontend port
+    "http://127.0.0.1:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
 )
 
 # Configuration for Member 1's AI Service URL (adjust port if needed later)
