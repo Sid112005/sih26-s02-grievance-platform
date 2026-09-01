@@ -1,0 +1,1572 @@
+{
+  "metadata": {
+    "dataset_version": "1.0.0",
+    "region": "Mumbai / Thane Metropolitan Region (MMR)",
+    "generated_at": "2026-09-01T05:41:01Z",
+    "total_records": 130,
+    "cluster_records_count": 41,
+    "distinct_records_count": 89
+  },
+  "complaints": [
+    {
+      "complaint_id": "CMP_1047",
+      "citizen_id": "usr_74340",
+      "description": "Storm water drain choked with plastic silt causing foul water to back up near Sheetal Cinema.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.078855,
+        "lng": 72.890164
+      },
+      "address_context": "Near Sheetal Cinema, LBS Road, Kurla West",
+      "timestamp": "2026-08-19T04:29:30Z"
+    },
+    {
+      "complaint_id": "CMP_1126",
+      "citizen_id": "usr_25043",
+      "description": "Pack of aggressive stray dogs entered municipal park compound near Plaza Cinema.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.018586,
+        "lng": 72.840105
+      },
+      "address_context": "Near Plaza Cinema, NC Kelkar Road, Dadar West",
+      "timestamp": "2026-08-04T07:12:47Z"
+    },
+    {
+      "complaint_id": "CMP_1080",
+      "citizen_id": "usr_91057",
+      "description": "Pothole formed around the storm drain manhole at Ram Maruti Road. Needs immediate asphalt patch work.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.197541,
+        "lng": 72.966838
+      },
+      "address_context": "Ram Maruti Road, Naupada, Thane West",
+      "timestamp": "2026-08-30T23:28:52Z"
+    },
+    {
+      "complaint_id": "CMP_1116",
+      "citizen_id": "usr_47056",
+      "description": "Gutter chamber overflowing into nearby residential compound gate near Kurla Railway Bus Depot.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.069668,
+        "lng": 72.876317
+      },
+      "address_context": "Near Kurla West Railway Bus Depot, Kurla West",
+      "timestamp": "2026-08-23T07:59:24Z"
+    },
+    {
+      "complaint_id": "CMP_1025",
+      "citizen_id": "usr_60019",
+      "description": "Open drainage leakage and filthy water stagnation outside Phoenix Mall gate on LBS road.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.071646,
+        "lng": 72.882461
+      },
+      "address_context": "LBS Marg, opposite Phoenix Marketcity bus stop, Kurla West",
+      "timestamp": "2026-08-19T11:28:37Z"
+    },
+    {
+      "complaint_id": "CMP_1115",
+      "citizen_id": "usr_47762",
+      "description": "Streetlight pole flickering continuously outside Hiranandani Estate Gate, causing visibility disturbance at night.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.220982,
+        "lng": 72.985861
+      },
+      "address_context": "Near Hiranandani Estate Gate, Patlipada, Thane West",
+      "timestamp": "2026-08-29T16:56:38Z"
+    },
+    {
+      "complaint_id": "CMP_1104",
+      "citizen_id": "usr_82350",
+      "description": "Streetlight pole flickering continuously outside Thane Railway Station Plaza, causing visibility disturbance at night.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.190234,
+        "lng": 72.970768
+      },
+      "address_context": "Near Thane Railway Station West Plaza, Thane West",
+      "timestamp": "2026-08-06T09:36:13Z"
+    },
+    {
+      "complaint_id": "CMP_1007",
+      "citizen_id": "usr_22676",
+      "description": "Dark street outside National College on Waterfield Rd. Street lamp poles 14 and 15 not working at all. Highly unsafe for pedestrians.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.059429,
+        "lng": 72.831418
+      },
+      "address_context": "Waterfield Road, opposite National College lane, Bandra West",
+      "timestamp": "2026-08-12T01:28:33Z"
+    },
+    {
+      "complaint_id": "CMP_1046",
+      "citizen_id": "usr_93606",
+      "description": "Underground cable fault caused single lamp outage opposite Model Town.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.138537,
+        "lng": 72.831903
+      },
+      "address_context": "Model Town, 4 Bungalows, Andheri West",
+      "timestamp": "2026-08-07T05:19:24Z"
+    },
+    {
+      "complaint_id": "CMP_1066",
+      "citizen_id": "usr_92502",
+      "description": "Fire hydrant leaking clean water continuously on the pavement near Shivaji Park.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.020305,
+        "lng": 72.83503
+      },
+      "address_context": "Near Shivaji Park Gate 3, Cadell Road, Dadar West",
+      "timestamp": "2026-08-20T06:07:06Z"
+    },
+    {
+      "complaint_id": "CMP_1084",
+      "citizen_id": "usr_69049",
+      "description": "Commercial vendor dumping organic waste in open drain near BKC Connector Junction.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.05813,
+        "lng": 72.867423
+      },
+      "address_context": "Near BKC Connector junction, Kalanagar, Bandra East",
+      "timestamp": "2026-08-15T04:21:06Z"
+    },
+    {
+      "complaint_id": "CMP_1083",
+      "citizen_id": "usr_59856",
+      "description": "Commercial banquet hall bursting firecrackers after midnight near Manpada Service Road.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.211673,
+        "lng": 72.990048
+      },
+      "address_context": "Manpada Service Road, Ghodbunder Rd, Thane West",
+      "timestamp": "2026-08-18T04:48:36Z"
+    },
+    {
+      "complaint_id": "CMP_1051",
+      "citizen_id": "usr_47268",
+      "description": "Exposed wiring and sparking observed at the base of street lamp on BKC Connector Junction. Major safety hazard.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.069894,
+        "lng": 72.871447
+      },
+      "address_context": "Near BKC Connector junction, Kalanagar, Bandra East",
+      "timestamp": "2026-08-28T15:07:54Z"
+    },
+    {
+      "complaint_id": "CMP_1105",
+      "citizen_id": "usr_19838",
+      "description": "Sewage water leaking into open garden area near Veera Desai Industrial Area, strong unbearable odor.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.131731,
+        "lng": 72.82682
+      },
+      "address_context": "Veera Desai Industrial Area, 4 Bungalows, Andheri West",
+      "timestamp": "2026-08-15T11:14:43Z"
+    },
+    {
+      "complaint_id": "CMP_1002",
+      "citizen_id": "usr_65302",
+      "description": "Dangerous pothole near Majiwada flyover ramp on Thane West side. Road is completely broken and causing severe bottleneck.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.217888,
+        "lng": 72.978396
+      },
+      "address_context": "Near Majiwada Flyover service lane towards Kapurbawdi, Thane West",
+      "timestamp": "2026-08-15T00:42:44Z"
+    },
+    {
+      "complaint_id": "CMP_1015",
+      "citizen_id": "usr_42087",
+      "description": "Pipeline leak on Andheri MIDC Central road. Please shut the supply valve and repair the leakage ASAP.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.119574,
+        "lng": 72.876255
+      },
+      "address_context": "MIDC Central Road, near Seepz Gate 1, Andheri East",
+      "timestamp": "2026-08-16T19:38:26Z"
+    },
+    {
+      "complaint_id": "CMP_1044",
+      "citizen_id": "usr_48290",
+      "description": "Injured stray animal stuck on electric substation boundary wall near Dadar Flower Market.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.020963,
+        "lng": 72.839576
+      },
+      "address_context": "Near Flower Market, Dadar Station West, Dadar West",
+      "timestamp": "2026-08-09T08:28:34Z"
+    },
+    {
+      "complaint_id": "CMP_1049",
+      "citizen_id": "usr_11607",
+      "description": "Large crater on the road near Marol Maroshi Road. Buses cannot pull over properly to pick passengers.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.121474,
+        "lng": 72.881611
+      },
+      "address_context": "Marol Maroshi Road, near Fire Station, Andheri East",
+      "timestamp": "2026-08-24T14:14:43Z"
+    },
+    {
+      "complaint_id": "CMP_1091",
+      "citizen_id": "usr_91399",
+      "description": "Illegal billboard hoardings erected without structural stability certificate on Veera Desai Industrial Area.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.132424,
+        "lng": 72.832511
+      },
+      "address_context": "Veera Desai Industrial Area, 4 Bungalows, Andheri West",
+      "timestamp": "2026-08-10T23:40:51Z"
+    },
+    {
+      "complaint_id": "CMP_1113",
+      "citizen_id": "usr_14278",
+      "description": "Underground drainage line blocked causing dirty water backflow in shops near Waterfield Road.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.065438,
+        "lng": 72.830437
+      },
+      "address_context": "Waterfield Road, near National College, Bandra West",
+      "timestamp": "2026-08-08T20:52:21Z"
+    },
+    {
+      "complaint_id": "CMP_1028",
+      "citizen_id": "usr_30730",
+      "description": "Dangerous stray dogs attacking pedestrians walking towards Talao Pali in the early morning.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.191334,
+        "lng": 72.97172
+      },
+      "address_context": "Ram Maruti Road, near Talao Pali junction, Naupada, Thane West",
+      "timestamp": "2026-08-16T16:46:41Z"
+    },
+    {
+      "complaint_id": "CMP_1031",
+      "citizen_id": "usr_30032",
+      "description": "Illegal high decibel loudspeaker noise continuing after midnight near High Street Market, Lokhandwala. Disturbing entire residential society.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.138099,
+        "lng": 72.833569
+      },
+      "address_context": "Lokhandwala Back Road, near High Street Market, Andheri West",
+      "timestamp": "2026-08-08T04:28:21Z"
+    },
+    {
+      "complaint_id": "CMP_1038",
+      "citizen_id": "usr_36365",
+      "description": "Series of sharp, deep potholes on JVLR eastbound lane near Powai lake. Multiple cars suffered tyre punctures.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.123053,
+        "lng": 72.915232
+      },
+      "address_context": "JVLR Eastbound, near Powai Lake promenade junction, Powai",
+      "timestamp": "2026-08-20T04:35:50Z"
+    },
+    {
+      "complaint_id": "CMP_1010",
+      "citizen_id": "usr_57400",
+      "description": "Total darkness on Waterfield Road near the college signal due to faulty streetlights.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.058989,
+        "lng": 72.831397
+      },
+      "address_context": "Waterfield Road, opposite National College lane, Bandra West",
+      "timestamp": "2026-08-13T13:38:55Z"
+    },
+    {
+      "complaint_id": "CMP_1062",
+      "citizen_id": "usr_62521",
+      "description": "Drinking water line connection cracked near public tap at Majiwada Junction.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.212345,
+        "lng": 72.980829
+      },
+      "address_context": "Near Majiwada Junction, Ghodbunder Rd, Thane West",
+      "timestamp": "2026-08-06T18:01:30Z"
+    },
+    {
+      "complaint_id": "CMP_1086",
+      "citizen_id": "usr_48974",
+      "description": "Unauthorized hawker stalls erected on pedestrian walkway blocking fire exit near Pali Naka.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.061677,
+        "lng": 72.837482
+      },
+      "address_context": "Pali Naka, near 16th Road Junction, Bandra West",
+      "timestamp": "2026-08-25T17:56:30Z"
+    },
+    {
+      "complaint_id": "CMP_1055",
+      "citizen_id": "usr_54657",
+      "description": "Broken air valve on water supply line spraying water onto passing vehicles at Shimpoli Signal.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.23696,
+        "lng": 72.846315
+      },
+      "address_context": "Near Shimpoli Signal, Link Road, Borivali West",
+      "timestamp": "2026-08-14T13:24:15Z"
+    },
+    {
+      "complaint_id": "CMP_1079",
+      "citizen_id": "usr_88135",
+      "description": "Illegal billboard hoardings erected without structural stability certificate on Don Bosco School.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.23154,
+        "lng": 72.866683
+      },
+      "address_context": "Near Don Bosco School Road, Borivali West",
+      "timestamp": "2026-08-22T22:53:56Z"
+    },
+    {
+      "complaint_id": "CMP_1020",
+      "citizen_id": "usr_94259",
+      "description": "Uncleaned municipal trash bin near Dadar station market. Pedestrians forced to walk on road due to garbage mound on sidewalk.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.022356,
+        "lng": 72.842
+      },
+      "address_context": "Senapati Bapat Marg, near Dadar Flower Market, Dadar West",
+      "timestamp": "2026-08-16T01:19:08Z"
+    },
+    {
+      "complaint_id": "CMP_1059",
+      "citizen_id": "usr_72616",
+      "description": "Stray cattle roaming around busy traffic junction near Hiranandani Estate Gate during morning school hours.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.211302,
+        "lng": 72.974737
+      },
+      "address_context": "Near Hiranandani Estate Gate, Patlipada, Thane West",
+      "timestamp": "2026-08-28T17:04:07Z"
+    },
+    {
+      "complaint_id": "CMP_1054",
+      "citizen_id": "usr_67733",
+      "description": "Religious function using unauthorized horn loudspeakers above permissible decibel limits near Oshiwara Metro Station.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.140042,
+        "lng": 72.834587
+      },
+      "address_context": "Near Oshiwara Metro Station, Link Road, Andheri West",
+      "timestamp": "2026-08-25T07:48:15Z"
+    },
+    {
+      "complaint_id": "CMP_1058",
+      "citizen_id": "usr_43092",
+      "description": "Community dustbin broken and garbage scattered around by animals near Borivali Station West.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.233578,
+        "lng": 72.845914
+      },
+      "address_context": "Near Borivali Station West, SV Road, Borivali West",
+      "timestamp": "2026-08-29T07:45:09Z"
+    },
+    {
+      "complaint_id": "CMP_1109",
+      "citizen_id": "usr_69048",
+      "description": "Auto repair workshop using loud pneumatic hammers and metal grinding in residential zone near Gaondevi Mandir.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.185252,
+        "lng": 72.97417
+      },
+      "address_context": "Near Gaondevi Mandir, Naupada, Thane West",
+      "timestamp": "2026-08-02T08:03:54Z"
+    },
+    {
+      "complaint_id": "CMP_1072",
+      "citizen_id": "usr_49824",
+      "description": "Underground cable fault caused single lamp outage opposite Ram Maruti Road.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.187162,
+        "lng": 72.973256
+      },
+      "address_context": "Ram Maruti Road, Naupada, Thane West",
+      "timestamp": "2026-08-25T10:46:47Z"
+    },
+    {
+      "complaint_id": "CMP_1128",
+      "citizen_id": "usr_39466",
+      "description": "Injured stray animal stuck on electric substation boundary wall near MIDC Central Road.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.127619,
+        "lng": 72.881215
+      },
+      "address_context": "MIDC Central Road, near Seepz Gate 1, Andheri East",
+      "timestamp": "2026-08-05T19:40:21Z"
+    },
+    {
+      "complaint_id": "CMP_1009",
+      "citizen_id": "usr_59615",
+      "description": "Multiple lamp posts turned off on Waterfield road. Please send municipal electrician team to repair.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.059315,
+        "lng": 72.831518
+      },
+      "address_context": "Waterfield Road, opposite National College lane, Bandra West",
+      "timestamp": "2026-08-14T12:54:03Z"
+    },
+    {
+      "complaint_id": "CMP_1082",
+      "citizen_id": "usr_78494",
+      "description": "Generator set of mobile tower making high decibel rattling noise 24/7 near Viviana Mall.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.210981,
+        "lng": 72.96855
+      },
+      "address_context": "Opposite Viviana Mall, Eastern Express Highway, Thane West",
+      "timestamp": "2026-08-27T06:04:44Z"
+    },
+    {
+      "complaint_id": "CMP_1018",
+      "citizen_id": "usr_45093",
+      "description": "No BMC garbage truck has collected waste from the Dadar West market corner for three days. Waste piled up on footpath.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.022365,
+        "lng": 72.841766
+      },
+      "address_context": "Senapati Bapat Marg, near Dadar Flower Market, Dadar West",
+      "timestamp": "2026-08-14T10:53:45Z"
+    },
+    {
+      "complaint_id": "CMP_1071",
+      "citizen_id": "usr_83772",
+      "description": "Solar streetlight battery unit damaged and light not turning on near Central Avenue Hiranandani.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.11586,
+        "lng": 72.927983
+      },
+      "address_context": "Central Avenue, Hiranandani Gardens, Powai",
+      "timestamp": "2026-08-07T03:41:56Z"
+    },
+    {
+      "complaint_id": "CMP_1048",
+      "citizen_id": "usr_23446",
+      "description": "Deep trench-like pothole observed around Marol Maroshi Road. Vehicles are getting scratched underneath while passing.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.113136,
+        "lng": 72.877622
+      },
+      "address_context": "Marol Maroshi Road, near Fire Station, Andheri East",
+      "timestamp": "2026-08-25T00:03:31Z"
+    },
+    {
+      "complaint_id": "CMP_1029",
+      "citizen_id": "usr_44522",
+      "description": "Excessive stray dogs roaming aggressively in packs near Ram Maruti Road junction. Posing danger to children and senior citizens.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.191177,
+        "lng": 72.972027
+      },
+      "address_context": "Ram Maruti Road, near Talao Pali junction, Naupada, Thane West",
+      "timestamp": "2026-08-18T08:05:13Z"
+    },
+    {
+      "complaint_id": "CMP_1041",
+      "citizen_id": "usr_87128",
+      "description": "Please resurface the badly damaged road on JVLR near Powai Lake. Potholes are getting deeper with heavy vehicle movement.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.122782,
+        "lng": 72.914761
+      },
+      "address_context": "JVLR Eastbound, near Powai Lake promenade junction, Powai",
+      "timestamp": "2026-08-19T03:17:07Z"
+    },
+    {
+      "complaint_id": "CMP_1032",
+      "citizen_id": "usr_79514",
+      "description": "Noise pollution violation on Lokhandwala back road. Blaring music with heavy subwoofers vibrating residential building windows late at night.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.138137,
+        "lng": 72.833331
+      },
+      "address_context": "Lokhandwala Back Road, near High Street Market, Andheri West",
+      "timestamp": "2026-08-09T03:43:42Z"
+    },
+    {
+      "complaint_id": "CMP_1124",
+      "citizen_id": "usr_35928",
+      "description": "Heavy construction drilling and rock excavation noise at 2:00 AM near residential flats at Viviana Mall.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.227097,
+        "lng": 72.976969
+      },
+      "address_context": "Opposite Viviana Mall, Eastern Express Highway, Thane West",
+      "timestamp": "2026-08-04T08:48:58Z"
+    },
+    {
+      "complaint_id": "CMP_1081",
+      "citizen_id": "usr_39581",
+      "description": "Broken air valve on water supply line spraying water onto passing vehicles at Ram Maruti Road.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.193746,
+        "lng": 72.968819
+      },
+      "address_context": "Ram Maruti Road, Naupada, Thane West",
+      "timestamp": "2026-08-25T21:05:38Z"
+    },
+    {
+      "complaint_id": "CMP_1034",
+      "citizen_id": "usr_17592",
+      "description": "Unauthorized tin shed construction on the municipal footpath near Shimpoli signal. Completely blocked pedestrian walkway.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.231689,
+        "lng": 72.856166
+      },
+      "address_context": "Near Shimpoli Signal, Link Road, Borivali West",
+      "timestamp": "2026-08-08T09:47:52Z"
+    },
+    {
+      "complaint_id": "CMP_1013",
+      "citizen_id": "usr_58520",
+      "description": "Water pipe broken in front of MIDC industrial complex. Lakhs of liters getting wasted while our buildings have no water supply.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.119389,
+        "lng": 72.876268
+      },
+      "address_context": "MIDC Central Road, near Seepz Gate 1, Andheri East",
+      "timestamp": "2026-08-17T08:42:53Z"
+    },
+    {
+      "complaint_id": "CMP_1097",
+      "citizen_id": "usr_37659",
+      "description": "Broken drainage slab over nullah creating open sewage pool near Galleria Market.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.130253,
+        "lng": 72.922104
+      },
+      "address_context": "Galleria Market entrance road, Powai",
+      "timestamp": "2026-08-17T18:40:10Z"
+    },
+    {
+      "complaint_id": "CMP_1027",
+      "citizen_id": "usr_44973",
+      "description": "Stray dog menace near Talao Pali garden Naupada. Two delivery boys were bitten over the weekend. Need TMC veterinary team to sterilize and vaccinate.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.19129,
+        "lng": 72.971607
+      },
+      "address_context": "Ram Maruti Road, near Talao Pali junction, Naupada, Thane West",
+      "timestamp": "2026-08-18T08:41:24Z"
+    },
+    {
+      "complaint_id": "CMP_1099",
+      "citizen_id": "usr_96563",
+      "description": "Unauthorized hawker stalls erected on pedestrian walkway blocking fire exit near Chakala Gurunanak Petrol Pump.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.123103,
+        "lng": 72.879128
+      },
+      "address_context": "Chakala, near Gurunanak Petrol Pump, Andheri East",
+      "timestamp": "2026-08-29T20:16:48Z"
+    },
+    {
+      "complaint_id": "CMP_1114",
+      "citizen_id": "usr_40340",
+      "description": "Gutter chamber overflowing into nearby residential compound gate near Jupiter Hospital.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.229513,
+        "lng": 72.976083
+      },
+      "address_context": "Outside Jupiter Hospital, Eastern Express Hwy, Thane West",
+      "timestamp": "2026-08-12T05:30:46Z"
+    },
+    {
+      "complaint_id": "CMP_1130",
+      "citizen_id": "usr_29528",
+      "description": "Green waste and tree branches dumped on the roadside near Gaondevi Mandir not collected for a week.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.190388,
+        "lng": 72.975706
+      },
+      "address_context": "Near Gaondevi Mandir, Naupada, Thane West",
+      "timestamp": "2026-08-26T00:24:23Z"
+    },
+    {
+      "complaint_id": "CMP_1001",
+      "citizen_id": "usr_23434",
+      "description": "Huge crater like pothole right at the entry of Majiwada service road. Two bikers almost fell down this morning during peak traffic.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.217563,
+        "lng": 72.978088
+      },
+      "address_context": "Near Majiwada Flyover service lane towards Kapurbawdi, Thane West",
+      "timestamp": "2026-08-15T09:54:38Z"
+    },
+    {
+      "complaint_id": "CMP_1068",
+      "citizen_id": "usr_17026",
+      "description": "Deep trench-like pothole observed around Ranade Road. Vehicles are getting scratched underneath while passing.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.022636,
+        "lng": 72.835386
+      },
+      "address_context": "Ranade Road, near municipal market, Dadar West",
+      "timestamp": "2026-08-05T22:45:42Z"
+    },
+    {
+      "complaint_id": "CMP_1098",
+      "citizen_id": "usr_44687",
+      "description": "Commercial banquet hall bursting firecrackers after midnight near MCA Club BKC.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.067102,
+        "lng": 72.870625
+      },
+      "address_context": "G Block BKC, near MCA Club, Bandra East",
+      "timestamp": "2026-08-12T13:43:18Z"
+    },
+    {
+      "complaint_id": "CMP_1026",
+      "citizen_id": "usr_11504",
+      "description": "Pack of 6-7 aggressive stray dogs barking and chasing two-wheelers on Ram Maruti Road near Talao Pali.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.191184,
+        "lng": 72.971676
+      },
+      "address_context": "Ram Maruti Road, near Talao Pali junction, Naupada, Thane West",
+      "timestamp": "2026-08-17T10:18:34Z"
+    },
+    {
+      "complaint_id": "CMP_1050",
+      "citizen_id": "usr_85243",
+      "description": "Uneven road surface and sunken patch along MIDC Central Road, causing severe balance issues for two wheelers.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.123574,
+        "lng": 72.882648
+      },
+      "address_context": "MIDC Central Road, near Seepz Gate 1, Andheri East",
+      "timestamp": "2026-08-14T19:01:30Z"
+    },
+    {
+      "complaint_id": "CMP_1127",
+      "citizen_id": "usr_81376",
+      "description": "Pothole formed around the storm drain manhole at Waterfield Road. Needs immediate asphalt patch work.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.061289,
+        "lng": 72.841737
+      },
+      "address_context": "Waterfield Road, near National College, Bandra West",
+      "timestamp": "2026-08-30T14:36:20Z"
+    },
+    {
+      "complaint_id": "CMP_1092",
+      "citizen_id": "usr_17894",
+      "description": "Dry waste collection van has not visited our locality near Phoenix Marketcity for the past 5 days.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.074476,
+        "lng": 72.890597
+      },
+      "address_context": "LBS Marg, opposite Phoenix Marketcity, Kurla West",
+      "timestamp": "2026-08-28T03:58:09Z"
+    },
+    {
+      "complaint_id": "CMP_1017",
+      "citizen_id": "usr_17331",
+      "description": "Garbage bins near Dadar Flower Market on Senapati Bapat Marg overflowing onto the main road. Rotten smell unbearable.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.02236,
+        "lng": 72.841912
+      },
+      "address_context": "Senapati Bapat Marg, near Dadar Flower Market, Dadar West",
+      "timestamp": "2026-08-15T17:27:50Z"
+    },
+    {
+      "complaint_id": "CMP_1108",
+      "citizen_id": "usr_63545",
+      "description": "Uneven road surface and sunken patch along Turner Road, causing severe balance issues for two wheelers.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.062838,
+        "lng": 72.841331
+      },
+      "address_context": "Turner Road, opposite municipal park, Bandra West",
+      "timestamp": "2026-08-20T01:43:14Z"
+    },
+    {
+      "complaint_id": "CMP_1112",
+      "citizen_id": "usr_48175",
+      "description": "Commercial restaurant converted open parking space into kitchen extension near Gaondevi Mandir.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.195782,
+        "lng": 72.965749
+      },
+      "address_context": "Near Gaondevi Mandir, Naupada, Thane West",
+      "timestamp": "2026-08-21T22:14:33Z"
+    },
+    {
+      "complaint_id": "CMP_1101",
+      "citizen_id": "usr_30585",
+      "description": "Residential building adding illegal cantilever structure without municipal NOC near Turner Road.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.059817,
+        "lng": 72.840485
+      },
+      "address_context": "Turner Road, opposite municipal park, Bandra West",
+      "timestamp": "2026-08-06T20:35:21Z"
+    },
+    {
+      "complaint_id": "CMP_1005",
+      "citizen_id": "usr_10851",
+      "description": "Severe road damage and large ditch on Majiwada service road. Daily traffic jams because cars are swerving suddenly to avoid it.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.21776,
+        "lng": 72.978175
+      },
+      "address_context": "Near Majiwada Flyover service lane towards Kapurbawdi, Thane West",
+      "timestamp": "2026-08-15T13:37:18Z"
+    },
+    {
+      "complaint_id": "CMP_1111",
+      "citizen_id": "usr_71592",
+      "description": "Streetlight pole flickering continuously outside JB Nagar Metro Station, causing visibility disturbance at night.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.118901,
+        "lng": 72.883977
+      },
+      "address_context": "Near JB Nagar Metro Station, Andheri-Kurla Road, Andheri East",
+      "timestamp": "2026-08-04T15:54:14Z"
+    },
+    {
+      "complaint_id": "CMP_1119",
+      "citizen_id": "usr_40595",
+      "description": "Solar streetlight battery unit damaged and light not turning on near Powai Lake Promenade.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.118261,
+        "lng": 72.920293
+      },
+      "address_context": "JVLR Junction, near Powai Lake promenade, Powai",
+      "timestamp": "2026-08-20T14:04:30Z"
+    },
+    {
+      "complaint_id": "CMP_1107",
+      "citizen_id": "usr_10350",
+      "description": "Residential building adding illegal cantilever structure without municipal NOC near Dadar Flower Market.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.025597,
+        "lng": 72.840821
+      },
+      "address_context": "Near Flower Market, Dadar Station West, Dadar West",
+      "timestamp": "2026-08-25T15:39:27Z"
+    },
+    {
+      "complaint_id": "CMP_1088",
+      "citizen_id": "usr_66207",
+      "description": "Dry waste collection van has not visited our locality near JB Nagar Metro Station for the past 5 days.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.118333,
+        "lng": 72.878434
+      },
+      "address_context": "Near JB Nagar Metro Station, Andheri-Kurla Road, Andheri East",
+      "timestamp": "2026-08-22T21:55:19Z"
+    },
+    {
+      "complaint_id": "CMP_1120",
+      "citizen_id": "usr_44675",
+      "description": "Stray cattle roaming around busy traffic junction near Shimpoli Signal during morning school hours.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.240139,
+        "lng": 72.858614
+      },
+      "address_context": "Near Shimpoli Signal, Link Road, Borivali West",
+      "timestamp": "2026-08-12T05:47:14Z"
+    },
+    {
+      "complaint_id": "CMP_1021",
+      "citizen_id": "usr_44438",
+      "description": "Drainage manhole overflowing opposite Phoenix Marketcity on LBS Marg. Foul smelling gutter water entering footpath.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.071382,
+        "lng": 72.882373
+      },
+      "address_context": "LBS Marg, opposite Phoenix Marketcity bus stop, Kurla West",
+      "timestamp": "2026-08-20T21:04:52Z"
+    },
+    {
+      "complaint_id": "CMP_1014",
+      "citizen_id": "usr_99593",
+      "description": "Huge water line rupture near SEEPZ entrance, water gushing out with high pressure causing waterlogging.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.119428,
+        "lng": 72.876285
+      },
+      "address_context": "MIDC Central Road, near Seepz Gate 1, Andheri East",
+      "timestamp": "2026-08-18T07:27:41Z"
+    },
+    {
+      "complaint_id": "CMP_1100",
+      "citizen_id": "usr_20641",
+      "description": "Deep trench-like pothole observed around Pali Naka. Vehicles are getting scratched underneath while passing.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.054685,
+        "lng": 72.835716
+      },
+      "address_context": "Pali Naka, near 16th Road Junction, Bandra West",
+      "timestamp": "2026-08-09T17:51:49Z"
+    },
+    {
+      "complaint_id": "CMP_1043",
+      "citizen_id": "usr_82529",
+      "description": "Uneven road surface and sunken patch along Don Bosco School, causing severe balance issues for two wheelers.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.228914,
+        "lng": 72.863088
+      },
+      "address_context": "Near Don Bosco School Road, Borivali West",
+      "timestamp": "2026-08-18T21:40:49Z"
+    },
+    {
+      "complaint_id": "CMP_1053",
+      "citizen_id": "usr_72746",
+      "description": "Asphalt washed away creating multiple potholes outside the entrance of Dadar Flower Market.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.02393,
+        "lng": 72.841538
+      },
+      "address_context": "Near Flower Market, Dadar Station West, Dadar West",
+      "timestamp": "2026-08-10T07:09:50Z"
+    },
+    {
+      "complaint_id": "CMP_1045",
+      "citizen_id": "usr_26551",
+      "description": "Municipal water pipeline joint leaking into open stormwater drain near Kherwadi Signal.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.064185,
+        "lng": 72.868513
+      },
+      "address_context": "Kherwadi, near Western Express Highway junction, Bandra East",
+      "timestamp": "2026-08-16T16:54:56Z"
+    },
+    {
+      "complaint_id": "CMP_1085",
+      "citizen_id": "usr_68028",
+      "description": "Solar streetlight battery unit damaged and light not turning on near Turner Road.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.064931,
+        "lng": 72.834611
+      },
+      "address_context": "Turner Road, opposite municipal park, Bandra West",
+      "timestamp": "2026-08-17T12:26:38Z"
+    },
+    {
+      "complaint_id": "CMP_1122",
+      "citizen_id": "usr_87304",
+      "description": "Asphalt washed away creating multiple potholes outside the entrance of Turner Road.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.064888,
+        "lng": 72.83874
+      },
+      "address_context": "Turner Road, opposite municipal park, Bandra West",
+      "timestamp": "2026-08-15T02:16:40Z"
+    },
+    {
+      "complaint_id": "CMP_1063",
+      "citizen_id": "usr_74454",
+      "description": "Street light pole bent at 45 degree angle after vehicle collision near IIT Bombay Main Gate. Might collapse anytime.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.126337,
+        "lng": 72.912502
+      },
+      "address_context": "Near IIT Bombay Main Gate, Powai",
+      "timestamp": "2026-08-11T05:38:59Z"
+    },
+    {
+      "complaint_id": "CMP_1125",
+      "citizen_id": "usr_65723",
+      "description": "Municipal water pipeline joint leaking into open stormwater drain near BKC-Kurla Link Road.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.072191,
+        "lng": 72.891274
+      },
+      "address_context": "Near BKC-Kurla Link Road nullah, Kurla West",
+      "timestamp": "2026-08-02T11:13:47Z"
+    },
+    {
+      "complaint_id": "CMP_1075",
+      "citizen_id": "usr_25525",
+      "description": "Auto repair workshop using loud pneumatic hammers and metal grinding in residential zone near JB Nagar Metro Station.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.114547,
+        "lng": 72.879026
+      },
+      "address_context": "Near JB Nagar Metro Station, Andheri-Kurla Road, Andheri East",
+      "timestamp": "2026-08-20T11:40:42Z"
+    },
+    {
+      "complaint_id": "CMP_1024",
+      "citizen_id": "usr_30969",
+      "description": "Manhole cover leaking filthy drain water continuously in Kurla West. Please dispatch vacuum cleaning suction tanker.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.071628,
+        "lng": 72.882681
+      },
+      "address_context": "LBS Marg, opposite Phoenix Marketcity bus stop, Kurla West",
+      "timestamp": "2026-08-19T17:30:20Z"
+    },
+    {
+      "complaint_id": "CMP_1036",
+      "citizen_id": "usr_26483",
+      "description": "New illegal structure being erected on public walkway without municipal BMC approval at Shimpoli junction.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.231658,
+        "lng": 72.856239
+      },
+      "address_context": "Near Shimpoli Signal, Link Road, Borivali West",
+      "timestamp": "2026-08-09T00:59:54Z"
+    },
+    {
+      "complaint_id": "CMP_1121",
+      "citizen_id": "usr_91927",
+      "description": "Commercial vendor dumping organic waste in open drain near Oshiwara Metro Station.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.140014,
+        "lng": 72.841794
+      },
+      "address_context": "Near Oshiwara Metro Station, Link Road, Andheri West",
+      "timestamp": "2026-08-14T05:26:55Z"
+    },
+    {
+      "complaint_id": "CMP_1067",
+      "citizen_id": "usr_99974",
+      "description": "Exposed wiring and sparking observed at the base of street lamp on MIDC Central Road. Major safety hazard.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.115043,
+        "lng": 72.873972
+      },
+      "address_context": "MIDC Central Road, near Seepz Gate 1, Andheri East",
+      "timestamp": "2026-08-19T07:55:13Z"
+    },
+    {
+      "complaint_id": "CMP_1061",
+      "citizen_id": "usr_18564",
+      "description": "Storm water drain choked with plastic silt causing foul water to back up near Thane Railway Station Plaza.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.191989,
+        "lng": 72.9736
+      },
+      "address_context": "Near Thane Railway Station West Plaza, Thane West",
+      "timestamp": "2026-08-27T20:08:19Z"
+    },
+    {
+      "complaint_id": "CMP_1023",
+      "citizen_id": "usr_21915",
+      "description": "Choked sewer line causing gutter overflow near the bus stand on LBS Marg. Health hazard for commuters and shopkeepers.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.07136,
+        "lng": 72.882749
+      },
+      "address_context": "LBS Marg, opposite Phoenix Marketcity bus stop, Kurla West",
+      "timestamp": "2026-08-20T17:34:54Z"
+    },
+    {
+      "complaint_id": "CMP_1103",
+      "citizen_id": "usr_32782",
+      "description": "Green waste and tree branches dumped on the roadside near Charai Naka not collected for a week.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.185883,
+        "lng": 72.979651
+      },
+      "address_context": "Charai Naka, near municipal school, Thane West",
+      "timestamp": "2026-08-19T20:41:45Z"
+    },
+    {
+      "complaint_id": "CMP_1093",
+      "citizen_id": "usr_89905",
+      "description": "Unauthorized road digging and trenching without municipal display board near Senapati Bapat Marg.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.025535,
+        "lng": 72.845285
+      },
+      "address_context": "Senapati Bapat Marg, near Elphinstone Bridge, Dadar West",
+      "timestamp": "2026-08-08T05:12:46Z"
+    },
+    {
+      "complaint_id": "CMP_1110",
+      "citizen_id": "usr_87832",
+      "description": "Stray dog reported biting multiple passers-by near Galleria Market. Urgent animal control needed.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.131555,
+        "lng": 72.922238
+      },
+      "address_context": "Galleria Market entrance road, Powai",
+      "timestamp": "2026-08-04T12:22:51Z"
+    },
+    {
+      "complaint_id": "CMP_1094",
+      "citizen_id": "usr_23006",
+      "description": "Stray dog reported biting multiple passers-by near Gaondevi Mandir. Urgent animal control needed.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.186764,
+        "lng": 72.972849
+      },
+      "address_context": "Near Gaondevi Mandir, Naupada, Thane West",
+      "timestamp": "2026-08-30T06:07:08Z"
+    },
+    {
+      "complaint_id": "CMP_1003",
+      "citizen_id": "usr_88907",
+      "description": "Big pothole unfilled since last rain near Kapurbawdi Majiwada service lane. Vehicles getting damaged.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.217566,
+        "lng": 72.977997
+      },
+      "address_context": "Near Majiwada Flyover service lane towards Kapurbawdi, Thane West",
+      "timestamp": "2026-08-15T10:32:54Z"
+    },
+    {
+      "complaint_id": "CMP_1076",
+      "citizen_id": "usr_83147",
+      "description": "Broken drainage slab over nullah creating open sewage pool near BKC Connector Junction.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.07031,
+        "lng": 72.862391
+      },
+      "address_context": "Near BKC Connector junction, Kalanagar, Bandra East",
+      "timestamp": "2026-08-27T02:17:37Z"
+    },
+    {
+      "complaint_id": "CMP_1074",
+      "citizen_id": "usr_42530",
+      "description": "Unauthorized road digging and trenching without municipal display board near Central Avenue Hiranandani.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.116902,
+        "lng": 72.926736
+      },
+      "address_context": "Central Avenue, Hiranandani Gardens, Powai",
+      "timestamp": "2026-08-11T10:00:59Z"
+    },
+    {
+      "complaint_id": "CMP_1087",
+      "citizen_id": "usr_87139",
+      "description": "Drinking water line connection cracked near public tap at Powai Lake Promenade.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.115967,
+        "lng": 72.91668
+      },
+      "address_context": "JVLR Junction, near Powai Lake promenade, Powai",
+      "timestamp": "2026-08-06T16:53:33Z"
+    },
+    {
+      "complaint_id": "CMP_1030",
+      "citizen_id": "usr_91959",
+      "description": "Extremely loud music and DJ bass playing past 12:30 AM at Lokhandwala Back Road commercial venue. Cannot sleep.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.138331,
+        "lng": 72.833504
+      },
+      "address_context": "Lokhandwala Back Road, near High Street Market, Andheri West",
+      "timestamp": "2026-08-06T18:32:59Z"
+    },
+    {
+      "complaint_id": "CMP_1012",
+      "citizen_id": "usr_59823",
+      "description": "Heavy water leakage from underground pipeline near Seepz Gate 1, Andheri East. Road flooded with water wastage.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.119743,
+        "lng": 72.876378
+      },
+      "address_context": "MIDC Central Road, near Seepz Gate 1, Andheri East",
+      "timestamp": "2026-08-18T18:34:34Z"
+    },
+    {
+      "complaint_id": "CMP_1004",
+      "citizen_id": "usr_81426",
+      "description": "Please fix the deep pothole on Majiwada service lane immediately. Very unsafe for two wheelers at night.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.217563,
+        "lng": 72.978049
+      },
+      "address_context": "Near Majiwada Flyover service lane towards Kapurbawdi, Thane West",
+      "timestamp": "2026-08-16T14:42:40Z"
+    },
+    {
+      "complaint_id": "CMP_1033",
+      "citizen_id": "usr_24662",
+      "description": "Loud sound system operating till 1:30 AM in residential zone near Lokhandwala Complex. Please enforce 10 PM noise curfew rules.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.138409,
+        "lng": 72.833549
+      },
+      "address_context": "Lokhandwala Back Road, near High Street Market, Andheri West",
+      "timestamp": "2026-08-07T20:20:52Z"
+    },
+    {
+      "complaint_id": "CMP_1078",
+      "citizen_id": "usr_89471",
+      "description": "Underground drainage line blocked causing dirty water backflow in shops near IIT Bombay Main Gate.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.125399,
+        "lng": 72.927706
+      },
+      "address_context": "Near IIT Bombay Main Gate, Powai",
+      "timestamp": "2026-08-12T12:09:15Z"
+    },
+    {
+      "complaint_id": "CMP_1042",
+      "citizen_id": "usr_17146",
+      "description": "Slow water seepage through asphalt road surface creating a wet puddle outside Lokhandwala Back Road.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.134257,
+        "lng": 72.836286
+      },
+      "address_context": "Lokhandwala Back Road, near High Street Market, Andheri West",
+      "timestamp": "2026-08-13T12:38:58Z"
+    },
+    {
+      "complaint_id": "CMP_1095",
+      "citizen_id": "usr_37235",
+      "description": "Injured stray cow sitting in the middle of fast lane near Model Town, causing traffic bottleneck.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.13054,
+        "lng": 72.831277
+      },
+      "address_context": "Model Town, 4 Bungalows, Andheri West",
+      "timestamp": "2026-08-15T11:44:17Z"
+    },
+    {
+      "complaint_id": "CMP_1056",
+      "citizen_id": "usr_34164",
+      "description": "Community dustbin broken and garbage scattered around by animals near Senapati Bapat Marg.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.023595,
+        "lng": 72.837066
+      },
+      "address_context": "Senapati Bapat Marg, near Elphinstone Bridge, Dadar West",
+      "timestamp": "2026-08-11T12:24:49Z"
+    },
+    {
+      "complaint_id": "CMP_1006",
+      "citizen_id": "usr_38221",
+      "description": "All street lights along Waterfield Road near National College are non-functional for past 4 days. Pitch dark after 7 PM.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.05903,
+        "lng": 72.831461
+      },
+      "address_context": "Waterfield Road, opposite National College lane, Bandra West",
+      "timestamp": "2026-08-12T13:58:18Z"
+    },
+    {
+      "complaint_id": "CMP_1123",
+      "citizen_id": "usr_96662",
+      "description": "Construction debris and cement bags dumped illegally on the pavement near Gaondevi Mandir.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.187845,
+        "lng": 72.97867
+      },
+      "address_context": "Near Gaondevi Mandir, Naupada, Thane West",
+      "timestamp": "2026-08-11T06:33:52Z"
+    },
+    {
+      "complaint_id": "CMP_1011",
+      "citizen_id": "usr_47930",
+      "description": "BMC main water pipe burst on MIDC Central Road. Clean drinking water has been flooding the entire street since 6 AM.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.119602,
+        "lng": 72.875973
+      },
+      "address_context": "MIDC Central Road, near Seepz Gate 1, Andheri East",
+      "timestamp": "2026-08-16T23:28:18Z"
+    },
+    {
+      "complaint_id": "CMP_1117",
+      "citizen_id": "usr_69510",
+      "description": "Large crater on the road near Chakala Gurunanak Petrol Pump. Buses cannot pull over properly to pick passengers.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.12492,
+        "lng": 72.868808
+      },
+      "address_context": "Chakala, near Gurunanak Petrol Pump, Andheri East",
+      "timestamp": "2026-08-28T21:12:20Z"
+    },
+    {
+      "complaint_id": "CMP_1064",
+      "citizen_id": "usr_19710",
+      "description": "Fire hydrant leaking clean water continuously on the pavement near Pali Naka.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.055363,
+        "lng": 72.838572
+      },
+      "address_context": "Pali Naka, near 16th Road Junction, Bandra West",
+      "timestamp": "2026-08-13T21:32:22Z"
+    },
+    {
+      "complaint_id": "CMP_1070",
+      "citizen_id": "usr_29555",
+      "description": "Street light pole bent at 45 degree angle after vehicle collision near Bandra Talao. Might collapse anytime.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.055997,
+        "lng": 72.840772
+      },
+      "address_context": "Near Bandra Talao, SV Road, Bandra West",
+      "timestamp": "2026-08-18T16:55:37Z"
+    },
+    {
+      "complaint_id": "CMP_1065",
+      "citizen_id": "usr_85631",
+      "description": "Generator set of mobile tower making high decibel rattling noise 24/7 near Waterfield Road.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.055567,
+        "lng": 72.836561
+      },
+      "address_context": "Waterfield Road, near National College, Bandra West",
+      "timestamp": "2026-08-20T00:26:32Z"
+    },
+    {
+      "complaint_id": "CMP_1035",
+      "citizen_id": "usr_73699",
+      "description": "Illegal encroachment and commercial extension occupying the public sidewalk on Borivali Link Road near Shimpoli.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.23137,
+        "lng": 72.856034
+      },
+      "address_context": "Near Shimpoli Signal, Link Road, Borivali West",
+      "timestamp": "2026-08-07T18:21:24Z"
+    },
+    {
+      "complaint_id": "CMP_1052",
+      "citizen_id": "usr_71524",
+      "description": "Slow water seepage through asphalt road surface creating a wet puddle outside Galleria Market.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.117632,
+        "lng": 72.911824
+      },
+      "address_context": "Galleria Market entrance road, Powai",
+      "timestamp": "2026-08-03T06:04:43Z"
+    },
+    {
+      "complaint_id": "CMP_1090",
+      "citizen_id": "usr_84531",
+      "description": "Sewage water leaking into open garden area near Pali Naka, strong unbearable odor.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.057115,
+        "lng": 72.834642
+      },
+      "address_context": "Pali Naka, near 16th Road Junction, Bandra West",
+      "timestamp": "2026-08-27T15:57:47Z"
+    },
+    {
+      "complaint_id": "CMP_1039",
+      "citizen_id": "usr_58944",
+      "description": "Horrible road condition on JVLR Powai stretch near the lake signal. Huge crater on right fast lane causing sudden braking.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.123106,
+        "lng": 72.914949
+      },
+      "address_context": "JVLR Eastbound, near Powai Lake promenade junction, Powai",
+      "timestamp": "2026-08-19T11:14:04Z"
+    },
+    {
+      "complaint_id": "CMP_1089",
+      "citizen_id": "usr_50026",
+      "description": "Pack of aggressive stray dogs entered municipal park compound near Kherwadi Signal.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.068139,
+        "lng": 72.87181
+      },
+      "address_context": "Kherwadi, near Western Express Highway junction, Bandra East",
+      "timestamp": "2026-08-04T16:46:17Z"
+    },
+    {
+      "complaint_id": "CMP_1060",
+      "citizen_id": "usr_24953",
+      "description": "Commercial restaurant converted open parking space into kitchen extension near Senapati Bapat Marg.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.030668,
+        "lng": 72.843177
+      },
+      "address_context": "Senapati Bapat Marg, near Elphinstone Bridge, Dadar West",
+      "timestamp": "2026-08-11T06:50:20Z"
+    },
+    {
+      "complaint_id": "CMP_1016",
+      "citizen_id": "usr_93886",
+      "description": "Drinking water pipeline leakage creating a mini river on the road outside Seepz Gate 1.",
+      "category": "Water Leak",
+      "location": {
+        "lat": 19.119332,
+        "lng": 72.87614
+      },
+      "address_context": "MIDC Central Road, near Seepz Gate 1, Andheri East",
+      "timestamp": "2026-08-19T02:52:53Z"
+    },
+    {
+      "complaint_id": "CMP_1057",
+      "citizen_id": "usr_16734",
+      "description": "Religious function using unauthorized horn loudspeakers above permissible decibel limits near Hill Road.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.06747,
+        "lng": 72.830466
+      },
+      "address_context": "Hill Road, near Mehboob Studio, Bandra West",
+      "timestamp": "2026-08-12T20:58:13Z"
+    },
+    {
+      "complaint_id": "CMP_1129",
+      "citizen_id": "usr_94886",
+      "description": "Heavy construction drilling and rock excavation noise at 2:00 AM near residential flats at Dadar Flower Market.",
+      "category": "Noise Complaint",
+      "location": {
+        "lat": 19.028528,
+        "lng": 72.846647
+      },
+      "address_context": "Near Flower Market, Dadar Station West, Dadar West",
+      "timestamp": "2026-08-24T07:35:49Z"
+    },
+    {
+      "complaint_id": "CMP_1118",
+      "citizen_id": "usr_19329",
+      "description": "Large crater on the road near Central Avenue Hiranandani. Buses cannot pull over properly to pick passengers.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.121548,
+        "lng": 72.918262
+      },
+      "address_context": "Central Avenue, Hiranandani Gardens, Powai",
+      "timestamp": "2026-08-24T05:52:04Z"
+    },
+    {
+      "complaint_id": "CMP_1073",
+      "citizen_id": "usr_21164",
+      "description": "Construction debris and cement bags dumped illegally on the pavement near Gorai Bridge.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.240694,
+        "lng": 72.849698
+      },
+      "address_context": "Near Gorai Bridge junction, Gorai 1, Borivali West",
+      "timestamp": "2026-08-10T16:15:18Z"
+    },
+    {
+      "complaint_id": "CMP_1106",
+      "citizen_id": "usr_30517",
+      "description": "Pothole formed around the storm drain manhole at Hiranandani Estate Gate. Needs immediate asphalt patch work.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.207126,
+        "lng": 72.974426
+      },
+      "address_context": "Near Hiranandani Estate Gate, Patlipada, Thane West",
+      "timestamp": "2026-08-12T01:34:09Z"
+    },
+    {
+      "complaint_id": "CMP_1096",
+      "citizen_id": "usr_91987",
+      "description": "Asphalt washed away creating multiple potholes outside the entrance of Shivaji Park.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.025279,
+        "lng": 72.846291
+      },
+      "address_context": "Near Shivaji Park Gate 3, Cadell Road, Dadar West",
+      "timestamp": "2026-08-11T12:57:12Z"
+    },
+    {
+      "complaint_id": "CMP_1077",
+      "citizen_id": "usr_64548",
+      "description": "Injured stray cow sitting in the middle of fast lane near Chakala Gurunanak Petrol Pump, causing traffic bottleneck.",
+      "category": "Stray Animal",
+      "location": {
+        "lat": 19.115511,
+        "lng": 72.873717
+      },
+      "address_context": "Chakala, near Gurunanak Petrol Pump, Andheri East",
+      "timestamp": "2026-08-30T21:07:12Z"
+    },
+    {
+      "complaint_id": "CMP_1040",
+      "citizen_id": "usr_39451",
+      "description": "Dangerous pothole cluster on Jogeshwari Vikhroli Link Road near Powai promenade. High risk of fatal motorcycle crash.",
+      "category": "Pothole",
+      "location": {
+        "lat": 19.122969,
+        "lng": 72.915009
+      },
+      "address_context": "JVLR Eastbound, near Powai Lake promenade junction, Powai",
+      "timestamp": "2026-08-17T22:03:48Z"
+    },
+    {
+      "complaint_id": "CMP_1102",
+      "citizen_id": "usr_41439",
+      "description": "Exposed wiring and sparking observed at the base of street lamp on Gorai Bridge. Major safety hazard.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.235268,
+        "lng": 72.847866
+      },
+      "address_context": "Near Gorai Bridge junction, Gorai 1, Borivali West",
+      "timestamp": "2026-08-05T06:31:37Z"
+    },
+    {
+      "complaint_id": "CMP_1022",
+      "citizen_id": "usr_57447",
+      "description": "Severe sewage overflow on LBS Road Kurla West. Black drain water bubbling out of chamber and spreading onto street.",
+      "category": "Sewage Overflow",
+      "location": {
+        "lat": 19.071624,
+        "lng": 72.882464
+      },
+      "address_context": "LBS Marg, opposite Phoenix Marketcity bus stop, Kurla West",
+      "timestamp": "2026-08-20T22:34:38Z"
+    },
+    {
+      "complaint_id": "CMP_1008",
+      "citizen_id": "usr_15695",
+      "description": "No streetlight working on Waterfield Road Bandra West. Street is pitch black at night, risk of theft and accidents.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.059129,
+        "lng": 72.831422
+      },
+      "address_context": "Waterfield Road, opposite National College lane, Bandra West",
+      "timestamp": "2026-08-12T13:04:14Z"
+    },
+    {
+      "complaint_id": "CMP_1019",
+      "citizen_id": "usr_51245",
+      "description": "Huge heap of organic waste and plastic spilled across Senapati Bapat Marg near flower market. Breeding mosquitoes and dogs.",
+      "category": "Garbage Collection",
+      "location": {
+        "lat": 19.022283,
+        "lng": 72.842207
+      },
+      "address_context": "Senapati Bapat Marg, near Dadar Flower Market, Dadar West",
+      "timestamp": "2026-08-15T03:53:14Z"
+    },
+    {
+      "complaint_id": "CMP_1037",
+      "citizen_id": "usr_44741",
+      "description": "Encroachment on footpath by shopkeeper building temporary structure on Link Road Borivali West. Pedestrians forced into heavy traffic.",
+      "category": "Illegal Construction",
+      "location": {
+        "lat": 19.231314,
+        "lng": 72.855988
+      },
+      "address_context": "Near Shimpoli Signal, Link Road, Borivali West",
+      "timestamp": "2026-08-09T02:09:09Z"
+    },
+    {
+      "complaint_id": "CMP_1069",
+      "citizen_id": "usr_29887",
+      "description": "Street light pole bent at 45 degree angle after vehicle collision near Kherwadi Signal. Might collapse anytime.",
+      "category": "Streetlight",
+      "location": {
+        "lat": 19.067902,
+        "lng": 72.86371
+      },
+      "address_context": "Kherwadi, near Western Express Highway junction, Bandra East",
+      "timestamp": "2026-08-10T03:50:02Z"
+    }
+  ]
+}
